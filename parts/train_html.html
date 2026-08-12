@@ -1,0 +1,42 @@
+  <!-- ===== TAB 2: Train ===== -->
+  <section id="train" class="tab-content">
+    <h2 class="section-title">训练场</h2>
+    <p class="section-desc">三种模式：🎯 今日任务（每日推荐+闭环学习）· ⚡ 闯关刷题（混合题型）· 🎤 雅思实战（Part 2 模拟）</p>
+
+    <div class="train-mode-switch">
+      <button class="mode-btn active" onclick="setTrainTab('daily')">
+        <div class="m-title">🎯 今日任务</div>
+        <div class="m-desc">系统按记忆状态自动排课：待复习优先，一张卡一个闭环</div>
+      </button>
+      <button class="mode-btn" onclick="setTrainTab('quiz')">
+        <div class="m-title">⚡ 闯关刷题</div>
+        <div class="m-desc">每关8道混合题：释义 / 翻译 / 挖空，即时判分</div>
+      </button>
+      <button class="mode-btn" onclick="setTrainTab('speak')">
+        <div class="m-title">🎤 雅思实战</div>
+        <div class="m-desc">Part 2 话题卡 + 计时作答 + 必用表达彩蛋</div>
+      </button>
+    </div>
+
+    <!-- 今日任务 -->
+    <div id="trainDaily">
+      <div class="daily-goal">
+        <span class="gl">🎯 今日目标</span>
+        <div class="daily-progress"><div class="fill" id="dailyProgressFill"></div></div>
+        <span class="gt" id="dailyProgressText">0 / 4</span>
+        <span class="gx" id="dailyXpText">+30 XP</span>
+      </div>
+      <div id="dailyContent"></div>
+    </div>
+
+    <!-- 闯关 -->
+    <div id="trainQuiz" style="display:none">
+      <div id="quizContent"></div>
+    </div>
+
+    <!-- 实战 -->
+    <div id="trainSpeak" style="display:none">
+      <div id="speakContent"></div>
+    </div>
+  </section>
+

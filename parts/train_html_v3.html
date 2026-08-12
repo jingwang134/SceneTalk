@@ -1,0 +1,38 @@
+  <!-- ===== TAB 2: Train ===== -->
+  <section id="train" class="tab-content">
+    <h2 class="section-title">训练场</h2>
+    <p class="section-desc">按话题走完整路径：🗺️ 学词 → ⚡ 闯关 → 🎤 实战，记不住的自动进 📚 词库</p>
+
+    <div class="train-mode-switch">
+      <button class="mode-btn active" onclick="setTrainTab('path')">
+        <div class="m-title">🗺️ 话题学习</div>
+        <div class="m-desc">选话题 → 闪卡学词 → 闯关 → 雅思实战，一条路径学透</div>
+      </button>
+      <button class="mode-btn" onclick="setTrainTab('wordbook')">
+        <div class="m-title">📚 我的词库</div>
+        <div class="m-desc">记不住的表达在这里，陌生 / 模糊 / 认识 三档自评复习</div>
+      </button>
+      <button class="mode-btn" onclick="setTrainTab('daily')">
+        <div class="m-title">🎯 今日任务</div>
+        <div class="m-desc">系统按记忆状态自动排课，待复习优先</div>
+      </button>
+    </div>
+
+    <!-- 话题学习 -->
+    <div id="trainPath"></div>
+
+    <!-- 我的词库 -->
+    <div id="trainWordbook" style="display:none"></div>
+
+    <!-- 今日任务 -->
+    <div id="trainDaily" style="display:none">
+      <div class="daily-goal">
+        <span class="gl">🎯 今日目标</span>
+        <div class="daily-progress"><div class="fill" id="dailyProgressFill"></div></div>
+        <span class="gt" id="dailyProgressText">0 / 4</span>
+        <span class="gx" id="dailyXpText">+30 XP</span>
+      </div>
+      <div id="dailyContent"></div>
+    </div>
+  </section>
+
