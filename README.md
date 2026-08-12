@@ -1,0 +1,59 @@
+# 🎬 ScenePick 场景拾句
+
+从美剧台本拾取雅思 6.5+ 地道表达的学习工作台。
+
+- 📚 **表达库**：78 条雅思表达（摩登家庭 S01E01-E09 实拍提取），按雅思话题分类浏览
+- 🗺️ **话题路径**：闪卡学词 → 闯关 → 雅思实战，一条路径学透一个话题
+- 📚 **我的词库**：记不住的表达自动收纳，陌生 / 模糊 / 认识三档复习
+- 🎯 **今日任务**：按记忆状态自动排课
+- ⚖️ **雅思对比**：同一话题 5 分 vs 7 分回答 + 提分分析
+- 🔥 **打卡 / XP**：连续打卡、经验等级、掌握状态机
+
+## 🚀 在线预览（GitHub Pages）
+
+1. 仓库 **Settings → Pages**
+2. **Source** 选 `Deploy from a branch`
+3. 分支选 `main`，目录选 `/ (root)`
+4. Save，等 1-2 分钟
+5. 访问 `https://jingwang134.github.io/SceneTalk/`
+
+## 📤 如何在其他电脑上传资料
+
+项目数据全部在 **`data.js`**（表达）和 **`index.html`**（界面）中，**不需要安装任何软件**，用浏览器打开 GitHub 网页即可操作。
+
+### 方式一：编辑 data.js 直接加表达（简单表达）
+
+1. 打开 `data.js` → 点 ✏️ 编辑按钮
+2. 在数组末尾（最后一个 `}` 后）加逗号，粘贴新表达对象（格式见文件顶部注释）
+3. 底部 Commit changes → 提交
+
+### 方式二：上传台本，让 AI 处理（推荐，大量台本）
+
+1. 在仓库页面点 **Add file → Upload files**
+2. 把台本文件（txt/pdf）拖进新文件夹 `uploads/`
+3. Commit 后，在 WorkBuddy 里说"处理 uploads 里的台本"，AI 会提取表达并更新 `data.js`
+4. 刷新页面即可看到新表达
+
+### 方式三：本地 git 操作（进阶）
+
+```bash
+git clone git@github.com:jingwang134/SceneTalk.git
+# 或国内网络: git clone git@ssh.github.com:443/jingwang134/SceneTalk.git
+cd SceneTalk
+# 编辑 data.js 后
+git add data.js
+git commit -m "新增表达"
+git push
+```
+
+## 🛠️ 本地开发
+
+```
+index.html      # 界面 + 逻辑（表达库/训练场/词库/打卡）
+data.js         # 表达数据（78条，可独立编辑）
+parts/          # 工程片段（CSS/JS/数据模板，供 rebuild 脚本使用）
+scripts/        # 台本提取的纯文本（s01eXX.txt）
+*.py / *.js     # 工程脚本（数据插入、校验、重建）
+```
+
+校验：`node validate.js`（检查语法 + 表达条数）
