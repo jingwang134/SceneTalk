@@ -957,7 +957,7 @@ function showDetail(id){
       </div>
       <div class="detail-section">
         <h4>🗂️ 雅思话题</h4>
-        <div class="topic-use-box">${tp.icon} <b>${tp.name}</b> — 可直接用于 IELTS Speaking/Writing 中「${e.comparison.topic}」类话题，也适用于相关延伸讨论。</div>
+        <div class="topic-use-box">${tp.icon} <b>${tp.name}</b> — ${e.comparison&&e.comparison.topic?("可直接用于 IELTS Speaking/Writing 中「"+e.comparison.topic+"」类话题，也适用于相关延伸讨论。"):"该表达的精讲数据（提问/5分vs7分对比）补充中，先用例句和挖空学习。"}</div>
       </div>
       <div class="detail-section">
         <h4>🔤 关键词汇</h4>
@@ -1772,12 +1772,12 @@ function renderTaskCard(e){
           </div>
           <div class="sum-model" id="taskOutputModel"><span class="label">参考总结：</span>${generateModelSummary(e)}</div>
         `:`
-          <div class="q-text" style="display:block;margin-bottom:10px">${e.questions[0].q}</div>
+          <div class="q-text" style="display:block;margin-bottom:10px">${e.questions&&e.questions.length?e.questions[0].q:("用「"+e.english+"」造一个句子，或说一小段相关的话。")}</div>
           <textarea class="q-input" placeholder="用这个表达组织你的回答..." id="taskOutput"></textarea>
           <div class="q-actions" style="margin-top:8px">
-            <button class="q-btn reveal" onclick="revealTaskOutput()">查看参考答案</button>
+            <button class="q-btn reveal" onclick="revealTaskOutput()">${e.questions&&e.questions.length?"查看参考答案":"看例句提示"}</button>
           </div>
-          <div class="q-sample" id="taskOutputModel"><b>参考答案：</b>${e.questions[0].a}</div>
+          <div class="q-sample" id="taskOutputModel"><b>${e.questions&&e.questions.length?"参考答案：":"例句提示："}</b>${e.questions&&e.questions.length?e.questions[0].a:("可参考例句： "+e.example)}</div>
         `}
         <div class="step-nav">
           <button class="q-btn ghost" onclick="nextDailyStep(3)">← 上一步</button>
@@ -1907,11 +1907,11 @@ function highlightKeyPhrases(text,keywords){
 function generateModelSummary(e){
   const kwList=e.keywords.map(k=>k.word).join("、");
   const tp=topicOf(e.topic);
-  return `这段话的核心表达包括：${kwList}。主要观点是：${e.chinese}。在雅思口语/写作中，可以将这些表达用于「${tp.name}」话题（例如「${e.comparison.topic}」），先列举具体场景（建立真实感），再提炼洞察（展现思考深度），最后用对比结构收尾（增强说服力）。`;
+  return `这段话的核心表达包括：${kwList}。主要观点是：${e.chinese}。在雅思口语/写作中，可以将这些表达用于「${tp.name}」话题${e.comparison&&e.comparison.topic?("（例如「"+e.comparison.topic+"」）"):""}，先列举具体场景（建立真实感），再提炼洞察（展现思考深度），最后用对比结构收尾（增强说服力）。`;
 }
 // ===================== RENDER: IELTS Comparison =====================
 function renderComparison(){
-  document.getElementById("cmpList").innerHTML=expressions.map(e=>{
+  document.getElementById("cmpList").innerHTML=expressions.filter(e=>e.comparison&&e.comparison.score5).map(e=>{
     const tp=topicOf(e.topic);
     return `
     <div class="cmp-item" data-id="${e.id}">
