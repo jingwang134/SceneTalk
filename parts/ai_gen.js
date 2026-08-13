@@ -74,7 +74,7 @@ async function generateAIAnswer(q, reGen){
       else if(resp.status===402) msg='账户余额不足，请到 DeepSeek 平台充值';
       else if(resp.status===429) msg='请求过于频繁（限流），稍等几秒再试';
       else if(resp.status>=500) msg='AI 服务暂时不可用，稍后再试';
-      box.innerHTML='<div class="gen-error">❌ '+msg+'（HTTP '+resp.status+'）<br><br><button class="q-btn ghost" onclick="openAiSettings()">⚙️ 检查配置</button> <button class="q-btn ghost" onclick="setAiMode(\'template\');generateAnswer()">🎛️ 改用模板生成</button></div>';
+      box.innerHTML='<div class="gen-error">❌ '+msg+'（HTTP '+resp.status+'）<br><br><button class="q-btn ghost" onclick="openAiSettings()">⚙️ 检查配置</button> <button class="q-btn ghost" onclick="testAiConn()">🔍 测试连接</button> <button class="q-btn ghost" onclick="setAiMode(\'template\');generateAnswer()">🎛️ 改用模板生成</button></div>';
       return;
     }
     const data=await resp.json();
@@ -87,9 +87,56 @@ async function generateAIAnswer(q, reGen){
   }catch(e){
     let msg=e.message;
     if(e.name==='AbortError') msg='请求超时（90秒），网络或服务较慢，再试一次';
-    if(e.name==='TypeError') msg='网络请求失败（无法连接 API，检查网络；浏览器直连需 API 支持 CORS）';
-    box.innerHTML='<div class="gen-error">❌ AI 生成失败：'+msg+'<br><br><button class="q-btn ghost" onclick="generateAnswer(true)">🔄 重试</button> <button class="q-btn ghost" onclick="setAiMode(\'template\');generateAnswer()">🎛️ 改用模板生成</button></div>';
+    if(e.name==='TypeError') msg='网络请求失败（无法连接 API）——多数是网络被拦或接口地址填错，点「测试连接」定位';
+    box.innerHTML='<div class="gen-error">❌ AI 生成失败：'+msg+'<br><br><button class="q-btn ghost" onclick="testAiConn()">🔍 测试连接</button> <button class="q-btn ghost" onclick="generateAnswer(true)">🔄 重试</button> <button class="q-btn ghost" onclick="setAiMode(\'template\');generateAnswer()">🎛️ 改用模板生成</button></div>';
   }
+}
+
+// ---------- 连接诊断：分层定位问题 ----------
+async function testAiConn(){
+  const cfg=aiCfg();
+  const box=document.getElementById('genResult');
+  const L=[];
+  L.push('<div class="gen-error" style="text-align:left"><b>🔍 连接诊断</b>（对照检查，绿色=通过 红色=问题所在）<br><br>');
+  if(!cfg.key){
+    L.push('❌ 未配置 API Key —— 点右上「⚙️ 配置 AI」粘贴 Key<br>');
+    L.push('</div>');
+    box.innerHTML=L.join('');
+    return;
+  }
+  // ① 接口地址格式
+  try{ new URL(cfg.endpoint); L.push('✅ 接口地址格式正确：<code>'+escapeHtml(cfg.endpoint)+'</code><br>'); }
+  catch(e){
+    L.push('❌ 接口地址格式错误：<code>'+escapeHtml(cfg.endpoint)+'</code> —— 应形如 https://api.deepseek.com/chat/completions<br>');
+    L.push('</div>'); box.innerHTML=L.join(''); return;
+  }
+  // ② 连接测试（不带 key，服务器应返回 401 = 连上了）
+  try{
+    const resp=await fetch(cfg.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:cfg.model,messages:[{role:'user',content:'hi'}]})});
+    if(resp.status===401) L.push('✅ 已连上 API 服务器（返回 401 属正常，说明地址对、网络通）<br>');
+    else if(resp.status===404||resp.status===405) L.push('❌ 接口地址不对（HTTP '+resp.status+'）—— 应为 https://api.deepseek.com/chat/completions，请修正<br>');
+    else L.push('✅ 已连上 API（HTTP '+resp.status+'）<br>');
+  }catch(e){
+    if(e.name==='TypeError'){
+      L.push('❌ 浏览器无法连接 API —— 说明：<br>1）当前网络拦截了 api.deepseek.com（换网络/关代理试试）<br>2）或浏览器扩展拦截了请求（关广告拦截插件试试）<br>3）CORS 已实测放行，不是 CORS 问题<br>');
+    }else{
+      L.push('❌ 连接异常：'+escapeHtml(e.message)+'<br>');
+    }
+    L.push('</div>'); box.innerHTML=L.join(''); return;
+  }
+  // ③ Key 有效性（真实最小请求）
+  try{
+    const resp=await fetch(cfg.endpoint,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+cfg.key},body:JSON.stringify({model:cfg.model,messages:[{role:'user',content:'hi'}],max_tokens:5})});
+    if(resp.ok) L.push('✅ Key 有效！可以正常生成答案<br>');
+    else if(resp.status===401) L.push('❌ Key 无效或已过期（HTTP 401）—— 到 platform.deepseek.com 重新复制完整 Key（sk- 开头）<br>');
+    else if(resp.status===402) L.push('❌ 账户余额不足（HTTP 402）—— 到 DeepSeek 平台充值<br>');
+    else if(resp.status===429) L.push('⚠️ 请求过于频繁（HTTP 429）—— 稍等几秒再试<br>');
+    else L.push('⚠️ 服务器返回 HTTP '+resp.status+'<br>');
+  }catch(e){
+    L.push('❌ Key 验证请求失败：'+escapeHtml(e.message)+'<br>');
+  }
+  L.push('</div>');
+  box.innerHTML=L.join('');
 }
 
 function renderAIAnswer(q,out,p,tp,parsed,exprs){
