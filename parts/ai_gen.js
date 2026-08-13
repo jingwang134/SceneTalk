@@ -66,8 +66,8 @@ async function generateAIAnswer(q, reGen){
   let endpoint=cfg.endpoint||defaultEndpoint();
   if(isLocalServerMode() && endpoint.indexOf('/api/chat')===-1) endpoint='/api/chat';
   box.innerHTML='<div class="gen-loading">🤖 '+p.ico+' '+p.name+' 正在组织回答… 首次调用约 15-30 秒，请稍候</div>';
-  const sys='你是雅思口语金牌教练。根据用户题目生成地道、严格扣题的雅思口语答案。\n铁律：\n1. 严格回应题目内容，绝不跑题，不写与题目无关的套话\n2. 长度：Part1 只答2-4句短答；Part2 完整小故事（6句左右，含背景/细节/个人感受）；Part3 深度讨论（4-6句，正反两面论证）\n3. 完全模仿指定人设的口吻（口头禅、句式节奏、叙事逻辑），不要写成书面作文，保持真人感\n4. 尽量自然融入用户提供的2-3个地道表达，融入处用 **表达** 包裹标记\n5. 主体全英文，俚语受控（雅思考官能听懂），禁止搬运影视剧完整剧情\n6. 只输出JSON，不要任何多余文字，格式：\n{"lines":[{"en":"英文句子（含**标记**）","zh":"中文翻译","explain":"这句在雅思作答中的作用（扣题/铺垫/细节/升华等）"}],"notes":[{"phrase":"习语或词伙","meaning":"中文释义"}]}';
-  const usr='题目：'+q+'\n题型：'+PART_LABEL[parsed.part]+'（对象：'+parsed.obj.cn+'）\n人设：'+(PERSONA_PROMPTS[genStyle]||PERSONA_PROMPTS.casual)+'\n可用地道表达（请尽量融入其中2-3个）：\n'+exprs.map(e=>'- '+e.english+'（'+e.chinese+'）').join('\n');
+  const sys='你是雅思口语金牌教练。根据用户题目生成地道、严格扣题的雅思口语答案。\n铁律：\n1. 严格回应题目内容，绝不跑题，不写与题目无关的套话\n2. 长度：Part1 只答2-4句短答；Part2 完整小故事（6句左右，含背景/细节/个人感受）；Part3 深度讨论（4-6句，正反两面论证）\n3. 完全模仿指定人设的口吻（口头禅、句式节奏、叙事逻辑），不要写成书面作文，保持真人感\n4. 【强制】必须使用用户下方提供的地道表达中的至少2个，自然融入句子，融入处用 **表达** 包裹标记；可额外用你掌握的表达补充，但至少2处必须是库内提供的\n5. 主体全英文，俚语受控（雅思考官能听懂），禁止搬运影视剧完整剧情\n6. 只输出JSON，不要任何多余文字，格式：\n{"lines":[{"en":"英文句子（含**标记**）","zh":"中文翻译","explain":"这句在雅思作答中的作用（扣题/铺垫/细节/升华等）"}],"notes":[{"phrase":"习语或词伙","meaning":"中文释义"}]}';
+  const usr='题目：'+q+'\n题型：'+PART_LABEL[parsed.part]+'（对象：'+parsed.obj.cn+'）\n人设：'+(PERSONA_PROMPTS[genStyle]||PERSONA_PROMPTS.casual)+'\n可用地道表达（来自本产品表达库·美剧台本提炼，必须使用其中至少2个）：\n'+exprs.map(e=>'- '+e.english+'（'+e.chinese+'）').join('\n');
   try{
     const ctrl=new AbortController();
     const timer=setTimeout(function(){ ctrl.abort(); }, 90000);
@@ -174,10 +174,17 @@ function renderAIAnswer(q,out,p,tp,parsed,exprs){
       '</div></div>';
   }).join('');
   const notesHtml=notes.length?notes.map(function(n){ return '<div class="gen-note"><code>'+escapeHtml(n.phrase)+'</code> <span class="gen-note-zh">('+escapeHtml(n.meaning)+')</span></div>'; }).join(''):'<div class="gen-note" style="color:#8892A0">AI 未单独标注习语，逐句讲解中的金色短语即为融入的地道表达</div>';
+  // 统计 AI 实际融入的库内表达数（**标记** 成对出现）
+  let usedCount=0;
+  lines.forEach(function(l){ var m=(l.en||'').match(/\*\*(.+?)\*\*/g); if(m) usedCount+=m.length; });
+  const usedBadge = usedCount>=2
+    ? '<div class="gen-used-ok">✅ 已融入 <b>'+usedCount+'</b> 个库内地道表达（要求 ≥2）</div>'
+    : '<div class="gen-used-warn">⚠️ AI 本次只融入了 '+usedCount+' 个库内表达（要求 ≥2）——点「🔄 重新生成」让 AI 重写一版<br><button class="q-btn ghost" onclick="generateAnswer(true)">🔄 重新生成</button></div>';
   box.innerHTML='<div class="gen-answer">'+
     '<div class="gen-q-label">📝 你的问题</div>'+
     '<div class="gen-q-text">'+escapeHtml(q)+'</div>'+
     '<div class="gen-style-tag">🤖 AI 生成 ·【'+p.ico+' '+p.name+'】·【'+PART_LABEL[parsed.part]+'】· 话题：'+tp.icon+' '+tp.name+'</div>'+
+    usedBadge+
     '<div class="gen-block-label">🗣️ 英文答案 <span class="gen-block-sub">(金色 = 融入的地道表达)</span></div>'+
     '<div class="gen-answer-text">'+enHtml+'</div>'+
     '<div class="gen-block-label">🇨🇳 中文翻译</div>'+
@@ -186,9 +193,9 @@ function renderAIAnswer(q,out,p,tp,parsed,exprs){
     '<div class="gen-lines">'+lineHtml+'</div>'+
     '<div class="gen-exprs-label">📝 地道习语 / 词伙注释</div>'+
     '<div class="gen-notes">'+notesHtml+'</div>'+
-    '<div class="gen-exprs-label">🌟 本话题可用的高分表达（点击看详解）</div>'+
+    '<div class="gen-exprs-label">🌟 本题用到的库内表达（点击看详解）</div>'+
     '<div class="gen-expr-chips">'+exprs.map(function(e){ return '<button class="gen-chip" onclick="showDetail('+e.id+')">'+e.english+'</button>'; }).join('')+'</div>'+
-    '<div class="gen-tip">🤖 AI 答案每次生成都不同，人设与表达库由你指定。点「🔀 换一批表达」让 AI 换个角度重写。</div>'+
+    '<div class="gen-tip">🤖 AI 答案每次生成都不同，人设与表达库由你指定。点「🔀 换一批表达」让 AI 换一套词伙重写。</div>'+
     '</div>';
 }
 
