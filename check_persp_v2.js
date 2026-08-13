@@ -80,6 +80,11 @@ for (const tk of topicKeys) {
     if (!d.tag) errors.push(dl + ' 缺 tag');
     if (!d.name) errors.push(dl + ' 缺 name');
     if (!d.angle) errors.push(dl + ' 缺 angle');
+    else {
+      const FORBIDDEN = ['母语者', '思维框架', '母语思维', '观察思维', '唯一的说法', '只能这么说'];
+      const bad = FORBIDDEN.filter(w => d.angle.includes(w));
+      if (bad.length) errors.push(dl + ' angle 含禁用词（' + bad.join(' / ') + '）——话术应为"谈XX时，可以这么说"');
+    }
     if (!d.use) errors.push(dl + ' 缺 use（雅思支架）');
     if (!d.items || !d.items.length) { errors.push(dl + ' 无 items'); return; }
     if (d.items.length < 2 || d.items.length > 4) warns.push(dl + ' items数=' + d.items.length + '（规则2-4条）');

@@ -1339,16 +1339,16 @@ function renderPerspectivePage(c){
           <span class="persp-dim-tag">${d.tag}</span>
           <span class="persp-dim-name">${d.name}</span>
         </div>
-        <div class="persp-angle">💭 ${d.angle}</div>
+        <div class="persp-angle">💡 ${d.angle}</div>
         <div class="persp-items">${itemsHtml}</div>
-        <div class="persp-use">✍️ <b>雅思支架：</b>${d.use}</div>
+        <div class="persp-use">✍️ <b>可以这么串：</b>${d.use}</div>
       </div>`;
   }).join(""):`<div class="persp-empty">📖 该话题的维度素材补充中，先选其他话题～</div>`;
   c.innerHTML=pathBanner()+`
     <div class="persp-sec-title">💡 ${data.map||("聊「"+tp.name+"」，外国人通常从这 3 个维度展开")}</div>
-    <div class="persp-map-hint">🗺️ 每个维度 = 一个思考方向 + 紧贴它的地道语料；选 2-3 个维度，就能组织一段有层次的口语/写作回答。</div>
+    <div class="persp-map-hint">🗺️ 每个维度是一组同场景的说法，都是从剧里提炼的——挑顺手的用，不用全记。</div>
     ${dimsHtml}
-    <div class="persp-tipbox">✨ 小提示：雅思口语/写作时，选其中 2-3 个维度，用每个维度下的「雅思支架」串成你的回答。</div>
+    <div class="persp-tipbox">✨ 小提示：同一个话题不用只记一种说法——每个维度挑 1-2 个用熟就行；考试时按「可以这么串」组织就是一段回答。</div>
     <div class="persp-cta">
       <button class="q-btn reveal" onclick="startLearnAfterPersp()">已看完范例 → 开始学词 📖</button>
     </div>`;
