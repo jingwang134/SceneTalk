@@ -235,6 +235,13 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
 .gen-styles{display:flex;flex-wrap:wrap;gap:8px}
 .gen-style{font-size:13px;padding:7px 14px;border-radius:20px;border:1px solid #E0DACB;background:#fff;color:#5A6B7A;cursor:pointer}
 .gen-style.active{background:#C8963E;border-color:#C8963E;color:#fff;font-weight:700}
+.gen-style.base{border-style:dashed;opacity:.8}
+.gen-style.base.active{border-style:solid;opacity:1}
+.gen-answer-text .zn{font-size:12px;color:#8892A0}
+.gen-notes{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.gen-note{font-size:13px;color:#2C2C2A;background:#F6F3FC;border:1px solid #E3DCF2;border-radius:8px;padding:7px 12px;line-height:1.6}
+.gen-note code{font-family:inherit;font-size:13px;font-weight:600;color:#534AB7}
+.gen-note-zh{font-size:12.5px;color:#5A6B7A}
 .gen-answer{background:#fff;border:1px solid #E8E2D5;border-radius:14px;padding:18px;margin-top:14px}
 .gen-q-label{font-size:12px;color:#8892A0;margin-bottom:4px}
 .gen-q-text{font-size:14px;font-weight:600;color:#1A2A3A;margin-bottom:10px;line-height:1.5}
@@ -639,12 +646,23 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
         <textarea id="genQuestion" class="gen-input" rows="2" placeholder="例：Describe a person who has influenced you.  /  Do you think technology makes people lazy?"></textarea>
       </div>
       <div class="gen-row" style="margin-top:14px">
-        <span class="filter-label" style="margin-right:8px">答题风格</span>
+        <span class="filter-label" style="margin-right:8px">选择人设</span>
         <div class="gen-styles" id="genStyles">
-          <button class="gen-style active" data-style="high" onclick="setGenStyle(this)">🎯 高分范文风</button>
-          <button class="gen-style" data-style="casual" onclick="setGenStyle(this)">💬 口语自然风</button>
-          <button class="gen-style" data-style="academic" onclick="setGenStyle(this)">📚 学术分析风</button>
-          <button class="gen-style" data-style="story" onclick="setGenStyle(this)">🎭 故事叙述风</button>
+          <button class="gen-style active" data-style="vlogger" onclick="setGenStyle(this)">🌴 加州松弛白女</button>
+          <button class="gen-style" data-style="brit" onclick="setGenStyle(this)">🎓 英伦学霸</button>
+          <button class="gen-style" data-style="shy" onclick="setGenStyle(this)">🙈 社恐内向青年</button>
+          <button class="gen-style" data-style="party" onclick="setGenStyle(this)">🎉 外向乐天派</button>
+          <button class="gen-style" data-style="ted" onclick="setGenStyle(this)">🧠 理性学术学霸</button>
+          <button class="gen-style" data-style="critic" onclick="setGenStyle(this)">🎙️ 批判思辨博主</button>
+        </div>
+      </div>
+      <div class="gen-row" style="margin-top:10px">
+        <span class="filter-label" style="margin-right:8px;color:#8892A0">基础风格（不绑人设）</span>
+        <div class="gen-styles" id="genBaseStyles">
+          <button class="gen-style base" data-style="high" onclick="setGenStyle(this)">🎯 高分范文风</button>
+          <button class="gen-style base" data-style="casual" onclick="setGenStyle(this)">💬 口语自然风</button>
+          <button class="gen-style base" data-style="analytic" onclick="setGenStyle(this)">📚 学术分析风</button>
+          <button class="gen-style base" data-style="story" onclick="setGenStyle(this)">🎭 故事叙述风</button>
         </div>
       </div>
       <div style="margin-top:16px">
@@ -2000,50 +2018,115 @@ function generateModelSummary(e){
   const tp=topicOf(e.topic);
   return `这段话的核心表达包括：${kwList}。主要观点是：${e.chinese}。在雅思口语/写作中，可以将这些表达用于「${tp.name}」话题${e.comparison&&e.comparison.topic?("（例如「"+e.comparison.topic+"」）"):""}，先列举具体场景（建立真实感），再提炼洞察（展现思考深度），最后用对比结构收尾（增强说服力）。`;
 }
-// ===================== 🎤 雅思答案定制 =====================
-let genStyle = "high";
-const GEN_STYLES = {
-  high:     {name:"高分范文风", opener:"Well, that's a thought-provoking question — let me give you my honest take.",
-             mids:[
-               "There's an expression I often use in situations like this: \"{e1}\" ({z1}). It captures exactly how I feel.",
-               "And thinking about it further, \"{e2}\" ({z2}) adds a slightly different shade of meaning to the whole picture.",
-               "From my own experience, this really resonates, because it connects directly to the way I see the world."
-             ],
-             closer:"So in a nutshell, I'd say it boils down to this: the right expression can change the whole conversation."},
-  casual:   {name:"口语自然风", opener:"Oh, good question! Let me think out loud for a second.",
-             mids:[
-               "I've got this one phrase that fits perfectly: \"{e1}\" ({z1}). It's kind of my go-to in this situation.",
-               "And hey, \"{e2}\" ({z2}) — that one's pretty handy too, honestly.",
-               "It's funny — I picked these up from watching shows, and now they just come out naturally."
-             ],
-             closer:"So yeah, that's basically where I stand — nothing too fancy, just my honest two cents."},
-  academic: {name:"学术分析风", opener:"From a broader perspective, I think this question touches on several interconnected issues.",
-             mids:[
-               "One could frame it through the lens of \"{e1}\" ({z1}) — a notion that has gained considerable attention in recent years.",
-               "Moreover, \"{e2}\" ({z2}) highlights a further dimension worth examining closely.",
-               "The evidence from everyday life suggests that language itself shapes how we perceive such situations."
-             ],
-             closer:"To conclude, while opinions vary, I would argue that the most convincing account combines both of these viewpoints."},
-  story:    {name:"故事叙述风", opener:"I actually have a story about this — it happened a couple of years ago.",
-             mids:[
-               "I remember this one moment when \"{e1}\" ({z1}) really hit home for me.",
-               "And later, \"{e2}\" ({z2}) became kind of my motto for getting through it.",
-               "Looking back, that experience taught me more than any textbook ever could."
-             ],
-             closer:"So whenever I hear this question now, that memory always comes back — and it still makes me smile."}
+// ===================== 🎤 雅思答案定制（人设驱动版） =====================
+let genStyle = "vlogger";
+// 人设/风格：fillers=口头禅填充 | openers/closers 按题型(p1/p2/p3) | linkers=句间连接
+const PERSONAS = {
+  vlogger:{name:"加州松弛白女",src:"美式Vlog·摩登家庭",ico:"🌴",
+    fillers:["you know","sort of","literally","honestly","I guess","funnily enough","kinda"],
+    openers:{p1:"Okay so, honestly, this is such a fun little question — let me think out loud for a second.",
+             p2:"Oh my gosh, okay — to be real with you, I have a perfect little story for this one.",
+             p3:"Hmm, okay, honestly? I don't think there's one simple answer, but here's how I see it."},
+    linkers:["And funnily enough,","Honestly,","The thing is,","And you know what?","Plus,","So kinda like,"],
+    closers:{p1:"So yeah, that's kind of where I stand — hope that made sense!",
+             p2:"So yeah, that's my little story — one of those memories that just stuck with me.",
+             p3:"So I guess, at the end of the day, it's all about how you frame it — but hey, that's just me."}},
+  brit:{name:"英伦学霸",src:"英剧·BBC访谈",ico:"🎓",
+    fillers:["arguably","from my perspective","I'd say","to some extent","frankly"],
+    openers:{p1:"That's an interesting question — I'd say there's rather more nuance to it than first appears.",
+             p2:"Let me draw on a personal example, if I may — it's the clearest way I can illustrate the point.",
+             p3:"From my perspective, this warrants a more measured analysis than a simple yes or no."},
+    linkers:["Arguably,","From a different angle,","To some extent,","That said,","One could also argue that"],
+    closers:{p1:"So to summarise, it's less about a fixed answer and more about how you weigh the factors involved.",
+             p2:"So that anecdote, I think, captures the essence of what I'm trying to convey.",
+             p3:"In conclusion, while the issue is multifaceted, I'd argue the balance tips towards the view I've outlined."}},
+  shy:{name:"社恐内向青年",src:"欧美校园剧",ico:"🙈",
+    fillers:["I think","probably","maybe","honestly","I guess"],
+    openers:{p1:"Um, I'm not sure I'm the best person to ask about this, but I'll give it a go.",
+             p2:"I don't usually talk about this sort of thing, but since you asked, there is one memory...",
+             p3:"Hmm. I think this is one of those questions where the answer depends a lot on the situation."},
+    linkers:["Most of the time,","But occasionally,","For me personally,","I mean,","In my case,"],
+    closers:{p1:"So yeah, that's just my take — I know it's a bit of an unusual one.",
+             p2:"So, yeah — it's not a big story, but it's mine, and I think about it more than I'd admit.",
+             p3:"So I'd say it really depends — and I don't think there's anything wrong with that being the answer."}},
+  party:{name:"外向乐天派",src:"真人秀综艺",ico:"🎉",
+    fillers:["like","literally","honestly","no joke"],
+    openers:{p1:"Oh, this is an easy one for me — I've got opinions on everything, no joke!",
+             p2:"Okay, story time! You're gonna love this, I swear.",
+             p3:"Honestly? I could talk about this all day — here's my take, straight up."},
+    linkers:["And get this,","So then,","Anyway,","Also,","Oh and fun fact,"],
+    closers:{p1:"So yeah, that's me — short and sweet, that's how I roll.",
+             p2:"And that, my friend, is how it all went down — true story!",
+             p3:"So there you have it — my two cents, and I'm sticking to it!"}},
+  ted:{name:"理性学术学霸",src:"TED-Ed",ico:"🧠",
+    fillers:["notably","in practice","by and large","arguably"],
+    openers:{p1:"Interesting. If we step beyond the personal level for a moment, there's a broader pattern worth noting.",
+             p2:"To frame this properly, let me first situate it within a wider context before narrowing to a specific case.",
+             p3:"If we examine this societally rather than individually, a more layered picture emerges."},
+    linkers:["Notably,","In practice,","By and large,","Critically,","This connects to a wider phenomenon,"],
+    closers:{p1:"So, in short, the personal and the structural are more intertwined than they first appear.",
+             p2:"In closing, this single case serves as a microcosm of a much larger dynamic.",
+             p3:"To conclude, the evidence favours a nuanced position that distinguishes individual agency from systemic influence."}},
+  critic:{name:"批判思辨博主",src:"深度播客",ico:"🎙️",
+    fillers:["to be fair","on balance","actually","frankly"],
+    openers:{p1:"I don't think this is a black-and-white issue, to be fair — but let's start with where I land.",
+             p2:"I'm going to tell you a story, but I'm also going to complicate it, because that's the honest version.",
+             p3:"On one hand, the easy answer is tempting. On the flip side, it falls apart under scrutiny."},
+    linkers:["On one hand,","On the flip side,","That said,","Having said that,","Actually, though,"],
+    closers:{p1:"So the honest answer is: it depends — and that's a legitimate answer in itself.",
+             p2:"So that's the story — and the lesson I took from it isn't as tidy as I'd like it to be.",
+             p3:"So I'll leave it there: the confident answer is rarely the complete one."}},
+  // ---- 基础风格（不绑人设）----
+  high:{name:"高分范文风",src:"应试范文",ico:"🎯",
+    fillers:["in essence","fundamentally","to a large degree"],
+    openers:{p1:"Well, that's a straightforward question — let me give you my honest take.",
+             p2:"I'd like to share a personal experience that illustrates this well.",
+             p3:"This is a multifaceted issue, so let me approach it from a couple of angles."},
+    linkers:["Moreover,","Furthermore,","In addition,","From my perspective,","For instance,"],
+    closers:{p1:"So in a nutshell, that's my view on the matter.",
+             p2:"To sum up, this experience taught me a lesson I still carry with me.",
+             p3:"All in all, I believe a balanced perspective serves this discussion best."}},
+  casual:{name:"口语自然风",src:"普通考生",ico:"💬",
+    fillers:["you know","I mean","actually","pretty much"],
+    openers:{p1:"Oh, good question. Let me think for a second.",
+             p2:"I remember a time when...",
+             p3:"Hmm, I've never really thought about it deeply, but I'd say..."},
+    linkers:["And actually,","Also,","For me,","I mean,"],
+    closers:{p1:"So yeah, that's basically it.",
+             p2:"So that's the story — hope it makes sense.",
+             p3:"So I'd say it depends, honestly."}},
+  analytic:{name:"学术分析风",src:"重辩证·社会视角",ico:"📚",
+    fillers:["arguably","in many cases","from a societal standpoint"],
+    openers:{p1:"If we consider this from a broader societal standpoint, a clearer pattern emerges.",
+             p2:"To answer this, it helps to distinguish the individual experience from the collective one.",
+             p3:"This question operates on multiple levels — personal, social, and structural."},
+    linkers:["From a societal standpoint,","Conversely,","Empirically speaking,","This raises a further question,"],
+    closers:{p1:"So while the personal lens is valid, the structural view adds essential depth.",
+             p2:"In sum, the anecdotal and the systemic are two sides of the same coin.",
+             p3:"Ultimately, the most defensible position integrates both the micro and macro perspectives."}},
+  story:{name:"故事叙述风",src:"优先叙事",ico:"🎭",
+    fillers:["and then","suddenly","at that moment","funny enough"],
+    openers:{p1:"I've got a quick story that answers this better than any opinion.",
+             p2:"Let me take you back to a moment I'll never forget.",
+             p3:"I can answer this best with a story, then unpack it afterwards."},
+    linkers:["And then,","Suddenly,","What happened next was,","At that moment,","Funny enough,"],
+    closers:{p1:"And that's why I feel the way I do about it.",
+             p2:"And that memory still makes me smile every time.",
+             p3:"So the story, I think, says more than a hundred arguments could."}}
 };
 const TOPIC_KEYWORDS = {
-  work:["work","job","career","career","boss","colleague","工作","职业","职场","老板","同事","赚钱","money","salary","company"],
+  work:["work","job","career","boss","colleague","工作","职业","职场","老板","同事","赚钱","money","salary","company"],
   family:["family","parents","mother","father","child","children","家庭","家人","父母","孩子","结婚","married","亲"],
-  education:["school","study","student","teacher","exam","education","学校","学习","学生","老师","考试","教育","study"],
-  communication:["communication","talk","relationship","friendship","朋友","沟通","交流","社交","聊天","relationship","argue"],
+  education:["school","study","student","teacher","exam","education","学校","学习","学生","老师","考试","教育"],
+  communication:["communication","talk","relationship","朋友","沟通","交流","社交","聊天","argue","friendship"],
   values:["value","principle","honest","诚实","诚信","原则","价值观","道德","坚持","放弃"],
   skills:["skill","ability","learn","学会","技能","能力","掌握"],
   health:["health","exercise","sport","健康","运动","锻炼","饮食"],
-  media:["media","internet","phone","social","媒体","网络","手机","社交平台","新闻"],
+  media:["media","internet","phone","social","technology","tech","媒体","网络","手机","社交平台","新闻","科技"],
   travel:["travel","trip","holiday","旅行","旅游","假期","度假"],
   shopping:["shopping","buy","money","spend","购物","消费","买"]
 };
+const PART_LABEL={p1:"Part 1",p2:"Part 2",p3:"Part 3"};
 function setGenStyle(btn){ genStyle=btn.getAttribute("data-style"); document.querySelectorAll(".gen-style").forEach(b=>b.classList.remove("active")); btn.classList.add("active"); }
 function detectTopic(text){
   const t=text.toLowerCase();
@@ -2054,6 +2137,12 @@ function detectTopic(text){
   }
   return bestN>0?best:"communication";
 }
+function detectPart(q){
+  const t=q.trim().toLowerCase();
+  if(/^(describe|talk about|tell me about|describe a)/.test(t)||/ describe /.test(t)) return "p2";
+  if(/^(why|do you think|what are the|to what extent|in your opinion|should|how has|how does|how do|what is your opinion)/.test(t)) return "p3";
+  return "p1";
+}
 function pickGenExprs(topic,n){
   const pool=expressions.filter(e=>e.topic===topic);
   if(!pool.length) return expressions.filter(e=>e.topic==="communication").slice(0,n);
@@ -2061,26 +2150,45 @@ function pickGenExprs(topic,n){
   const rest=shuffleArr(pool.filter(e=>!(e.level||"").startsWith("7")));
   return high.concat(rest).slice(0,n);
 }
-function buildAnswer(topic,style,exprs){
-  const st=GEN_STYLES[style]||GEN_STYLES.high;
+function fillIn(fillers,sentence){
+  return sentence.replace("{f}",fillers[Math.floor(Math.random()*fillers.length)]);
+}
+function buildAnswer(topic,key,exprs,part){
+  const p=PERSONAS[key]||PERSONAS.vlogger;
   const tp=topicOf(topic);
-  let body=st.mids.map((m,i)=>{
-    const e=exprs[i]||exprs[exprs.length-1];
-    return m.replace("{e"+(i+1)+"}",`<span class='hl'>${e.english}</span>`).replace("{z"+(i+1)+"}",e.chinese);
-  }).join(" ");
+  const f=()=>p.fillers[Math.floor(Math.random()*p.fillers.length)];
+  const L=()=>p.linkers[Math.floor(Math.random()*p.linkers.length)];
+  const E=(i)=>`<span class='hl'>${exprs[i].english}</span> <span class='zn'>(${exprs[i].chinese})</span>`;
+  let body="";
+  if(part==="p1"){
+    body=`${p.openers.p1} There's a saying I've picked up that fits perfectly — ${E(0)} — ${f()}, that's exactly how I feel about it. ${p.closers.p1}`;
+  }else if(part==="p2"){
+    body=`${p.openers.p2}
+      So this goes back to a while ago — something that really stuck with me. The first thing that comes to mind is ${E(0)}. It's funny how one phrase can capture a whole moment.
+      ${L()} ${E(1)} became sort of the turning point — that's when things started to make sense.
+      Looking back now, ${E(2)} sums it up better than anything I could say myself.
+      ${p.closers.p2}`;
+  }else{
+    body=`${p.openers.p3}
+      One way to approach it is through the lens of ${E(0)} — it reminds us that the individual experience isn't the whole story.
+      ${L()} ${E(1)} points to a different angle entirely, and I think both are worth holding onto.
+      ${p.closers.p3}`;
+  }
   return `
     <div class="gen-answer">
       <div class="gen-q-label">📝 你的问题</div>
       <div class="gen-q-text">${escapeHtml(document.getElementById("genQuestion").value)}</div>
-      <div class="gen-style-tag">${st.name} · 话题：${tp.icon} ${tp.name}</div>
-      <div class="gen-answer-text">
-        ${st.opener} ${body} ${st.closer}
+      <div class="gen-style-tag">【${p.ico} ${p.name} · ${p.src}】·【${PART_LABEL[part]}】· 话题：${tp.icon} ${tp.name}</div>
+      <div class="gen-answer-text">${body.replace(/\n\s*/g," ")}</div>
+      <div class="gen-exprs-label">📝 地道习语 / 词伙注释</div>
+      <div class="gen-notes">
+        ${exprs.map(e=>`<div class="gen-note"><code>${e.english}</code> <span class="gen-note-zh">(${e.chinese})</span></div>`).join("")}
       </div>
-      <div class="gen-exprs-label">🌟 用到的地道表达（来自「${tp.name}」话题，点击可看详解）</div>
+      <div class="gen-exprs-label">🌟 表达出处（点击看详解）</div>
       <div class="gen-expr-chips">
         ${exprs.map(e=>`<button class="gen-chip" onclick="showDetail(${e.id})">${e.english}</button>`).join("")}
       </div>
-      <div class="gen-tip">💡 提示：黄色高亮是本次嵌入的地道表达。点「🔀 换一批表达」看同一问题的其他版本；自己开口说一遍效果最好。</div>
+      <div class="gen-tip">💡 提示：黄字为本次嵌入的地道表达。点「🔀 换一批表达」用同人设换一套词伙重新生成，避免背熟一套模板。</div>
     </div>`;
 }
 function escapeHtml(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
@@ -2088,12 +2196,13 @@ function generateAnswer(reGen){
   const q=document.getElementById("genQuestion").value.trim();
   const box=document.getElementById("genResult");
   if(!q && !reGen){
-    box.innerHTML='<div class="gen-empty">✍️ 先输入一个雅思问题，再点生成～</div>';
+    box.innerHTML='<div class="gen-empty">✍️ 先输入一个雅思口语题目，再选人设点生成～</div>';
     return;
   }
   const topic=detectTopic(q||"communication");
-  const exprs=pickGenExprs(topic,3);
-  box.innerHTML=buildAnswer(topic,genStyle,exprs);
+  const part=detectPart(q||"Describe something");
+  const exprs=pickGenExprs(topic, part==="p2"?3:2);
+  box.innerHTML=buildAnswer(topic,genStyle,exprs,part);
 }
 
 // ===================== FILTERS =====================
