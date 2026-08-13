@@ -20,8 +20,6 @@ header{background:linear-gradient(135deg,#1A2A3A 0%,#2D4A5A 100%);color:#F9F5EC;
 .header-chip{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);padding:6px 12px;border-radius:16px;font-size:12.5px;font-weight:600;color:#F9F5EC;white-space:nowrap}
 .header-chip.gold{color:#F5D58F}
 .header-chip .ch-num{color:#F9F5EC;font-weight:700}
-.import-btn{display:flex;align-items:center;gap:6px;background:rgba(200,150,62,.2);border:1px solid rgba(200,150,62,.5);color:#F5D58F;padding:6px 14px;border-radius:16px;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit;white-space:nowrap}
-.import-btn:hover{background:rgba(200,150,62,.35);border-color:#C8963E;color:#fff}
 .tabs{display:flex;gap:2px;max-width:1100px;margin:0 auto;padding:8px 24px 0;overflow-x:auto}
 .tab{background:transparent;border:none;color:#8FA3B8;padding:11px 18px;font-size:14px;font-weight:500;cursor:pointer;border-bottom:3px solid transparent;transition:all .2s;font-family:inherit;white-space:nowrap}
 .tab:hover{color:#F9F5EC}
@@ -230,7 +228,7 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
 .sum-checklist li{font-size:13px;color:#4A5568;padding:4px 0;padding-left:22px;position:relative}
 .sum-checklist li::before{content:'☐';position:absolute;left:0;color:#C8963E}
 
-/* ===== 🎤 雅思答案生成器 ===== */
+/* ===== 🎤 雅思答案定制 ===== */
 .gen-box{background:#fff;border:1px solid #E8E2D5;border-radius:14px;padding:18px}
 .gen-input{width:100%;border:1px solid #D8D2C4;border-radius:10px;padding:10px 12px;font-size:14px;font-family:inherit;resize:vertical;background:#FFFDF9}
 .gen-input:focus{outline:none;border-color:#C8963E}
@@ -279,19 +277,6 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
 .empty-state p{font-size:14px}
 
 /* ===== Import Modal ===== */
-.import-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(26,42,58,.5);z-index:300;justify-content:center;align-items:center;padding:20px}
-.import-overlay.show{display:flex}
-.import-panel{background:#fff;border-radius:16px;max-width:520px;width:100%;padding:28px;position:relative;box-shadow:0 8px 40px rgba(0,0,0,.2);animation:fadeIn .2s}
-.import-panel h3{font-size:19px;color:#1A2A3A;margin-bottom:6px}
-.import-panel .sub{font-size:13px;color:#8892A0;margin-bottom:20px}
-.import-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
-.import-step{display:flex;gap:12px;align-items:flex-start}
-.import-step .step-num{width:26px;height:26px;border-radius:50%;background:#1A2A3A;color:#F9F5EC;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.import-step .step-text{font-size:13px;color:#4A5568;line-height:1.6}
-.import-step .step-text b{color:#1A2A3A}
-.import-tip{background:#FBF8F0;border-radius:10px;padding:14px 16px;font-size:13px;color:#6B5B3E;line-height:1.7;margin-bottom:22px;border-left:3px solid #C8963E}
-.import-close-btn{width:100%;padding:12px;border:none;border-radius:10px;background:#1A2A3A;color:#F9F5EC;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s}
-.import-close-btn:hover{background:#2D4A5A}
 
 /* ===== Toast ===== */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:#1A2A3A;color:#F9F5EC;padding:12px 22px;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 6px 24px rgba(0,0,0,.25);opacity:0;transition:all .3s ease;z-index:400;pointer-events:none;white-space:nowrap}
@@ -558,13 +543,12 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
     <div class="header-actions">
       <span class="header-chip">⭐ <span class="ch-num" id="hdrXp">0</span> · Lv<span class="ch-num" id="hdrLv">1</span></span>
       <span class="header-chip gold">🔥 <span class="ch-num" id="hdrStreak">0</span>天</span>
-      <button class="import-btn" onclick="openImport()">📤 导入台本</button>
     </div>
   </div>
   <nav class="tabs">
     <button class="tab active" data-tab="library">📚 表达库</button>
     <button class="tab" data-tab="train">🎯 训练场</button>
-    <button class="tab" data-tab="compare">⚖️ 雅思对比</button>
+    <button class="tab" data-tab="compare">🎤 雅思答案定制</button>
   </nav>
 </header>
 
@@ -645,9 +629,9 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
     </div>
   </section>
 
-<!-- ===== TAB 3: 雅思答案生成器 ===== -->
+<!-- ===== TAB 3: 雅思答案定制 ===== -->
   <section id="compare" class="tab-content">
-    <h2 class="section-title">🎤 雅思答案生成器</h2>
+    <h2 class="section-title">🎤 雅思答案定制</h2>
     <p class="section-desc">输入一个雅思问题（Part 1/2/3 都行），选一个答题风格，自动从表达库里组装一段带地道表达的回答。</p>
     <div class="gen-box">
       <div class="gen-row">
@@ -675,35 +659,6 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
 <!-- ===== Detail Overlay ===== -->
 <div class="detail-overlay" id="detailOverlay">
   <div class="detail-panel" id="detailPanel"></div>
-</div>
-
-<!-- ===== Import Modal ===== -->
-<div class="import-overlay" id="importOverlay">
-  <div class="import-panel">
-    <button class="detail-close" onclick="closeImport()">✕</button>
-    <h3>📤 导入台本</h3>
-    <p class="sub">把你的美剧 / 综艺台本交给我，我来完成全部加工</p>
-    <div class="import-steps">
-      <div class="import-step">
-        <div class="step-num">1</div>
-        <div class="step-text"><b>提供台本</b> — 直接在对话里粘贴台词文本，或把 TXT / PDF / Word 文件放到工作区后告诉我路径。</div>
-      </div>
-      <div class="import-step">
-        <div class="step-num">2</div>
-        <div class="step-text"><b>智能提取</b> — 我筛出雅思6.5+ 的短语、句子、段落表达，并逐条配上中文翻译、用法说明和例句。</div>
-      </div>
-      <div class="import-step">
-        <div class="step-num">3</div>
-        <div class="step-text"><b>自动归类</b> — 按雅思话题（工作、家庭、沟通、价值观……）自动归入工作台，统计与筛选同步更新。</div>
-      </div>
-      <div class="import-step">
-        <div class="step-num">4</div>
-        <div class="step-text"><b>生成训练</b> — 每条表达自动生成提问、挖空、总结和「5分 vs 7分」对比，随时开练。</div>
-      </div>
-    </div>
-    <div class="import-tip">💡 建议 <b>逐集提供</b>（双语对照最佳），一集大约提取 5-8 条高价值表达，保证质量。</div>
-    <button class="import-close-btn" onclick="closeImport()">明白了，这就去发台本</button>
-  </div>
 </div>
 
 <!-- ===== Toast ===== -->
@@ -1056,7 +1011,7 @@ function showDetail(id){
       </div>
       <div class="detail-cta">
         <button class="cta-btn train" onclick="goTrain(${e.id})">🎯 去训练这个表达</button>
-        <button class="cta-btn compare" onclick="goCompare(${e.id})">⚖️ 看 5分 vs 7分 对比</button>
+        <button class="cta-btn compare" onclick="goGen('${e.topic}')">🎤 定制这个问题的雅思答案</button>
       </div>
     </div>
   `;
@@ -1086,10 +1041,24 @@ function goTrain(id){
   if(flashIndex<0) flashIndex=0;
   renderPathStage();
 }
-function goCompare(id){
+function goGen(topic){
   closeDetail();
+  const SAMPLE={
+    work:"Describe a job you would like to do in the future.",
+    family:"Describe a family member you are closest to.",
+    education:"Describe a subject you enjoyed at school.",
+    communication:"Describe a time you had a difficult conversation with someone.",
+    values:"Describe a time you had to make a difficult decision.",
+    skills:"Describe a skill you would like to learn in the future.",
+    friendship:"Describe a close friend you have known for a long time.",
+    media:"Do you think social media has a positive or negative influence on people?",
+    health:"Describe something you do to stay healthy.",
+    travel:"Describe a trip you remember well.",
+    shopping:"Do you enjoy shopping? Why or why not?"
+  };
+  document.getElementById("genQuestion").value=SAMPLE[topic]||SAMPLE.communication;
   switchTab("compare");
-  document.querySelector(`#cmpList .cmp-item[data-id="${id}"]`).scrollIntoView({behavior:"smooth",block:"center"});
+  setTimeout(function(){ generateAnswer(); var r=document.getElementById("genResult"); if(r) r.scrollIntoView({behavior:"smooth",block:"start"}); },120);
 }
 
 // ===================== CUE CARDS (雅思 Part 2 话题卡) =====================
@@ -2031,7 +2000,7 @@ function generateModelSummary(e){
   const tp=topicOf(e.topic);
   return `这段话的核心表达包括：${kwList}。主要观点是：${e.chinese}。在雅思口语/写作中，可以将这些表达用于「${tp.name}」话题${e.comparison&&e.comparison.topic?("（例如「"+e.comparison.topic+"」）"):""}，先列举具体场景（建立真实感），再提炼洞察（展现思考深度），最后用对比结构收尾（增强说服力）。`;
 }
-// ===================== 🎤 雅思答案生成器 =====================
+// ===================== 🎤 雅思答案定制 =====================
 let genStyle = "high";
 const GEN_STYLES = {
   high:     {name:"高分范文风", opener:"Well, that's a thought-provoking question — let me give you my honest take.",
@@ -2135,17 +2104,6 @@ document.querySelectorAll("#typeFilters .filter-btn").forEach(btn=>{
     currentFilter=btn.dataset.filter;
     renderLibrary();
   });
-});
-
-// ===================== IMPORT MODAL =====================
-function openImport(){
-  document.getElementById("importOverlay").classList.add("show");
-}
-function closeImport(){
-  document.getElementById("importOverlay").classList.remove("show");
-}
-document.getElementById("importOverlay").addEventListener("click",function(e){
-  if(e.target===this)closeImport();
 });
 
 // ===================== INIT =====================
