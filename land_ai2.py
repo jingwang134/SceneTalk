@@ -8,12 +8,16 @@ AI_JS = 'parts/ai_gen.js'
 c = io.open(PATH, encoding='utf-8').read()
 new_js = io.open(AI_JS, encoding='utf-8').read()
 
-# 1) 替换 AI JS 区块（锚点用前缀匹配，兼容注释头版本变化）
+# 1) 替换/插入 AI JS 区块（锚点用前缀匹配；若不存在则插入到 FILTERS 前）
 start = c.find('// ===================== 🎤 AI 智能生成')
 end = c.find('// ===================== FILTERS =====================')
-assert start != -1, 'AI JS anchor not found'
-assert end != -1 and end > start, 'FILTERS anchor not found'
-c = c[:start] + new_js + '\n\n' + c[end:]
+assert end != -1, 'FILTERS anchor not found'
+if start != -1 and end > start:
+    c = c[:start] + new_js + '\n\n' + c[end:]
+    print('AI JS 已替换')
+else:
+    c = c[:end] + new_js + '\n\n' + c[end:]
+    print('AI JS 已插入')
 
 # 2) 加「测试连接」按钮（⚙️ 配置 AI 旁）
 anchor = '<button class="ai-cfg-link" onclick="openAiSettings()" style="margin-left:auto">⚙️ 配置 AI</button>'
@@ -32,6 +36,17 @@ if '.gen-used-ok{' not in c:
     print('CSS 已追加 (gen-used)')
 else:
     print('CSS gen-used 已存在，跳过')
+
+# 4) CSS：表达出处小标（幂等）
+if '.expr-src{' not in c:
+    src_css = '''.expr-src{display:inline-block;font-size:10px;color:#8A6D2F;background:#FBF3E0;border:1px solid #F0E0B8;border-radius:4px;padding:0 5px;margin-left:5px;vertical-align:1px;font-weight:400;white-space:nowrap}'''
+    gok = '.gen-used-ok{'
+    gok_idx = c.find(gok)
+    if gok_idx == -1: gok_idx = c.find('.gen-answer-text{')
+    c = c[:gok_idx] + src_css + '\n' + c[gok_idx:]
+    print('CSS 已追加 (expr-src)')
+else:
+    print('CSS expr-src 已存在，跳过')
 
 io.open(PATH, 'w', encoding='utf-8').write(c)
 print('更新完成: AI JS 替换 + 测试连接按钮 + 融入数徽章')

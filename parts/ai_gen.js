@@ -49,7 +49,28 @@ const PERSONA_PROMPTS={
   story:"故事叙述风：优先叙事讲故事"
 };
 
-function renderAIText(s){ return escapeHtml(s||'').replace(/\*\*(.+?)\*\*/g,'<span class="hl">$1</span>'); }
+function renderAIText(s, exprs){
+  if(!s) return '';
+  return escapeHtml(s).replace(/\*\*(.+?)\*\*/g,function(m,inner){
+    // 匹配库内表达：命中则标注出处（剧名+集数）
+    const key=inner.toLowerCase().replace(/[^a-z0-9\s']/g,'').trim();
+    let src='';
+    if(exprs&&exprs.length){
+      for(const e of exprs){
+        const ek=(e.english||'').toLowerCase().replace(/[^a-z0-9\s']/g,'').trim();
+        if(!ek) continue;
+        // 精确命中，或库内表达是输出文本的子串（处理 AI 加前后缀）；不做反向包含，避免短词误标
+        if(key===ek || (ek.length>=6 && key.indexOf(ek)!==-1)){
+          src=e.source;
+          break;
+        }
+      }
+    }
+    return src
+      ? '<span class="hl">'+inner+'<span class="expr-src">📺 '+escapeHtml(src)+'</span></span>'
+      : '<span class="hl">'+inner+'</span>';
+  });
+}
 
 async function generateAIAnswer(q, reGen){
   const cfg=aiCfg();
@@ -164,11 +185,11 @@ function renderAIAnswer(q,out,p,tp,parsed,exprs){
   const box=document.getElementById('genResult');
   const lines=Array.isArray(out.lines)?out.lines:[];
   const notes=Array.isArray(out.notes)?out.notes:[];
-  const enHtml=lines.map(function(l){ return renderAIText(l.en); }).join(' ');
+  const enHtml=lines.map(function(l){ return renderAIText(l.en, exprs); }).join(' ');
   const zhHtml=lines.map(function(l){ return l.zh||''; }).filter(Boolean).join(' ');
   const lineHtml=lines.map(function(l,i){
     return '<div class="gen-line"><div class="gen-line-no">'+(i+1)+'</div><div class="gen-line-body">'+
-      '<div class="gen-line-en">'+renderAIText(l.en)+'</div>'+
+      '<div class="gen-line-en">'+renderAIText(l.en, exprs)+'</div>'+
       (l.zh?'<div class="gen-line-zh">'+escapeHtml(l.zh)+'</div>':'')+
       (l.explain?'<div class="gen-line-ex">💡 '+escapeHtml(l.explain)+'</div>':'')+
       '</div></div>';

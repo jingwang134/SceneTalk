@@ -562,6 +562,7 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
 .ai-field label{display:block;font-size:12px;color:#5A6B7A;margin-bottom:5px;font-weight:600}
 .ai-field input{width:100%;box-sizing:border-box;border:1px solid #E0DACB;border-radius:8px;padding:9px 12px;font-size:13.5px;background:#fff}
 .ai-field input:focus{outline:none;border-color:#C8963E}
+.expr-src{display:inline-block;font-size:10px;color:#8A6D2F;background:#FBF3E0;border:1px solid #F0E0B8;border-radius:4px;padding:0 5px;margin-left:5px;vertical-align:1px;font-weight:400;white-space:nowrap}
 .gen-used-ok{background:#EDF7F0;border:1px solid #CBE7D4;color:#1F7A44;border-radius:8px;padding:8px 12px;font-size:12.5px;margin-bottom:12px}
 .gen-used-warn{background:#FDF6E8;border:1px solid #F0DFB0;color:#8A6D2F;border-radius:8px;padding:10px 12px;font-size:12.5px;margin-bottom:12px;line-height:1.9}
 .ai-actions{display:flex;gap:10px;margin-top:18px}
@@ -700,6 +701,8 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
           <button class="gen-mode-btn" data-mode="ai" onclick="setAiMode('ai',this)">🤖 AI 智能生成</button>
         </div>
         <button class="ai-cfg-link" onclick="openAiSettings()" style="margin-left:auto">⚙️ 配置 AI</button>
+        <button class="ai-cfg-link" onclick="testAiConn()" style="margin-left:4px">🔍 测试连接</button>
+        <button class="ai-cfg-link" onclick="testAiConn()" style="margin-left:4px">🔍 测试连接</button>
         <button class="ai-cfg-link" onclick="testAiConn()" style="margin-left:4px">🔍 测试连接</button>
         <button class="ai-cfg-link" onclick="testAiConn()" style="margin-left:4px">🔍 测试连接</button>
         <button class="ai-cfg-link" onclick="testAiConn()" style="margin-left:4px">🔍 测试连接</button>
@@ -2484,7 +2487,7 @@ function pickOne(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 // 组装句子：填槽位 + 嵌表达
 function fillSkel(skel, vars, exprIdx){
   const E=vars.exprs[exprIdx];
-  const exprHtml=E?`<span class="hl">${E.english}</span>`:"";
+  const exprHtml=E?`<span class="hl">${E.english}<span class="expr-src">📺 ${escapeHtml(E.source)}</span></span>`:"";
   const en=skel.en
     .replace(/\{core\}/g,vars.core)
     .replace(/\{subj\}/g,vars.subj)
@@ -2537,6 +2540,55 @@ function buildAnswerV2(parsed,key,exprs){
 
 function escapeHtml(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
+function generateAnswer(reGen){
+  const q=document.getElementById("genQuestion").value.trim();
+  const box=document.getElementById("genResult");
+  if(!q && !reGen){
+    box.innerHTML='<div class="gen-empty">✍️ 先输入一个雅思口语题目，再选人设点生成～</div>';
+    return;
+  }
+  const parsed=parseQuestion(q||"Describe something you like");
+  const exprs=pickGenExprs(parsed.topic, parsed.part==="p2"?3:2);
+  const r=buildAnswerV2(parsed,genStyle,exprs);
+  // 渲染：英文 / 中文翻译 / 逐句讲解 / 习语注释 / 表达chips
+  const enHtml=r.lines.map(l=>l.en).join(" ");
+  const zhHtml=r.lines.map(l=>l.zh).filter(Boolean).join(" ");
+  const lineHtml=r.lines.map((l,i)=>`
+    <div class="gen-line">
+      <div class="gen-line-no">${i+1}</div>
+      <div class="gen-line-body">
+        <div class="gen-line-en">${l.en}</div>
+        ${l.zh?`<div class="gen-line-zh">${l.zh}</div>`:""}
+        ${l.explain?`<div class="gen-line-ex">💡 ${l.explain}</div>`:""}
+      </div>
+    </div>`).join("");
+  box.innerHTML=`
+    <div class="gen-answer">
+      <div class="gen-q-label">📝 你的问题</div>
+      <div class="gen-q-text">${escapeHtml(q)}</div>
+      <div class="gen-style-tag">【${r.p.ico} ${r.p.name} · ${r.p.src}】·【${PART_LABEL[r.part]}·${parsed.obj.cn}】· 话题：${r.tp.icon} ${r.tp.name}</div>
+
+      <div class="gen-block-label">🗣️ 英文答案 <span class="gen-block-sub">(表达高亮 = 本题嵌入的地道用法)</span></div>
+      <div class="gen-answer-text">${enHtml}</div>
+
+      <div class="gen-block-label">🇨🇳 中文翻译</div>
+      <div class="gen-answer-zh">${zhHtml}</div>
+
+      <div class="gen-block-label">🔍 逐句讲解</div>
+      <div class="gen-lines">${lineHtml}</div>
+
+      <div class="gen-exprs-label">📝 地道习语 / 词伙注释</div>
+      <div class="gen-notes">
+        ${exprs.map(e=>`<div class="gen-note"><code>${e.english}</code> <span class="gen-note-zh">(${e.chinese})</span></div>`).join("")}
+      </div>
+      <div class="gen-exprs-label">🌟 表达出处（点击看详解）</div>
+      <div class="gen-expr-chips">
+        ${exprs.map(e=>`<button class="gen-chip" onclick="showDetail(${e.id})">${e.english}</button>`).join("")}
+      </div>
+      <div class="gen-tip">💡 黄字为本次嵌入的地道表达，中文翻译逐句对应。点「🔀 换一批表达」用同人设换一套词伙重新生成，答案结构与讲解会同步刷新。</div>
+    </div>`;
+}
+
 // ===================== 🎤 AI 智能生成（DeepSeek 直连 / 本地服务代理） =====================
 let genAiMode = (function(){ try{ return localStorage.getItem('wb_ai_mode')||'template'; }catch(e){ return 'template'; } })();
 function isLocalServerMode(){
@@ -2588,7 +2640,28 @@ const PERSONA_PROMPTS={
   story:"故事叙述风：优先叙事讲故事"
 };
 
-function renderAIText(s){ return escapeHtml(s||'').replace(/\*\*(.+?)\*\*/g,'<span class="hl">$1</span>'); }
+function renderAIText(s, exprs){
+  if(!s) return '';
+  return escapeHtml(s).replace(/\*\*(.+?)\*\*/g,function(m,inner){
+    // 匹配库内表达：命中则标注出处（剧名+集数）
+    const key=inner.toLowerCase().replace(/[^a-z0-9\s']/g,'').trim();
+    let src='';
+    if(exprs&&exprs.length){
+      for(const e of exprs){
+        const ek=(e.english||'').toLowerCase().replace(/[^a-z0-9\s']/g,'').trim();
+        if(!ek) continue;
+        // 精确命中，或库内表达是输出文本的子串（处理 AI 加前后缀）；不做反向包含，避免短词误标
+        if(key===ek || (ek.length>=6 && key.indexOf(ek)!==-1)){
+          src=e.source;
+          break;
+        }
+      }
+    }
+    return src
+      ? '<span class="hl">'+inner+'<span class="expr-src">📺 '+escapeHtml(src)+'</span></span>'
+      : '<span class="hl">'+inner+'</span>';
+  });
+}
 
 async function generateAIAnswer(q, reGen){
   const cfg=aiCfg();
@@ -2703,11 +2776,11 @@ function renderAIAnswer(q,out,p,tp,parsed,exprs){
   const box=document.getElementById('genResult');
   const lines=Array.isArray(out.lines)?out.lines:[];
   const notes=Array.isArray(out.notes)?out.notes:[];
-  const enHtml=lines.map(function(l){ return renderAIText(l.en); }).join(' ');
+  const enHtml=lines.map(function(l){ return renderAIText(l.en, exprs); }).join(' ');
   const zhHtml=lines.map(function(l){ return l.zh||''; }).filter(Boolean).join(' ');
   const lineHtml=lines.map(function(l,i){
     return '<div class="gen-line"><div class="gen-line-no">'+(i+1)+'</div><div class="gen-line-body">'+
-      '<div class="gen-line-en">'+renderAIText(l.en)+'</div>'+
+      '<div class="gen-line-en">'+renderAIText(l.en, exprs)+'</div>'+
       (l.zh?'<div class="gen-line-zh">'+escapeHtml(l.zh)+'</div>':'')+
       (l.explain?'<div class="gen-line-ex">💡 '+escapeHtml(l.explain)+'</div>':'')+
       '</div></div>';

@@ -400,7 +400,7 @@ function pickOne(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 // 组装句子：填槽位 + 嵌表达
 function fillSkel(skel, vars, exprIdx){
   const E=vars.exprs[exprIdx];
-  const exprHtml=E?`<span class="hl">${E.english}</span>`:"";
+  const exprHtml=E?`<span class="hl">${E.english}<span class="expr-src">📺 ${escapeHtml(E.source)}</span></span>`:"";
   const en=skel.en
     .replace(/\{core\}/g,vars.core)
     .replace(/\{subj\}/g,vars.subj)
