@@ -102,6 +102,7 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
 .badge-type.sentence{background:#F0EBF8;color:#6B46C1}
 .badge-type.paragraph{background:#FFF5E6;color:#C05621}
 .badge-topic{font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px;background:#F0F4F8;color:#2C5AA0}
+.badge-dim{font-size:11px;font-weight:600;padding:3px 10px;border-radius:10px;background:#EEEDFE;color:#534AB7}
 .badge-level{font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px}
 .badge-level[data-l="7+"]{background:#E3F2E8;color:#2D7A55}
 .badge-level[data-l="6.5+"]{background:#FFF8E6;color:#8B6914}
@@ -568,6 +569,11 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
       <button class="filter-btn state-filter active" id="topicFilterBtn"></button>
       <button class="filter-clear" onclick="clearTopic()">✕ 清除话题筛选</button>
     </div>
+    <div class="filters" id="dimFilterRow" style="display:none">
+      <span class="filter-label">话题维度</span>
+      <div class="filter-group" id="dimFilters"></div>
+      <button class="filter-clear" onclick="clearDim()">✕ 清除维度</button>
+    </div>
     <div class="filters" id="stateFilterRow" style="display:none">
       <span class="filter-label">学习状态</span>
       <button class="filter-btn state-filter active" id="stateFilterBtn"></button>
@@ -680,6 +686,11 @@ const TOPICS = {
   shopping:     {name:"消费购物",   icon:"🛍️"}
 };
 function topicOf(key){ return TOPICS[key] ? TOPICS[key] : {name:key, icon:"📌"}; }
+function dimNameOf(topic,key){
+  const dims=TOPIC_DIMENSIONS[topic]||[];
+  const d=dims.find(x=>x.key===key);
+  return d?d.name:"";
+}
 
 // ===================== DATA (外置到 data.js) =====================
 // 表达数据在 data.js 中，通过 <script src="data.js"> 加载
@@ -863,15 +874,20 @@ function getTopicMaxLevel(t){
 let currentFilter="all";
 let currentTopic="all";
 let currentState="all";
+let currentDim="all";
 function selectTopic(t){
   currentTopic = (currentTopic===t) ? "all" : t;  // 再点一次取消
+  currentDim="all";
   renderTopicGrid();
   const row=document.getElementById("topicFilterRow");
+  const drow=document.getElementById("dimFilterRow");
   if(currentTopic!=="all"){
     row.style.display="flex";
     document.getElementById("topicFilterBtn").textContent=topicOf(currentTopic).icon+" "+topicOf(currentTopic).name;
+    renderDimFilters();
   }else{
     row.style.display="none";
+    drow.style.display="none";
   }
   renderLibrary();
   if(currentTopic!=="all"){
@@ -880,8 +896,29 @@ function selectTopic(t){
 }
 function clearTopic(){
   currentTopic="all";
+  currentDim="all";
   document.getElementById("topicFilterRow").style.display="none";
+  document.getElementById("dimFilterRow").style.display="none";
   renderTopicGrid();
+  renderLibrary();
+}
+function renderDimFilters(){
+  const dims=TOPIC_DIMENSIONS[currentTopic]||[];
+  const box=document.getElementById("dimFilters");
+  const drow=document.getElementById("dimFilterRow");
+  if(!dims.length){ drow.style.display="none"; return; }
+  drow.style.display="flex";
+  box.innerHTML='<button class="filter-btn '+(currentDim==="all"?"active":"")+'" onclick="selectDim(\'all\')">全部</button>'+
+    dims.map(d=>'<button class="filter-btn '+(currentDim===d.key?"active":"")+'" onclick="selectDim(\''+d.key+'\')">'+d.name+'</button>').join("");
+}
+function selectDim(d){
+  currentDim=d;
+  renderDimFilters();
+  renderLibrary();
+}
+function clearDim(){
+  currentDim="all";
+  renderDimFilters();
   renderLibrary();
 }
 function filterByState(s){
@@ -902,8 +939,9 @@ function renderLibrary(){
   const filtered=expressions.filter(e=>{
     const okType=currentFilter==="all"||e.type===currentFilter;
     const okTopic=currentTopic==="all"||e.topic===currentTopic;
+    const okDim=currentDim==="all"||e.dimension===currentDim;
     const okState=currentState==="all"||exprState(e.id)===currentState;
-    return okType&&okTopic&&okState;
+    return okType&&okTopic&&okDim&&okState;
   });
   if(filtered.length===0){
     grid.innerHTML='<div class="empty-state"><div class="icon">📭</div><p>该筛选条件下暂无表达，换个条件试试</p></div>';
@@ -918,6 +956,7 @@ function renderLibrary(){
       <div class="card-top">
         <span class="badge-type ${e.type}">${e.type==="phrase"?"短语":e.type==="sentence"?"句子":"段落"}</span>
         <span class="badge-topic">${tp.icon} ${tp.name}</span>
+        ${e.dimension?`<span class="badge-dim">${dimNameOf(e.topic,e.dimension)}</span>`:""}
         ${stBadge}
         <span class="badge-level" data-l="${e.level}">IELTS ${e.level}</span>
       </div>
@@ -944,6 +983,7 @@ function showDetail(id){
       <div class="detail-badges">
         <span class="badge-type ${e.type}">${e.type==="phrase"?"短语":e.type==="sentence"?"句子":"段落"}</span>
         <span class="badge-topic">${tp.icon} ${tp.name}</span>
+        ${e.dimension?`<span class="badge-dim">${dimNameOf(e.topic,e.dimension)}</span>`:""}
         ${stBadge}
         <span class="badge-level" data-l="${e.level}">IELTS ${e.level}</span>
       </div>

@@ -3,10 +3,55 @@
 // 其他电脑加资料：编辑本文件（或把台本提交到仓库后让 AI 处理）
 // 新增表达按下面格式在数组末尾追加对象即可
 // ============================================
+// ===================== TOPIC DIMENSIONS (话题二级分类·维度) =====================
+// 每话题下按「场景/功能」划分维度，表达挂到维度下；范例页(TOPIC_PERSPECTIVES)的核心维度与之呼应
+const TOPIC_DIMENSIONS = {
+  communication: [
+    {key:"express", name:"表达与回应"},
+    {key:"conflict", name:"冲突与交锋"},
+    {key:"discretion", name:"分寸与心机"},
+    {key:"connect", name:"拉近与相处"}
+  ],
+  values: [
+    {key:"persist", name:"坚持与放弃"},
+    {key:"principles", name:"原则与底线"},
+    {key:"integrity", name:"诚信与责任"},
+    {key:"mood", name:"情绪与心态"}
+  ],
+  work: [
+    {key:"deal", name:"谈判与成交"},
+    {key:"career", name:"机会与晋升"},
+    {key:"execution", name:"执行与效率"},
+    {key:"pressure", name:"失误与压力"}
+  ],
+  family: [
+    {key:"bond", name:"家人相处"},
+    {key:"love", name:"家庭与爱"}
+  ],
+  education: [
+    {key:"learning", name:"学习与成长"},
+    {key:"talent", name:"天赋与兴趣"}
+  ],
+  skills: [
+    {key:"mastery", name:"练习与掌握"},
+    {key:"prove", name:"表现与证明"}
+  ],
+  friendship: [
+    {key:"trust", name:"信任与陪伴"},
+    {key:"romance", name:"心动与情愫"}
+  ],
+  media: [
+    {key:"truth", name:"信息与真相"}
+  ],
+  health: [
+    {key:"body", name:"身体与健康"}
+  ]
+};
+
 const expressions = [
   // ===== 示范表达（经典美剧） =====
   {
-    id:1, type:"phrase", level:"7+", topic:"work", english:"pull strings",
+    id:1, type:"phrase", level:"7+", topic:"work", dimension:"deal", english:"pull strings",
     chinese:"暗中牵线，幕后运作",
     source:"Suits（金装律师）", category:"idiom",
     keywords:[
@@ -30,7 +75,7 @@ const expressions = [
     }
   },
   {
-    id:2, type:"phrase", level:"6.5+", topic:"communication", english:"read between the lines",
+    id:2, type:"phrase", level:"6.5+", topic:"communication", dimension:"discretion", english:"read between the lines",
     chinese:"听弦外之音，读懂言外之意",
     source:"多部美剧通用", category:"idiom",
     keywords:[
@@ -54,7 +99,7 @@ const expressions = [
     }
   },
   {
-    id:3, type:"phrase", level:"6.5+", topic:"communication", english:"cut to the chase",
+    id:3, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"cut to the chase",
     chinese:"直奔主题，少废话",
     source:"多部美剧通用", category:"idiom",
     keywords:[
@@ -78,7 +123,7 @@ const expressions = [
     }
   },
   {
-    id:4, type:"phrase", level:"6.5+", topic:"work", english:"on thin ice",
+    id:4, type:"phrase", level:"6.5+", topic:"work", dimension:"pressure", english:"on thin ice",
     chinese:"如履薄冰，处境危险",
     source:"Breaking Bad（绝命毒师）", category:"idiom",
     keywords:[
@@ -102,7 +147,7 @@ const expressions = [
     }
   },
   {
-    id:5, type:"sentence", level:"7+", topic:"values",
+    id:5, type:"sentence", level:"7+", topic:"values", dimension:"principles",
     english:"It's not that I don't trust you, it's that I trust no one.",
     chinese:"不是我不信你，是我谁都不信。",
     source:"多部美剧通用", category:"contrast structure",
@@ -127,7 +172,7 @@ const expressions = [
     }
   },
   {
-    id:6, type:"sentence", level:"7+", topic:"education",
+    id:6, type:"sentence", level:"7+", topic:"education", dimension:"learning",
     english:"Were it not for your help, I wouldn't be standing here today.",
     chinese:"若非你的帮助，我今天不会站在这里。",
     source:"多部美剧通用", category:"inverted conditional",
@@ -152,7 +197,7 @@ const expressions = [
     }
   },
   {
-    id:7, type:"sentence", level:"7+", topic:"media",
+    id:7, type:"sentence", level:"7+", topic:"media", dimension:"truth",
     english:"The thing about secrets is they have a way of coming out.",
     chinese:"秘密这东西吧，总会泄露的。",
     source:"Gossip Girl（绯闻女孩）", category:"cleft sentence",
@@ -178,7 +223,7 @@ const expressions = [
     }
   },
   {
-    id:8, type:"sentence", level:"7+", topic:"values",
+    id:8, type:"sentence", level:"7+", topic:"values", dimension:"principles",
     english:"At the end of the day, what matters is whether you can look yourself in the mirror.",
     chinese:"说到底，重要的是你能否问心无愧。",
     source:"多部美剧通用", category:"discourse marker + cleft",
@@ -204,7 +249,7 @@ const expressions = [
     }
   },
   {
-    id:9, type:"paragraph", level:"7+", topic:"work",
+    id:9, type:"paragraph", level:"7+", topic:"work", dimension:"deal",
     english:"Look, I'm not here to play games. You and I both know what this deal is worth. The question is whether you're willing to walk away from the table with nothing, or whether you'd rather meet me halfway. I've put my cards on the table — ball's in your court.",
     chinese:"听好了，我不是来跟你玩花招的。你我都清楚这笔买卖值多少。问题是你要不要空手离开谈判桌，还是各退一步。我已经摊牌了——球在你那边。",
     source:"Suits（金装律师）", category:"negotiation discourse",
@@ -232,7 +277,7 @@ const expressions = [
     }
   },
   {
-    id:10, type:"paragraph", level:"7+", topic:"friendship",
+    id:10, type:"paragraph", level:"7+", topic:"friendship", dimension:"trust",
     english:"We've been through a lot together — the late-night conversations, the ridiculous arguments, the moments when we didn't speak for weeks and then picked up right where we left off. That's the thing about real friendship: it doesn't require constant maintenance. It just requires showing up when it counts.",
     chinese:"我们一起经历了太多——深夜的长谈，荒唐的争吵，几周不说话然后又像什么都没发生过一样继续。真正的友谊就是这样：它不需要时刻维系，只需要在关键时刻出现。",
     source:"Friends（老友记）", category:"reflective discourse",
@@ -259,7 +304,7 @@ const expressions = [
     }
   },
   {
-    id:11, type:"paragraph", level:"7+", topic:"skills",
+    id:11, type:"paragraph", level:"7+", topic:"skills", dimension:"prove",
     english:"People underestimate me. They see the jokes, the pranks, the goofing off, and they think that's all there is. But here's what they don't get: sometimes the person who seems like they're not trying is the one who's paying the most attention. I may not play by the rules, but I get results.",
     chinese:"人们低估了我。他们看到的是玩笑、恶作剧、不务正业，就以为这就是全部。但他们不明白的是：有时候那个看起来最不上心的人，恰恰是最专注的那个。我或许不按常理出牌，但我能出成绩。",
     source:"The Office（办公室）", category:"self-assertion discourse",
@@ -287,7 +332,7 @@ const expressions = [
     }
   },
   {
-    id:12, type:"paragraph", level:"7+", topic:"family",
+    id:12, type:"paragraph", level:"7+", topic:"family", dimension:"love",
     english:"We're not a perfect family — far from it. We fight, we judge, we say things we don't mean. But at the end of the day, when push comes to shove, we show up for each other. That's what family means. It's not about being flawless; it's about being there, flaws and all.",
     chinese:"我们家不算完美——差远了。我们吵架、互相评判、说违心的话。但说到底，到了关键时刻，我们总是在彼此身边。家人就是这样的。不是要做到完美无缺，而是要陪伴在侧，连同缺点一起。",
     source:"Modern Family（摩登家庭）", category:"reflective discourse",
@@ -315,7 +360,7 @@ const expressions = [
   },
   // ===== 摩登家庭 S01E01 实拍提取 =====
   {
-    id:13, type:"phrase", level:"6.5+", topic:"communication", english:"take it down a notch",
+    id:13, type:"phrase", level:"6.5+", topic:"communication", dimension:"discretion", english:"take it down a notch",
     chinese:"收敛点，悠着点儿，降降调",
     source:"摩登家庭 S01E01", category:"idiom",
     keywords:[
@@ -339,7 +384,7 @@ const expressions = [
     }
   },
   {
-    id:14, type:"phrase", level:"6.5+", topic:"communication", english:"tell someone off",
+    id:14, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"tell someone off",
     chinese:"数落某人，狠狠责备",
     source:"摩登家庭 S01E01", category:"phrasal verb",
     keywords:[
@@ -363,7 +408,7 @@ const expressions = [
     }
   },
   {
-    id:15, type:"phrase", level:"6.5+", topic:"values", english:"follow through",
+    id:15, type:"phrase", level:"6.5+", topic:"values", dimension:"integrity", english:"follow through",
     chinese:"说到做到，贯彻到底",
     source:"摩登家庭 S01E01", category:"phrasal verb",
     keywords:[
@@ -387,7 +432,7 @@ const expressions = [
     }
   },
   {
-    id:16, type:"sentence", level:"7+", topic:"family",
+    id:16, type:"sentence", level:"7+", topic:"family", dimension:"love",
     english:"This baby would have grown up in a crowded orphanage if it wasn't for us.",
     chinese:"这个宝宝要不是因为我们，就会在人满为患的孤儿院里长大。",
     source:"摩登家庭 S01E01", category:"virtual conditional",
@@ -412,7 +457,7 @@ const expressions = [
     }
   },
   {
-    id:17, type:"sentence", level:"7+", topic:"family",
+    id:17, type:"sentence", level:"7+", topic:"family", dimension:"love",
     english:"Something that's supposed to be nothing but joyful suddenly turns into this huge fight.",
     chinese:"本该是纯粹的喜事，却突然变成一场大争吵。",
     source:"摩登家庭 S01E01", category:"contrast structure",
@@ -438,7 +483,7 @@ const expressions = [
     }
   },
   {
-    id:18, type:"sentence", level:"6.5+", topic:"communication",
+    id:18, type:"sentence", level:"6.5+", topic:"communication", dimension:"conflict",
     english:"What the hell is that supposed to mean?",
     chinese:"你这话到底是什么意思？",
     source:"摩登家庭 S01E01", category:"question pattern",
@@ -463,7 +508,7 @@ const expressions = [
     }
   },
   {
-    id:19, type:"paragraph", level:"7+", topic:"skills",
+    id:19, type:"paragraph", level:"7+", topic:"skills", dimension:"prove",
     english:"You just stare down at 'em, let the eyes do the work. Your mouth might be saying, 'Hey, we cool,' but your eyes are like, 'No, we not.' 'Nice to meet you.' 'No, it's not.'",
     chinese:"你就死盯着他们，让眼神替你干活。你嘴上可以说'咱们没问题'，但你的眼神在说'才怪'。'很高兴见到你。'——'才怪。'",
     source:"摩登家庭 S01E01", category:"non-verbal communication",
@@ -489,7 +534,7 @@ const expressions = [
     }
   },
   {
-    id:20, type:"paragraph", level:"7+", topic:"family",
+    id:20, type:"paragraph", level:"7+", topic:"family", dimension:"love",
     english:"I mean, it's not like I wrote the book on fatherhood. Been trying all my life to get it right. I'm still screwing up.",
     chinese:"我又不是什么模范父亲。一辈子都在努力做个好爸爸，可我还是在搞砸。",
     source:"摩登家庭 S01E01", category:"self-deprecating discourse",
@@ -516,7 +561,7 @@ const expressions = [
   },
   // ===== 摩登家庭 S01E02 实拍提取 =====
   {
-    id:21, type:"phrase", level:"7+", topic:"values", english:"put your foot down",
+    id:21, type:"phrase", level:"7+", topic:"values", dimension:"principles", english:"put your foot down",
     chinese:"态度强硬，坚决反对，寸步不让",
     source:"摩登家庭 S01E02", category:"idiom",
     keywords:[
@@ -540,7 +585,7 @@ const expressions = [
     }
   },
   {
-    id:22, type:"phrase", level:"6.5+", topic:"communication", english:"rub someone the wrong way",
+    id:22, type:"phrase", level:"6.5+", topic:"communication", dimension:"discretion", english:"rub someone the wrong way",
     chinese:"惹某人不快，触到逆鳞",
     source:"摩登家庭 S01E02", category:"idiom",
     keywords:[
@@ -564,7 +609,7 @@ const expressions = [
     }
   },
   {
-    id:23, type:"phrase", level:"7+", topic:"family", english:"keep someone grounded",
+    id:23, type:"phrase", level:"7+", topic:"family", dimension:"bond", english:"keep someone grounded",
     chinese:"让某人脚踏实地，不飘",
     source:"摩登家庭 S01E02", category:"collocation",
     keywords:[
@@ -588,7 +633,7 @@ const expressions = [
     }
   },
   {
-    id:24, type:"phrase", level:"6.5+", topic:"values", english:"take great pride in",
+    id:24, type:"phrase", level:"6.5+", topic:"values", dimension:"integrity", english:"take great pride in",
     chinese:"以……为豪，引以为傲",
     source:"摩登家庭 S01E02", category:"collocation",
     keywords:[
@@ -612,7 +657,7 @@ const expressions = [
     }
   },
   {
-    id:25, type:"phrase", level:"7+", topic:"values", english:"a total flake",
+    id:25, type:"phrase", level:"7+", topic:"values", dimension:"integrity", english:"a total flake",
     chinese:"极不靠谱的人，放鸽子专业户",
     source:"摩登家庭 S01E02", category:"idiom",
     keywords:[
@@ -636,7 +681,7 @@ const expressions = [
     }
   },
   {
-    id:26, type:"phrase", level:"6.5+", topic:"education", english:"teach someone a lesson",
+    id:26, type:"phrase", level:"6.5+", topic:"education", dimension:"learning", english:"teach someone a lesson",
     chinese:"给某人一个教训",
     source:"摩登家庭 S01E02", category:"idiom",
     keywords:[
@@ -660,7 +705,7 @@ const expressions = [
     }
   },
   {
-    id:27, type:"phrase", level:"6.5+", topic:"communication", english:"take turns doing something",
+    id:27, type:"phrase", level:"6.5+", topic:"communication", dimension:"discretion", english:"take turns doing something",
     chinese:"轮流做某事，轮流来",
     source:"摩登家庭 S01E02", category:"collocation",
     keywords:[
@@ -685,7 +730,7 @@ const expressions = [
   },
   // ===== 摩登家庭 S01E03 实拍提取 =====
   {
-    id:28, type:"phrase", level:"7+", topic:"communication", english:"walk on eggshells",
+    id:28, type:"phrase", level:"7+", topic:"communication", dimension:"discretion", english:"walk on eggshells",
     chinese:"如履薄冰，小心翼翼",
     source:"摩登家庭 S01E03", category:"idiom",
     keywords:[
@@ -709,7 +754,7 @@ const expressions = [
     }
   },
   {
-    id:29, type:"phrase", level:"6.5+", topic:"work", english:"take it to the next level",
+    id:29, type:"phrase", level:"6.5+", topic:"work", dimension:"career", english:"take it to the next level",
     chinese:"更上一层楼，提升到新高度",
     source:"摩登家庭 S01E03", category:"collocation",
     keywords:[
@@ -733,7 +778,7 @@ const expressions = [
     }
   },
   {
-    id:30, type:"phrase", level:"6.5+", topic:"values", english:"keep it real",
+    id:30, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"keep it real",
     chinese:"保持真实，别装",
     source:"摩登家庭 S01E03", category:"idiom",
     keywords:[
@@ -757,7 +802,7 @@ const expressions = [
     }
   },
   {
-    id:31, type:"phrase", level:"6.5+", topic:"communication", english:"not someone's thing",
+    id:31, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"not someone's thing",
     chinese:"不是某人的菜 / 不喜欢",
     source:"摩登家庭 S01E03", category:"collocation",
     keywords:[
@@ -781,7 +826,7 @@ const expressions = [
     }
   },
   {
-    id:32, type:"phrase", level:"7+", topic:"skills", english:"without missing a beat",
+    id:32, type:"phrase", level:"7+", topic:"skills", dimension:"mastery", english:"without missing a beat",
     chinese:"毫不停顿，反应神速",
     source:"摩登家庭 S01E03", category:"idiom",
     keywords:[
@@ -805,7 +850,7 @@ const expressions = [
     }
   },
   {
-    id:33, type:"phrase", level:"6.5+", topic:"work", english:"non-negotiable",
+    id:33, type:"phrase", level:"6.5+", topic:"work", dimension:"deal", english:"non-negotiable",
     chinese:"没得商量，不可让步的",
     source:"摩登家庭 S01E03", category:"collocation",
     keywords:[
@@ -829,7 +874,7 @@ const expressions = [
     }
   },
   {
-    id:34, type:"phrase", level:"6.5+", topic:"communication", english:"roll your eyes",
+    id:34, type:"phrase", level:"6.5+", topic:"communication", dimension:"discretion", english:"roll your eyes",
     chinese:"翻白眼（表示无语/不屑）",
     source:"摩登家庭 S01E03", category:"collocation",
     keywords:[
@@ -854,7 +899,7 @@ const expressions = [
   },
   // ===== 摩登家庭 S01E04 实拍提取 =====
   {
-    id:35, type:"phrase", level:"7+", topic:"communication", english:"give as good as you get",
+    id:35, type:"phrase", level:"7+", topic:"communication", dimension:"conflict", english:"give as good as you get",
     chinese:"以牙还牙，毫不示弱",
     source:"摩登家庭 S01E04", category:"idiom",
     keywords:[
@@ -878,7 +923,7 @@ const expressions = [
     }
   },
   {
-    id:36, type:"phrase", level:"7+", topic:"work", english:"pave the way",
+    id:36, type:"phrase", level:"7+", topic:"work", dimension:"career", english:"pave the way",
     chinese:"铺平道路，为……创造条件",
     source:"摩登家庭 S01E04", category:"idiom",
     keywords:[
@@ -902,7 +947,7 @@ const expressions = [
     }
   },
   {
-    id:37, type:"phrase", level:"6.5+", topic:"friendship", english:"count on someone",
+    id:37, type:"phrase", level:"6.5+", topic:"friendship", dimension:"trust", english:"count on someone",
     chinese:"指望某人，信赖某人",
     source:"摩登家庭 S01E04", category:"phrasal verb",
     keywords:[
@@ -926,7 +971,7 @@ const expressions = [
     }
   },
   {
-    id:38, type:"phrase", level:"7+", topic:"communication", english:"dredge up",
+    id:38, type:"phrase", level:"7+", topic:"communication", dimension:"discretion", english:"dredge up",
     chinese:"翻旧账，重提旧事",
     source:"摩登家庭 S01E04", category:"phrasal verb",
     keywords:[
@@ -950,7 +995,7 @@ const expressions = [
     }
   },
   {
-    id:39, type:"phrase", level:"6.5+", topic:"communication", english:"don't get me wrong",
+    id:39, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"don't get me wrong",
     chinese:"别误会我的意思",
     source:"摩登家庭 S01E04", category:"discourse marker",
     keywords:[
@@ -974,7 +1019,7 @@ const expressions = [
     }
   },
   {
-    id:40, type:"phrase", level:"6.5+", topic:"values", english:"be full of yourself",
+    id:40, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"be full of yourself",
     chinese:"自以为是，自命不凡",
     source:"摩登家庭 S01E04", category:"idiom",
     keywords:[
@@ -998,7 +1043,7 @@ const expressions = [
     }
   },
   {
-    id:41, type:"phrase", level:"6.5+", topic:"family", english:"run off with someone",
+    id:41, type:"phrase", level:"6.5+", topic:"family", dimension:"bond", english:"run off with someone",
     chinese:"跟某人私奔 / 甩下家人跟人跑了",
     source:"摩登家庭 S01E04", category:"phrasal verb",
     keywords:[
@@ -1022,7 +1067,7 @@ const expressions = [
     }
   },
   {
-    id:42, type:"phrase", level:"6.5+", topic:"values", english:"get past something",
+    id:42, type:"phrase", level:"6.5+", topic:"values", dimension:"integrity", english:"get past something",
     chinese:"克服 / 放下（心结、困难）",
     source:"摩登家庭 S01E04", category:"phrasal verb",
     keywords:[
@@ -1047,7 +1092,7 @@ const expressions = [
   },
 // ===== 摩登家庭 S01E05 实拍提取 =====
   {
-    id:43, type:"phrase", level:"7+", topic:"communication", english:"address the elephant in the room",
+    id:43, type:"phrase", level:"7+", topic:"communication", dimension:"discretion", english:"address the elephant in the room",
     chinese:"直面那个避而不谈的问题",
     source:"摩登家庭 S01E05", category:"idiom",
     keywords:[
@@ -1071,7 +1116,7 @@ const expressions = [
     }
   },
   {
-    id:44, type:"phrase", level:"7+", topic:"communication", english:"sweep it under the rug",
+    id:44, type:"phrase", level:"7+", topic:"communication", dimension:"discretion", english:"sweep it under the rug",
     chinese:"掩盖问题，装作没事",
     source:"摩登家庭 S01E05", category:"idiom",
     keywords:[
@@ -1095,7 +1140,7 @@ const expressions = [
     }
   },
   {
-    id:45, type:"phrase", level:"6.5+", topic:"communication", english:"talk it out",
+    id:45, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"talk it out",
     chinese:"说开了，把问题谈清楚",
     source:"摩登家庭 S01E05", category:"phrasal verb",
     keywords:[
@@ -1119,7 +1164,7 @@ const expressions = [
     }
   },
   {
-    id:46, type:"phrase", level:"6.5+", topic:"education", english:"book smart vs street smart",
+    id:46, type:"phrase", level:"6.5+", topic:"education", dimension:"talent", english:"book smart vs street smart",
     chinese:"书本智慧 vs 街头智慧",
     source:"摩登家庭 S01E05", category:"collocation",
     keywords:[
@@ -1143,7 +1188,7 @@ const expressions = [
     }
   },
   {
-    id:47, type:"phrase", level:"7+", topic:"work", english:"in light of",
+    id:47, type:"phrase", level:"7+", topic:"work", dimension:"career", english:"in light of",
     chinese:"鉴于，考虑到",
     source:"摩登家庭 S01E05", category:"discourse marker",
     keywords:[
@@ -1167,7 +1212,7 @@ const expressions = [
     }
   },
   {
-    id:48, type:"phrase", level:"6.5+", topic:"communication", english:"make fun of someone",
+    id:48, type:"phrase", level:"6.5+", topic:"communication", dimension:"connect", english:"make fun of someone",
     chinese:"取笑某人，开某人的玩笑",
     source:"摩登家庭 S01E05", category:"collocation",
     keywords:[
@@ -1191,7 +1236,7 @@ const expressions = [
     }
   },
   {
-    id:49, type:"phrase", level:"6.5+", topic:"education", english:"a thirst for knowledge",
+    id:49, type:"phrase", level:"6.5+", topic:"education", dimension:"talent", english:"a thirst for knowledge",
     chinese:"求知欲，对知识的渴望",
     source:"摩登家庭 S01E05", category:"collocation",
     keywords:[
@@ -1216,7 +1261,7 @@ const expressions = [
   },
   // ===== 摩登家庭 S01E06 实拍提取 =====
   {
-    id:50, type:"phrase", level:"7+", topic:"work", english:"hang by a thread",
+    id:50, type:"phrase", level:"7+", topic:"work", dimension:"pressure", english:"hang by a thread",
     chinese:"千钧一发，命悬一线",
     source:"摩登家庭 S01E06", category:"idiom",
     keywords:[
@@ -1240,7 +1285,7 @@ const expressions = [
     }
   },
   {
-    id:51, type:"phrase", level:"6.5+", topic:"values", english:"loosen up",
+    id:51, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"loosen up",
     chinese:"放松点，别绷着",
     source:"摩登家庭 S01E06", category:"phrasal verb",
     keywords:[
@@ -1264,7 +1309,7 @@ const expressions = [
     }
   },
   {
-    id:52, type:"phrase", level:"7+", topic:"work", english:"make a judgment call",
+    id:52, type:"phrase", level:"7+", topic:"work", dimension:"execution", english:"make a judgment call",
     chinese:"当机立断，临场决断",
     source:"摩登家庭 S01E06", category:"collocation",
     keywords:[
@@ -1288,7 +1333,7 @@ const expressions = [
     }
   },
   {
-    id:53, type:"phrase", level:"6.5+", topic:"education", english:"keep up with",
+    id:53, type:"phrase", level:"6.5+", topic:"education", dimension:"learning", english:"keep up with",
     chinese:"跟上，不落后",
     source:"摩登家庭 S01E06", category:"phrasal verb",
     keywords:[
@@ -1312,7 +1357,7 @@ const expressions = [
     }
   },
   {
-    id:54, type:"phrase", level:"6.5+", topic:"values", english:"take advantage of",
+    id:54, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"take advantage of",
     chinese:"利用（机会），好好把握",
     source:"摩登家庭 S01E06", category:"phrasal verb",
     keywords:[
@@ -1336,7 +1381,7 @@ const expressions = [
     }
   },
   {
-    id:55, type:"phrase", level:"6.5+", topic:"family", english:"look up to someone",
+    id:55, type:"phrase", level:"6.5+", topic:"family", dimension:"bond", english:"look up to someone",
     chinese:"崇拜某人，敬仰某人",
     source:"摩登家庭 S01E06", category:"phrasal verb",
     keywords:[
@@ -1360,7 +1405,7 @@ const expressions = [
     }
   },
   {
-    id:56, type:"phrase", level:"7+", topic:"skills", english:"have it down pat",
+    id:56, type:"phrase", level:"7+", topic:"skills", dimension:"mastery", english:"have it down pat",
     chinese:"熟练掌握，驾轻就熟",
     source:"摩登家庭 S01E06", category:"idiom",
     keywords:[
@@ -1384,7 +1429,7 @@ const expressions = [
     }
   },
   {
-    id:57, type:"phrase", level:"6.5+", topic:"work", english:"be in demand",
+    id:57, type:"phrase", level:"6.5+", topic:"work", dimension:"career", english:"be in demand",
     chinese:"抢手，需求量大",
     source:"摩登家庭 S01E06", category:"collocation",
     keywords:[
@@ -1409,7 +1454,7 @@ const expressions = [
   },
 // ===== 摩登家庭 S01E07 实拍提取 =====
   {
-    id:58, type:"phrase", level:"7+", topic:"work", english:"drop the ball",
+    id:58, type:"phrase", level:"7+", topic:"work", dimension:"pressure", english:"drop the ball",
     chinese:"搞砸了，失职了",
     source:"摩登家庭 S01E07", category:"idiom",
     keywords:[
@@ -1433,7 +1478,7 @@ const expressions = [
     }
   },
   {
-    id:59, type:"phrase", level:"6.5+", topic:"values", english:"get butterflies",
+    id:59, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"get butterflies",
     chinese:"心里七上八下，紧张不安",
     source:"摩登家庭 S01E07", category:"idiom",
     keywords:[
@@ -1457,7 +1502,7 @@ const expressions = [
     }
   },
   {
-    id:60, type:"phrase", level:"7+", topic:"communication", english:"get your panties in a bunch",
+    id:60, type:"phrase", level:"7+", topic:"communication", dimension:"conflict", english:"get your panties in a bunch",
     chinese:"为小事心烦意乱，气急败坏",
     source:"摩登家庭 S01E07", category:"slang idiom",
     keywords:[
@@ -1481,7 +1526,7 @@ const expressions = [
     }
   },
   {
-    id:61, type:"phrase", level:"7+", topic:"values", english:"stir up",
+    id:61, type:"phrase", level:"7+", topic:"values", dimension:"mood", english:"stir up",
     chinese:"激起（情绪/麻烦），煽动",
     source:"摩登家庭 S01E07", category:"phrasal verb",
     keywords:[
@@ -1505,7 +1550,7 @@ const expressions = [
     }
   },
   {
-    id:62, type:"phrase", level:"6.5+", topic:"values", english:"take things too far",
+    id:62, type:"phrase", level:"6.5+", topic:"values", dimension:"principles", english:"take things too far",
     chinese:"做得太过分了",
     source:"摩登家庭 S01E07", category:"collocation",
     keywords:[
@@ -1529,7 +1574,7 @@ const expressions = [
     }
   },
   {
-    id:63, type:"phrase", level:"6.5+", topic:"education", english:"excel at",
+    id:63, type:"phrase", level:"6.5+", topic:"education", dimension:"talent", english:"excel at",
     chinese:"擅长，出类拔萃",
     source:"摩登家庭 S01E07", category:"collocation",
     keywords:[
@@ -1553,7 +1598,7 @@ const expressions = [
     }
   },
   {
-    id:64, type:"phrase", level:"6.5+", topic:"family", english:"sneak out",
+    id:64, type:"phrase", level:"6.5+", topic:"family", dimension:"bond", english:"sneak out",
     chinese:"偷偷溜出去",
     source:"摩登家庭 S01E07", category:"phrasal verb",
     keywords:[
@@ -1577,7 +1622,7 @@ const expressions = [
     }
   },
   {
-    id:65, type:"phrase", level:"6.5+", topic:"communication", english:"bubble up",
+    id:65, type:"phrase", level:"6.5+", topic:"communication", dimension:"discretion", english:"bubble up",
     chinese:"（情绪）浮现，翻涌上来",
     source:"摩登家庭 S01E07", category:"phrasal verb",
     keywords:[
@@ -1602,7 +1647,7 @@ const expressions = [
   },
   // ===== 摩登家庭 S01E08 实拍提取 =====
   {
-    id:66, type:"phrase", level:"6.5+", topic:"values", english:"make a commitment",
+    id:66, type:"phrase", level:"6.5+", topic:"values", dimension:"integrity", english:"make a commitment",
     chinese:"做出承诺，承担义务",
     source:"摩登家庭 S01E08", category:"collocation",
     keywords:[
@@ -1626,7 +1671,7 @@ const expressions = [
     }
   },
   {
-    id:67, type:"phrase", level:"6.5+", topic:"work", english:"kick off",
+    id:67, type:"phrase", level:"6.5+", topic:"work", dimension:"career", english:"kick off",
     chinese:"开启，启动",
     source:"摩登家庭 S01E08", category:"phrasal verb",
     keywords:[
@@ -1650,7 +1695,7 @@ const expressions = [
     }
   },
   {
-    id:68, type:"phrase", level:"6.5+", topic:"family", english:"bring back memories",
+    id:68, type:"phrase", level:"6.5+", topic:"family", dimension:"love", english:"bring back memories",
     chinese:"勾起回忆",
     source:"摩登家庭 S01E08", category:"collocation",
     keywords:[
@@ -1674,7 +1719,7 @@ const expressions = [
     }
   },
   {
-    id:69, type:"phrase", level:"6.5+", topic:"communication", english:"the more, the merrier",
+    id:69, type:"phrase", level:"6.5+", topic:"communication", dimension:"connect", english:"the more, the merrier",
     chinese:"人越多越热闹",
     source:"摩登家庭 S01E08", category:"proverb",
     keywords:[
@@ -1698,7 +1743,7 @@ const expressions = [
     }
   },
   {
-    id:70, type:"phrase", level:"7+", topic:"work", english:"get around to",
+    id:70, type:"phrase", level:"7+", topic:"work", dimension:"execution", english:"get around to",
     chinese:"终于抽出时间做（拖了很久的事）",
     source:"摩登家庭 S01E08", category:"phrasal verb",
     keywords:[
@@ -1722,7 +1767,7 @@ const expressions = [
     }
   },
   {
-    id:71, type:"phrase", level:"6.5+", topic:"communication", english:"freaking out",
+    id:71, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"freaking out",
     chinese:"慌了，吓坏了",
     source:"摩登家庭 S01E08", category:"phrasal verb",
     keywords:[
@@ -1747,7 +1792,7 @@ const expressions = [
   },
   // ===== 摩登家庭 S01E09 实拍提取 =====
   {
-    id:72, type:"phrase", level:"6.5+", topic:"communication", english:"a complete package",
+    id:72, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"a complete package",
     chinese:"（条件）完美，样样俱全",
     source:"摩登家庭 S01E09", category:"idiom",
     keywords:[
@@ -1771,7 +1816,7 @@ const expressions = [
     }
   },
   {
-    id:73, type:"phrase", level:"6.5+", topic:"work", english:"here's the deal",
+    id:73, type:"phrase", level:"6.5+", topic:"work", dimension:"deal", english:"here's the deal",
     chinese:"听好了，是这样的",
     source:"摩登家庭 S01E09", category:"discourse marker",
     keywords:[
@@ -1795,7 +1840,7 @@ const expressions = [
     }
   },
   {
-    id:74, type:"phrase", level:"6.5+", topic:"work", english:"step it up a notch",
+    id:74, type:"phrase", level:"6.5+", topic:"work", dimension:"career", english:"step it up a notch",
     chinese:"加把劲，升个档次",
     source:"摩登家庭 S01E09", category:"collocation",
     keywords:[
@@ -1819,7 +1864,7 @@ const expressions = [
     }
   },
   {
-    id:75, type:"phrase", level:"7+", topic:"work", english:"back to square one",
+    id:75, type:"phrase", level:"7+", topic:"work", dimension:"pressure", english:"back to square one",
     chinese:"回到原点，前功尽弃",
     source:"摩登家庭 S01E09", category:"idiom",
     keywords:[
@@ -1843,7 +1888,7 @@ const expressions = [
     }
   },
   {
-    id:76, type:"phrase", level:"6.5+", topic:"friendship", english:"have a blast",
+    id:76, type:"phrase", level:"6.5+", topic:"friendship", dimension:"trust", english:"have a blast",
     chinese:"玩得超级开心",
     source:"摩登家庭 S01E09", category:"idiom",
     keywords:[
@@ -1867,7 +1912,7 @@ const expressions = [
     }
   },
   {
-    id:77, type:"phrase", level:"6.5+", topic:"education", english:"lesson learned",
+    id:77, type:"phrase", level:"6.5+", topic:"education", dimension:"learning", english:"lesson learned",
     chinese:"吸取教训",
     source:"摩登家庭 S01E09", category:"collocation",
     keywords:[
@@ -1891,7 +1936,7 @@ const expressions = [
     }
   },
   {
-    id:78, type:"phrase", level:"7+", topic:"communication", english:"be thrown (by something)",
+    id:78, type:"phrase", level:"7+", topic:"communication", dimension:"express", english:"be thrown (by something)",
     chinese:"被打个措手不及，不知所措",
     source:"摩登家庭 S01E09", category:"collocation",
     keywords:[
@@ -1916,7 +1961,7 @@ const expressions = [
   },
   
   {
-    id:79, type:"phrase", level:"7+", topic:"communication", english:"save the best for last",
+    id:79, type:"phrase", level:"7+", topic:"communication", dimension:"connect", english:"save the best for last",
     chinese:"把最好的留到最后，压轴",
     source:"查理成长日记 S01E01", category:"idiom",
     keywords:[
@@ -1939,7 +1984,7 @@ const expressions = [
     }
   },
   {
-    id:80, type:"phrase", level:"6.5+", topic:"communication", english:"fire away",
+    id:80, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"fire away",
     chinese:"说吧，尽管问",
     source:"查理成长日记 S01E01", category:"idiom",
     keywords:[
@@ -1962,7 +2007,7 @@ const expressions = [
     }
   },
   {
-    id:81, type:"phrase", level:"6.5+", topic:"communication", english:"knock yourself out",
+    id:81, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"knock yourself out",
     chinese:"别客气，自己随意（尽管去）",
     source:"查理成长日记 S01E01", category:"idiom",
     keywords:[
@@ -1985,7 +2030,7 @@ const expressions = [
     }
   },
   {
-    id:82, type:"phrase", level:"6.5+", topic:"communication", english:"blend in",
+    id:82, type:"phrase", level:"6.5+", topic:"communication", dimension:"connect", english:"blend in",
     chinese:"融入，不引人注意",
     source:"查理成长日记 S01E01", category:"phrasal verb",
     keywords:[
@@ -2008,7 +2053,7 @@ const expressions = [
     }
   },
   {
-    id:83, type:"phrase", level:"6.5+", topic:"values", english:"hang in there",
+    id:83, type:"phrase", level:"6.5+", topic:"values", dimension:"persist", english:"hang in there",
     chinese:"撑住，别放弃",
     source:"查理成长日记 S01E01", category:"idiom",
     keywords:[
@@ -2031,7 +2076,7 @@ const expressions = [
     }
   },
   {
-    id:84, type:"sentence", level:"7+", topic:"communication", english:"It's all in your head.",
+    id:84, type:"sentence", level:"7+", topic:"communication", dimension:"express", english:"It's all in your head.",
     chinese:"那是你自己想出来的（臆想）。",
     source:"查理成长日记 S01E01", category:"sentence pattern",
     keywords:[
@@ -2054,7 +2099,7 @@ const expressions = [
     }
   },
   {
-    id:85, type:"phrase", level:"6.5+", topic:"communication", english:"for crying out loud",
+    id:85, type:"phrase", level:"6.5+", topic:"communication", dimension:"connect", english:"for crying out loud",
     chinese:"拜托了，搞什么鬼",
     source:"查理成长日记 S01E01", category:"exclamation",
     keywords:[
@@ -2077,7 +2122,7 @@ const expressions = [
     }
   },
   {
-    id:86, type:"phrase", level:"7+", topic:"values", english:"kiss it goodbye",
+    id:86, type:"phrase", level:"7+", topic:"values", dimension:"persist", english:"kiss it goodbye",
     chinese:"和它说再见吧（放弃）",
     source:"查理成长日记 S01E02", category:"idiom",
     keywords:[
@@ -2100,7 +2145,7 @@ const expressions = [
     }
   },
   {
-    id:87, type:"phrase", level:"6.5+", topic:"communication", english:"just out of curiosity",
+    id:87, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"just out of curiosity",
     chinese:"纯属好奇问一句",
     source:"查理成长日记 S01E02", category:"phrase",
     keywords:[
@@ -2123,7 +2168,7 @@ const expressions = [
     }
   },
   {
-    id:88, type:"phrase", level:"6.5+", topic:"communication", english:"sign me up",
+    id:88, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"sign me up",
     chinese:"算我一个，我报名",
     source:"查理成长日记 S01E02", category:"idiom",
     keywords:[
@@ -2146,7 +2191,7 @@ const expressions = [
     }
   },
   {
-    id:89, type:"sentence", level:"6.5+", topic:"work", english:"I got a little distracted.",
+    id:89, type:"sentence", level:"6.5+", topic:"work", dimension:"pressure", english:"I got a little distracted.",
     chinese:"我有点分心了。",
     source:"查理成长日记 S01E02", category:"sentence pattern",
     keywords:[
@@ -2169,7 +2214,7 @@ const expressions = [
     }
   },
   {
-    id:90, type:"sentence", level:"7+", topic:"communication", english:"Oh, it gets worse.",
+    id:90, type:"sentence", level:"7+", topic:"communication", dimension:"conflict", english:"Oh, it gets worse.",
     chinese:"哦，这还不是最糟的。",
     source:"查理成长日记 S01E02", category:"sentence pattern",
     keywords:[
@@ -2192,7 +2237,7 @@ const expressions = [
     }
   },
   {
-    id:91, type:"sentence", level:"7+", topic:"communication", english:"Who couldn't see that one coming?",
+    id:91, type:"sentence", level:"7+", topic:"communication", dimension:"express", english:"Who couldn't see that one coming?",
     chinese:"这不是明摆着的吗？（早就料到）",
     source:"查理成长日记 S01E02", category:"rhetorical question",
     keywords:[
@@ -2215,7 +2260,7 @@ const expressions = [
     }
   },
   {
-    id:92, type:"phrase", level:"6.5+", topic:"work", english:"divide it up evenly",
+    id:92, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"divide it up evenly",
     chinese:"平均分配",
     source:"查理成长日记 S01E02", category:"phrase",
     keywords:[
@@ -2238,7 +2283,7 @@ const expressions = [
     }
   },
   {
-    id:93, type:"phrase", level:"6.5+", topic:"communication", english:"get off my back",
+    id:93, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"get off my back",
     chinese:"少啰嗦，别烦我",
     source:"查理成长日记 S01E03", category:"idiom",
     keywords:[
@@ -2261,7 +2306,7 @@ const expressions = [
     }
   },
   {
-    id:94, type:"phrase", level:"7+", topic:"family", english:"go at it again",
+    id:94, type:"phrase", level:"7+", topic:"family", dimension:"bond", english:"go at it again",
     chinese:"（夫妻/搭档）又吵起来了",
     source:"查理成长日记 S01E03", category:"phrasal verb",
     keywords:[
@@ -2284,7 +2329,7 @@ const expressions = [
     }
   },
   {
-    id:95, type:"sentence", level:"7+", topic:"values", english:"That's what you get for being a bad husband.",
+    id:95, type:"sentence", level:"7+", topic:"values", dimension:"integrity", english:"That's what you get for being a bad husband.",
     chinese:"这就是你当坏老公的下场。",
     source:"查理成长日记 S01E03", category:"sentence pattern",
     keywords:[
@@ -2307,7 +2352,7 @@ const expressions = [
     }
   },
   {
-    id:96, type:"phrase", level:"6.5+", topic:"education", english:"learn (something) the hard way",
+    id:96, type:"phrase", level:"6.5+", topic:"education", dimension:"learning", english:"learn (something) the hard way",
     chinese:"吃过苦头才学会",
     source:"查理成长日记 S01E03", category:"idiom",
     keywords:[
@@ -2330,7 +2375,7 @@ const expressions = [
     }
   },
   {
-    id:97, type:"phrase", level:"6.5+", topic:"communication", english:"heads up",
+    id:97, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"heads up",
     chinese:"小心，注意（提醒）",
     source:"查理成长日记 S01E03", category:"phrase",
     keywords:[
@@ -2353,7 +2398,7 @@ const expressions = [
     }
   },
   {
-    id:98, type:"phrase", level:"7+", topic:"skills", english:"cool under pressure",
+    id:98, type:"phrase", level:"7+", topic:"skills", dimension:"mastery", english:"cool under pressure",
     chinese:"临危不乱，压力之下很冷静",
     source:"查理成长日记 S01E03", category:"phrase",
     keywords:[
@@ -2376,7 +2421,7 @@ const expressions = [
     }
   },
   {
-    id:99, type:"phrase", level:"6.5+", topic:"work", english:"speed things up",
+    id:99, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"speed things up",
     chinese:"加快进度，提高效率",
     source:"查理成长日记 S01E03", category:"phrasal verb",
     keywords:[
@@ -2399,7 +2444,7 @@ const expressions = [
     }
   },
   {
-    id:100, type:"phrase", level:"7+", topic:"communication", english:"just to humor you",
+    id:100, type:"phrase", level:"7+", topic:"communication", dimension:"connect", english:"just to humor you",
     chinese:"只是为了哄你开心",
     source:"查理成长日记 S01E04", category:"phrase",
     keywords:[
@@ -2422,7 +2467,7 @@ const expressions = [
     }
   },
   {
-    id:101, type:"sentence", level:"6.5+", topic:"values", english:"Enjoy it while you got it.",
+    id:101, type:"sentence", level:"6.5+", topic:"values", dimension:"integrity", english:"Enjoy it while you got it.",
     chinese:"趁现在好好享受吧。",
     source:"查理成长日记 S01E04", category:"sentence pattern",
     keywords:[
@@ -2445,7 +2490,7 @@ const expressions = [
     }
   },
   {
-    id:102, type:"phrase", level:"6.5+", topic:"communication", english:"go on and on about",
+    id:102, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"go on and on about",
     chinese:"没完没了地讲",
     source:"查理成长日记 S01E04", category:"phrasal verb",
     keywords:[
@@ -2468,7 +2513,7 @@ const expressions = [
     }
   },
   {
-    id:103, type:"phrase", level:"7+", topic:"values", english:"take (our) chances",
+    id:103, type:"phrase", level:"7+", topic:"values", dimension:"persist", english:"take (our) chances",
     chinese:"赌一把，碰碰运气",
     source:"查理成长日记 S01E04", category:"phrase",
     keywords:[
@@ -2491,7 +2536,7 @@ const expressions = [
     }
   },
   {
-    id:104, type:"phrase", level:"7+", topic:"education", english:"in hindsight",
+    id:104, type:"phrase", level:"7+", topic:"education", dimension:"learning", english:"in hindsight",
     chinese:"事后看来，马后炮",
     source:"查理成长日记 S01E04", category:"phrase",
     keywords:[
@@ -2514,7 +2559,7 @@ const expressions = [
     }
   },
   {
-    id:105, type:"sentence", level:"6.5+", topic:"values", english:"I knew this day was coming.",
+    id:105, type:"sentence", level:"6.5+", topic:"values", dimension:"persist", english:"I knew this day was coming.",
     chinese:"我就知道会有这一天。",
     source:"查理成长日记 S01E04", category:"sentence pattern",
     keywords:[
@@ -2537,7 +2582,7 @@ const expressions = [
     }
   },
   {
-    id:106, type:"sentence", level:"6.5+", topic:"work", english:"There's only one way to settle this.",
+    id:106, type:"sentence", level:"6.5+", topic:"work", dimension:"deal", english:"There's only one way to settle this.",
     chinese:"只有一个办法能解决这件事。",
     source:"查理成长日记 S01E04", category:"sentence pattern",
     keywords:[
@@ -2560,7 +2605,7 @@ const expressions = [
     }
   },
   {
-    id:107, type:"phrase", level:"7+", topic:"work", english:"window of opportunity",
+    id:107, type:"phrase", level:"7+", topic:"work", dimension:"career", english:"window of opportunity",
     chinese:"机会之窗，难得的时机",
     source:"查理成长日记 S01E05", category:"metaphor",
     keywords:[
@@ -2583,7 +2628,7 @@ const expressions = [
     }
   },
   {
-    id:108, type:"phrase", level:"6.5+", topic:"values", english:"when the time is right",
+    id:108, type:"phrase", level:"6.5+", topic:"values", dimension:"persist", english:"when the time is right",
     chinese:"等时机成熟时",
     source:"查理成长日记 S01E05", category:"phrase",
     keywords:[
@@ -2606,7 +2651,7 @@ const expressions = [
     }
   },
   {
-    id:109, type:"phrase", level:"6.5+", topic:"communication", english:"just between us",
+    id:109, type:"phrase", level:"6.5+", topic:"communication", dimension:"discretion", english:"just between us",
     chinese:"咱俩私下说，别传出去",
     source:"查理成长日记 S01E05", category:"phrase",
     keywords:[
@@ -2629,7 +2674,7 @@ const expressions = [
     }
   },
   {
-    id:110, type:"phrase", level:"6.5+", topic:"communication", english:"behind someone's back",
+    id:110, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"behind someone's back",
     chinese:"背着某人，暗地里",
     source:"查理成长日记 S01E05", category:"phrase",
     keywords:[
@@ -2652,7 +2697,7 @@ const expressions = [
     }
   },
   {
-    id:111, type:"sentence", level:"6.5+", topic:"work", english:"Consider it done.",
+    id:111, type:"sentence", level:"6.5+", topic:"work", dimension:"execution", english:"Consider it done.",
     chinese:"包在我身上。",
     source:"查理成长日记 S01E05", category:"sentence pattern",
     keywords:[
@@ -2675,7 +2720,7 @@ const expressions = [
     }
   },
   {
-    id:112, type:"phrase", level:"7+", topic:"family", english:"put a roof over one's head",
+    id:112, type:"phrase", level:"7+", topic:"family", dimension:"bond", english:"put a roof over one's head",
     chinese:"养家糊口，供人遮风避雨",
     source:"查理成长日记 S01E05", category:"idiom",
     keywords:[
@@ -2698,7 +2743,7 @@ const expressions = [
     }
   },
   {
-    id:113, type:"phrase", level:"7+", topic:"values", english:"be doomed to do something",
+    id:113, type:"phrase", level:"7+", topic:"values", dimension:"persist", english:"be doomed to do something",
     chinese:"注定要……，难逃……",
     source:"查理成长日记 S01E05", category:"phrase",
     keywords:[
@@ -2721,7 +2766,7 @@ const expressions = [
     }
   },
   {
-    id:114, type:"phrase", level:"6.5+", topic:"work", english:"give someone a shot",
+    id:114, type:"phrase", level:"6.5+", topic:"work", dimension:"career", english:"give someone a shot",
     chinese:"给某人一次机会",
     source:"查理成长日记 S01E06", category:"idiom",
     keywords:[
@@ -2744,7 +2789,7 @@ const expressions = [
     }
   },
   {
-    id:115, type:"phrase", level:"6.5+", topic:"family", english:"be out of something",
+    id:115, type:"phrase", level:"6.5+", topic:"family", dimension:"bond", english:"be out of something",
     chinese:"（某物）用完了",
     source:"查理成长日记 S01E06", category:"phrase",
     keywords:[
@@ -2767,7 +2812,7 @@ const expressions = [
     }
   },
   {
-    id:116, type:"phrase", level:"6.5+", topic:"communication", english:"a word of advice",
+    id:116, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"a word of advice",
     chinese:"给你一句忠告",
     source:"查理成长日记 S01E06", category:"phrase",
     keywords:[
@@ -2790,7 +2835,7 @@ const expressions = [
     }
   },
   {
-    id:117, type:"phrase", level:"7+", topic:"communication", english:"in case you didn't notice",
+    id:117, type:"phrase", level:"7+", topic:"communication", dimension:"connect", english:"in case you didn't notice",
     chinese:"如果你还没注意到的话",
     source:"查理成长日记 S01E06", category:"phrase",
     keywords:[
@@ -2813,7 +2858,7 @@ const expressions = [
     }
   },
   {
-    id:118, type:"phrase", level:"7+", topic:"values", english:"do whatever it takes",
+    id:118, type:"phrase", level:"7+", topic:"values", dimension:"persist", english:"do whatever it takes",
     chinese:"不惜一切代价，想尽办法",
     source:"查理成长日记 S01E06", category:"phrase",
     keywords:[
@@ -2836,7 +2881,7 @@ const expressions = [
     }
   },
   {
-    id:119, type:"sentence", level:"7+", topic:"values", english:"I've been waiting to hear those words my whole life.",
+    id:119, type:"sentence", level:"7+", topic:"values", dimension:"persist", english:"I've been waiting to hear those words my whole life.",
     chinese:"这句话我等了一辈子。",
     source:"查理成长日记 S01E06", category:"sentence pattern",
     keywords:[
@@ -2860,7 +2905,7 @@ const expressions = [
   },
   
   {
-    id:120, type:"phrase", level:"7+", topic:"skills", english:"pull it off",
+    id:120, type:"phrase", level:"7+", topic:"skills", dimension:"mastery", english:"pull it off",
     chinese:"搞定，成功做到",
     source:"查理成长日记 S01E07", category:"phrasal verb",
     keywords:[{word:"pull off", pos:"phrasal verb", meaning:"成功完成（难事）"}],
@@ -2870,7 +2915,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:121, type:"phrase", level:"7+", topic:"work", english:"be stuck with",
+    id:121, type:"phrase", level:"7+", topic:"work", dimension:"pressure", english:"be stuck with",
     chinese:"被迫和……绑在一起，甩不掉",
     source:"查理成长日记 S01E07", category:"phrasal verb",
     keywords:[{word:"be stuck with", pos:"phrasal verb", meaning:"被迫接受/甩不掉"}],
@@ -2880,7 +2925,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:122, type:"phrase", level:"6.5+", topic:"communication", english:"butter someone up",
+    id:122, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"butter someone up",
     chinese:"拍马屁，灌迷魂汤",
     source:"查理成长日记 S01E07", category:"phrasal verb",
     keywords:[{word:"butter up", pos:"phrasal verb", meaning:"讨好，奉承"}],
@@ -2890,7 +2935,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:123, type:"phrase", level:"7+", topic:"values", english:"get even",
+    id:123, type:"phrase", level:"7+", topic:"values", dimension:"mood", english:"get even",
     chinese:"报复，扯平",
     source:"查理成长日记 S01E07", category:"phrasal verb",
     keywords:[{word:"get even", pos:"phrasal verb", meaning:"报复，以牙还牙"}],
@@ -2900,7 +2945,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:124, type:"phrase", level:"6.5+", topic:"communication", english:"get something out of one's head",
+    id:124, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"get something out of one's head",
     chinese:"（旋律/念头）挥之不去",
     source:"查理成长日记 S01E07", category:"phrasal verb",
     keywords:[{word:"get out of one's head", pos:"phrase", meaning:"从脑子里赶走"}],
@@ -2910,7 +2955,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:125, type:"phrase", level:"6.5+", topic:"family", english:"school night",
+    id:125, type:"phrase", level:"6.5+", topic:"family", dimension:"bond", english:"school night",
     chinese:"上学日的晚上",
     source:"查理成长日记 S01E07", category:"phrase",
     keywords:[{word:"school night", pos:"phrase", meaning:"（第二天要上学的）上学日前一晚"}],
@@ -2920,7 +2965,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:126, type:"sentence", level:"6.5+", topic:"communication", english:"That's gonna get old.",
+    id:126, type:"sentence", level:"6.5+", topic:"communication", dimension:"express", english:"That's gonna get old.",
     chinese:"（这）很快就会让人腻烦。",
     source:"查理成长日记 S01E07", category:"sentence pattern",
     keywords:[{word:"get old", pos:"phrase", meaning:"变无聊，让人腻"}],
@@ -2930,7 +2975,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:127, type:"phrase", level:"6.5+", topic:"friendship", english:"hang out with",
+    id:127, type:"phrase", level:"6.5+", topic:"friendship", dimension:"trust", english:"hang out with",
     chinese:"和某人待在一起，一起玩",
     source:"查理成长日记 S01E07", category:"phrasal verb",
     keywords:[{word:"hang out", pos:"phrasal verb", meaning:"闲逛，厮混"}],
@@ -2940,7 +2985,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:128, type:"phrase", level:"6.5+", topic:"family", english:"be grounded",
+    id:128, type:"phrase", level:"6.5+", topic:"family", dimension:"bond", english:"be grounded",
     chinese:"被禁足，被罚不许出门",
     source:"查理成长日记 S01E07", category:"phrase",
     keywords:[{word:"ground", pos:"v.", meaning:"禁足（惩罚）"}],
@@ -2950,7 +2995,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:129, type:"sentence", level:"6.5+", topic:"values", english:"I've had it forever.",
+    id:129, type:"sentence", level:"6.5+", topic:"values", dimension:"integrity", english:"I've had it forever.",
     chinese:"这东西我用了好久了。",
     source:"查理成长日记 S01E07", category:"sentence pattern",
     keywords:[{word:"have it forever", pos:"phrase", meaning:"拥有很久了"}],
@@ -2960,7 +3005,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:130, type:"phrase", level:"6.5+", topic:"communication", english:"deal with it",
+    id:130, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"deal with it",
     chinese:"忍着点，你得接受现实",
     source:"查理成长日记 S01E08", category:"phrasal verb",
     keywords:[{word:"deal with", pos:"phrasal verb", meaning:"应付，接受"}],
@@ -2970,7 +3015,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:131, type:"phrase", level:"6.5+", topic:"communication", english:"just so we're clear",
+    id:131, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"just so we're clear",
     chinese:"把话说清楚，先声明",
     source:"查理成长日记 S01E08", category:"phrase",
     keywords:[{word:"just so we're clear", pos:"phrase", meaning:"把话说明白"}],
@@ -2980,7 +3025,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:132, type:"phrase", level:"6.5+", topic:"family", english:"go into labor",
+    id:132, type:"phrase", level:"6.5+", topic:"family", dimension:"love", english:"go into labor",
     chinese:"（孕妇）开始分娩阵痛",
     source:"查理成长日记 S01E08", category:"phrase",
     keywords:[{word:"labor", pos:"n.", meaning:"分娩"}],
@@ -2990,7 +3035,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:133, type:"idiom", level:"7+", topic:"work", english:"all my ducks are in a row",
+    id:133, type:"idiom", level:"7+", topic:"work", dimension:"execution", english:"all my ducks are in a row",
     chinese:"一切安排妥当，万事俱备",
     source:"查理成长日记 S01E08", category:"idiom",
     keywords:[{word:"ducks in a row", pos:"idiom", meaning:"把事情都安排好"}],
@@ -3000,7 +3045,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:134, type:"phrase", level:"6.5+", topic:"work", english:"under control",
+    id:134, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"under control",
     chinese:"在掌控之中，有条不紊",
     source:"查理成长日记 S01E08", category:"phrase",
     keywords:[{word:"under control", pos:"phrase", meaning:"处于控制之下"}],
@@ -3010,7 +3055,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:135, type:"phrase", level:"7+", topic:"values", english:"before you do something you might regret",
+    id:135, type:"phrase", level:"7+", topic:"values", dimension:"principles", english:"before you do something you might regret",
     chinese:"在做会后悔的事之前，三思",
     source:"查理成长日记 S01E08", category:"phrase",
     keywords:[{word:"regret", pos:"v.", meaning:"后悔"}],
@@ -3020,7 +3065,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:136, type:"phrasal verb", level:"6.5+", topic:"education", english:"catch on",
+    id:136, type:"phrasal verb", level:"6.5+", topic:"education", dimension:"learning", english:"catch on",
     chinese:"领会，学会，跟上",
     source:"查理成长日记 S01E08", category:"phrasal verb",
     keywords:[{word:"catch on", pos:"phrasal verb", meaning:"理解，学会"}],
@@ -3030,7 +3075,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:137, type:"phrase", level:"6.5+", topic:"communication", english:"keep it down",
+    id:137, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"keep it down",
     chinese:"小声点",
     source:"查理成长日记 S01E08", category:"phrasal verb",
     keywords:[{word:"keep it down", pos:"phrase", meaning:"压低音量"}],
@@ -3040,7 +3085,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:138, type:"phrase", level:"6.5+", topic:"communication", english:"who cares?",
+    id:138, type:"phrase", level:"6.5+", topic:"communication", dimension:"discretion", english:"who cares?",
     chinese:"谁在乎啊",
     source:"查理成长日记 S01E08", category:"phrase",
     keywords:[{word:"who cares", pos:"phrase", meaning:"谁在乎"}],
@@ -3050,7 +3095,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:139, type:"phrase", level:"6.5+", topic:"work", english:"one tiny glitch",
+    id:139, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"one tiny glitch",
     chinese:"一个小问题，一个小故障",
     source:"查理成长日记 S01E08", category:"phrase",
     keywords:[{word:"glitch", pos:"n.", meaning:"小故障，小毛病"}],
@@ -3060,7 +3105,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:140, type:"phrase", level:"6.5+", topic:"communication", english:"you're going down",
+    id:140, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"you're going down",
     chinese:"你死定了，你输定了",
     source:"查理成长日记 S01E09", category:"phrase",
     keywords:[{word:"going down", pos:"phrase", meaning:"要输了/要完蛋了"}],
@@ -3070,7 +3115,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:141, type:"phrase", level:"7+", topic:"values", english:"on one's best behavior",
+    id:141, type:"phrase", level:"7+", topic:"values", dimension:"integrity", english:"on one's best behavior",
     chinese:"表现出最佳风度",
     source:"查理成长日记 S01E09", category:"phrase",
     keywords:[{word:"best behavior", pos:"phrase", meaning:"最好的举止"}],
@@ -3080,7 +3125,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:142, type:"phrase", level:"7+", topic:"communication", english:"in someone's defense",
+    id:142, type:"phrase", level:"7+", topic:"communication", dimension:"discretion", english:"in someone's defense",
     chinese:"为某人说句公道话",
     source:"查理成长日记 S01E09", category:"phrase",
     keywords:[{word:"in defense of", pos:"phrase", meaning:"为……辩护"}],
@@ -3090,7 +3135,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:143, type:"phrase", level:"6.5+", topic:"education", english:"have a tendency to do",
+    id:143, type:"phrase", level:"6.5+", topic:"education", dimension:"talent", english:"have a tendency to do",
     chinese:"有……的倾向，容易……",
     source:"查理成长日记 S01E09", category:"phrase",
     keywords:[{word:"tendency", pos:"n.", meaning:"倾向，趋势"}],
@@ -3100,7 +3145,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:144, type:"phrase", level:"6.5+", topic:"work", english:"we got a deal",
+    id:144, type:"phrase", level:"6.5+", topic:"work", dimension:"deal", english:"we got a deal",
     chinese:"成交，就这么说定了",
     source:"查理成长日记 S01E09", category:"phrase",
     keywords:[{word:"deal", pos:"n.", meaning:"交易，协议"}],
@@ -3110,7 +3155,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:145, type:"phrase", level:"6.5+", topic:"work", english:"shake hands on it",
+    id:145, type:"phrase", level:"6.5+", topic:"work", dimension:"deal", english:"shake hands on it",
     chinese:"握手成交，说定",
     source:"查理成长日记 S01E09", category:"phrase",
     keywords:[{word:"shake hands", pos:"phrase", meaning:"握手"}],
@@ -3120,7 +3165,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:146, type:"sentence", level:"7+", topic:"values", english:"Deals are made to be broken.",
+    id:146, type:"sentence", level:"7+", topic:"values", dimension:"principles", english:"Deals are made to be broken.",
     chinese:"交易就是用来打破的。",
     source:"查理成长日记 S01E09", category:"sentence pattern",
     keywords:[{word:"made to be broken", pos:"phrase", meaning:"生来就是被打破的"}],
@@ -3130,7 +3175,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:147, type:"phrase", level:"6.5+", topic:"values", english:"one way or another",
+    id:147, type:"phrase", level:"6.5+", topic:"values", dimension:"persist", english:"one way or another",
     chinese:"无论如何，不管怎样",
     source:"查理成长日记 S01E09", category:"phrase",
     keywords:[{word:"one way or another", pos:"phrase", meaning:"以某种方式，总归"}],
@@ -3140,7 +3185,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:148, type:"phrase", level:"7+", topic:"values", english:"fight the power",
+    id:148, type:"phrase", level:"7+", topic:"values", dimension:"principles", english:"fight the power",
     chinese:"向权威开战，反抗",
     source:"查理成长日记 S01E09", category:"phrase",
     keywords:[{word:"fight the power", pos:"phrase", meaning:"反抗权威"}],
@@ -3150,7 +3195,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:149, type:"phrase", level:"7+", topic:"communication", english:"air one's grievances",
+    id:149, type:"phrase", level:"7+", topic:"communication", dimension:"conflict", english:"air one's grievances",
     chinese:"倾诉不满，倒苦水",
     source:"查理成长日记 S01E09", category:"phrase",
     keywords:[{word:"grievance", pos:"n.", meaning:"不满，委屈"}],
@@ -3160,7 +3205,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:150, type:"phrase", level:"7+", topic:"friendship", english:"have a falling out",
+    id:150, type:"phrase", level:"7+", topic:"friendship", dimension:"trust", english:"have a falling out",
     chinese:"（朋友/亲人）失和，闹翻",
     source:"查理成长日记 S01E10", category:"phrase",
     keywords:[{word:"falling out", pos:"phrase", meaning:"失和，闹翻"}],
@@ -3170,7 +3215,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:151, type:"phrase", level:"6.5+", topic:"communication", english:"when it comes to",
+    id:151, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"when it comes to",
     chinese:"说到，关于，在……方面",
     source:"查理成长日记 S01E10", category:"phrase",
     keywords:[{word:"when it comes to", pos:"phrase", meaning:"当涉及……时"}],
@@ -3180,7 +3225,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:152, type:"phrase", level:"6.5+", topic:"values", english:"stay out of it",
+    id:152, type:"phrase", level:"6.5+", topic:"values", dimension:"principles", english:"stay out of it",
     chinese:"别掺和，躲远点",
     source:"查理成长日记 S01E10", category:"phrasal verb",
     keywords:[{word:"stay out of", pos:"phrasal verb", meaning:"不参与，远离"}],
@@ -3190,7 +3235,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:153, type:"phrase", level:"7+", topic:"work", english:"a big break",
+    id:153, type:"phrase", level:"7+", topic:"work", dimension:"career", english:"a big break",
     chinese:"重大机遇，翻身的机会",
     source:"查理成长日记 S01E10", category:"phrase",
     keywords:[{word:"big break", pos:"phrase", meaning:"重大突破/机遇"}],
@@ -3200,7 +3245,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:154, type:"phrase", level:"7+", topic:"values", english:"take an ugly turn",
+    id:154, type:"phrase", level:"7+", topic:"values", dimension:"mood", english:"take an ugly turn",
     chinese:"急转直下，变得糟糕",
     source:"查理成长日记 S01E10", category:"phrase",
     keywords:[{word:"take a turn", pos:"phrase", meaning:"转变方向"}],
@@ -3210,7 +3255,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:155, type:"phrase", level:"6.5+", topic:"skills", english:"come up with",
+    id:155, type:"phrase", level:"6.5+", topic:"skills", dimension:"mastery", english:"come up with",
     chinese:"想出，提出（主意）",
     source:"查理成长日记 S01E10", category:"phrasal verb",
     keywords:[{word:"come up with", pos:"phrasal verb", meaning:"想出，提出"}],
@@ -3220,7 +3265,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:156, type:"phrase", level:"6.5+", topic:"communication", english:"in one of her moods",
+    id:156, type:"phrase", level:"6.5+", topic:"communication", dimension:"connect", english:"in one of her moods",
     chinese:"情绪不佳，闹脾气",
     source:"查理成长日记 S01E10", category:"phrase",
     keywords:[{word:"in a mood", pos:"phrase", meaning:"心情不好"}],
@@ -3230,7 +3275,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:157, type:"sentence", level:"6.5+", topic:"work", english:"Let me handle it.",
+    id:157, type:"sentence", level:"6.5+", topic:"work", dimension:"execution", english:"Let me handle it.",
     chinese:"让我来处理。",
     source:"查理成长日记 S01E10", category:"sentence pattern",
     keywords:[{word:"handle", pos:"v.", meaning:"处理，应对"}],
@@ -3240,7 +3285,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:158, type:"phrase", level:"6.5+", topic:"communication", english:"speaking of",
+    id:158, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"speaking of",
     chinese:"说到，提起",
     source:"查理成长日记 S01E10", category:"phrase",
     keywords:[{word:"speaking of", pos:"phrase", meaning:"说到……"}],
@@ -3250,7 +3295,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:159, type:"phrase", level:"6.5+", topic:"work", english:"pack it up",
+    id:159, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"pack it up",
     chinese:"收工，收拾走人",
     source:"查理成长日记 S01E10", category:"phrasal verb",
     keywords:[{word:"pack up", pos:"phrasal verb", meaning:"收拾，打包"}],
@@ -3260,7 +3305,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:160, type:"phrase", level:"7+", topic:"communication", english:"it's how I roll",
+    id:160, type:"phrase", level:"7+", topic:"communication", dimension:"connect", english:"it's how I roll",
     chinese:"这就是我的风格",
     source:"查理成长日记 S01E11", category:"idiom",
     keywords:[{word:"that's how I roll", pos:"idiom", meaning:"我就是这样行事的"}],
@@ -3270,7 +3315,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:161, type:"phrase", level:"6.5+", topic:"values", english:"pick on someone",
+    id:161, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"pick on someone",
     chinese:"欺负某人，找某人的茬",
     source:"查理成长日记 S01E11", category:"phrasal verb",
     keywords:[{word:"pick on", pos:"phrasal verb", meaning:"欺负，刁难"}],
@@ -3280,7 +3325,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:162, type:"idiom", level:"7+", topic:"values", english:"a taste of one's own medicine",
+    id:162, type:"idiom", level:"7+", topic:"values", dimension:"mood", english:"a taste of one's own medicine",
     chinese:"以其人之道还治其人之身",
     source:"查理成长日记 S01E11", category:"idiom",
     keywords:[{word:"taste of one's own medicine", pos:"idiom", meaning:"尝到自己的苦果"}],
@@ -3290,7 +3335,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:163, type:"phrase", level:"6.5+", topic:"communication", english:"ring a bell",
+    id:163, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"ring a bell",
     chinese:"（名字/事）听着耳熟，有印象",
     source:"查理成长日记 S01E11", category:"idiom",
     keywords:[{word:"ring a bell", pos:"idiom", meaning:"唤起回忆"}],
@@ -3300,7 +3345,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:164, type:"phrase", level:"6.5+", topic:"friendship", english:"have a crush on",
+    id:164, type:"phrase", level:"6.5+", topic:"friendship", dimension:"romance", english:"have a crush on",
     chinese:"暗恋，喜欢上",
     source:"查理成长日记 S01E11", category:"phrase",
     keywords:[{word:"crush", pos:"n.", meaning:"暗恋对象"}],
@@ -3310,7 +3355,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:165, type:"phrase", level:"7+", topic:"communication", english:"lash out",
+    id:165, type:"phrase", level:"7+", topic:"communication", dimension:"express", english:"lash out",
     chinese:"发火，猛烈抨击",
     source:"查理成长日记 S01E11", category:"phrasal verb",
     keywords:[{word:"lash out", pos:"phrasal verb", meaning:"（因愤怒）发作"}],
@@ -3320,7 +3365,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:166, type:"phrase", level:"7+", topic:"friendship", english:"leave a trail of broken hearts",
+    id:166, type:"phrase", level:"7+", topic:"friendship", dimension:"romance", english:"leave a trail of broken hearts",
     chinese:"到处留情，伤透人心",
     source:"查理成长日记 S01E11", category:"phrase",
     keywords:[{word:"broken hearts", pos:"phrase", meaning:"破碎的心"}],
@@ -3330,7 +3375,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:167, type:"phrase", level:"6.5+", topic:"communication", english:"get out of my face",
+    id:167, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"get out of my face",
     chinese:"滚远点，别烦我",
     source:"查理成长日记 S01E11", category:"phrase",
     keywords:[{word:"out of my face", pos:"phrase", meaning:"从我面前消失"}],
@@ -3340,7 +3385,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:168, type:"phrase", level:"6.5+", topic:"education", english:"have trouble doing something",
+    id:168, type:"phrase", level:"6.5+", topic:"education", dimension:"learning", english:"have trouble doing something",
     chinese:"做某事有困难",
     source:"查理成长日记 S01E11", category:"phrase",
     keywords:[{word:"have trouble doing", pos:"phrase", meaning:"做……有困难"}],
@@ -3350,7 +3395,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:169, type:"phrase", level:"6.5+", topic:"work", english:"keep the change",
+    id:169, type:"phrase", level:"6.5+", topic:"work", dimension:"deal", english:"keep the change",
     chinese:"不用找零了",
     source:"查理成长日记 S01E11", category:"phrase",
     keywords:[{word:"keep the change", pos:"phrase", meaning:"不用找钱"}],
@@ -3360,7 +3405,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:170, type:"phrase", level:"6.5+", topic:"work", english:"don't blow it",
+    id:170, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"don't blow it",
     chinese:"别搞砸了",
     source:"查理成长日记 S01E12", category:"phrase",
     keywords:[{word:"blow it", pos:"phrase", meaning:"搞砸，弄糟"}],
@@ -3370,7 +3415,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:171, type:"phrase", level:"6.5+", topic:"communication", english:"follow-up question",
+    id:171, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"follow-up question",
     chinese:"追问，后续问题",
     source:"查理成长日记 S01E12", category:"phrase",
     keywords:[{word:"follow-up", pos:"adj.", meaning:"后续的"}],
@@ -3380,7 +3425,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:172, type:"sentence", level:"6.5+", topic:"work", english:"My schedule just opened up.",
+    id:172, type:"sentence", level:"6.5+", topic:"work", dimension:"execution", english:"My schedule just opened up.",
     chinese:"我的时间表刚好空出来了。",
     source:"查理成长日记 S01E12", category:"sentence pattern",
     keywords:[{word:"open up", pos:"phrasal verb", meaning:"（时间）空出来"}],
@@ -3390,7 +3435,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:173, type:"phrase", level:"7+", topic:"communication", english:"make a scene",
+    id:173, type:"phrase", level:"7+", topic:"communication", dimension:"conflict", english:"make a scene",
     chinese:"大吵大闹，当众出丑",
     source:"查理成长日记 S01E12", category:"phrase",
     keywords:[{word:"make a scene", pos:"phrase", meaning:"当众吵闹"}],
@@ -3400,7 +3445,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:174, type:"phrase", level:"7+", topic:"friendship", english:"you've got it bad",
+    id:174, type:"phrase", level:"7+", topic:"friendship", dimension:"romance", english:"you've got it bad",
     chinese:"你陷得很深（痴情）",
     source:"查理成长日记 S01E12", category:"phrase",
     keywords:[{word:"have it bad", pos:"phrase", meaning:"（感情上）陷得深"}],
@@ -3410,7 +3455,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:175, type:"phrase", level:"6.5+", topic:"friendship", english:"have a lot in common",
+    id:175, type:"phrase", level:"6.5+", topic:"friendship", dimension:"trust", english:"have a lot in common",
     chinese:"有很多共同点",
     source:"查理成长日记 S01E12", category:"phrase",
     keywords:[{word:"in common", pos:"phrase", meaning:"共同的"}],
@@ -3420,7 +3465,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:176, type:"phrase", level:"6.5+", topic:"health", english:"be allergic to",
+    id:176, type:"phrase", level:"6.5+", topic:"health", dimension:"body", english:"be allergic to",
     chinese:"对……过敏",
     source:"查理成长日记 S01E12", category:"phrase",
     keywords:[{word:"allergic", pos:"adj.", meaning:"过敏的"}],
@@ -3430,7 +3475,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:177, type:"phrase", level:"7+", topic:"values", english:"be up to something",
+    id:177, type:"phrase", level:"7+", topic:"values", dimension:"mood", english:"be up to something",
     chinese:"在打什么算盘，有什么企图",
     source:"查理成长日记 S01E12", category:"phrase",
     keywords:[{word:"be up to", pos:"phrase", meaning:"在搞（名堂）"}],
@@ -3440,7 +3485,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:178, type:"phrase", level:"7+", topic:"values", english:"make it up to someone",
+    id:178, type:"phrase", level:"7+", topic:"values", dimension:"integrity", english:"make it up to someone",
     chinese:"补偿某人",
     source:"查理成长日记 S01E12", category:"phrase",
     keywords:[{word:"make up for", pos:"phrasal verb", meaning:"弥补"}],
@@ -3450,7 +3495,7 @@ const expressions = [
     questions:[], comparison:null
   },
   {
-    id:179, type:"idiom", level:"6.5+", topic:"skills", english:"a piece of cake",
+    id:179, type:"idiom", level:"6.5+", topic:"skills", dimension:"mastery", english:"a piece of cake",
     chinese:"小菜一碟，轻而易举",
     source:"查理成长日记 S01E12", category:"idiom",
     keywords:[{word:"a piece of cake", pos:"idiom", meaning:"非常容易"}],
