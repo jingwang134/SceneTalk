@@ -3503,5 +3503,606 @@ const expressions = [
     example:"The driving test was a piece of cake once I'd practised enough.",
     cloze:{text:"The driving test was a ______ of cake once I'd practised enough.", answer:"piece", hint:"填一个词"},
     questions:[], comparison:null
+  },
+  
+  {
+    id:180, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"in a row",
+    chinese:"连续（地），接连",
+    source:"查理成长日记 S01E13", category:"phrase",
+    keywords:[{word:"in a row", pos:"phrase", meaning:"连续，接连"}],
+    usage:"强调连续发生多次。'You've lost 11 games in a row.'（你们已连输11场）。",
+    example:"She won the championship three years in a row.",
+    cloze:{text:"She won the championship three years ______ ______ ______.", answer:"in|a|row", hint:"填三个词，用 | 分隔"},
+    questions:[], comparison:null
+  },
+  {
+    id:181, type:"phrase", level:"6.5+", topic:"work", dimension:"pressure", english:"be dead last",
+    chinese:"垫底，倒数第一",
+    source:"查理成长日记 S01E13", category:"phrase",
+    keywords:[{word:"dead last", pos:"phrase", meaning:"绝对垫底"}],
+    usage:"强调排名最末。'You're dead last in the league.'（你们在联赛里垫底）。",
+    example:"Our team finished dead last in the regional competition.",
+    cloze:{text:"Our team finished ______ last in the regional competition.", answer:"dead", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:182, type:"phrase", level:"6.5+", topic:"skills", dimension:"mastery", english:"build on something",
+    chinese:"在……基础上再接再厉",
+    source:"查理成长日记 S01E13", category:"phrasal verb",
+    keywords:[{word:"build on", pos:"phrasal verb", meaning:"在……基础上发展"}],
+    usage:"以已有成果为起点继续提升。'I think we can build on this.'（我们可以在此基础上再接再厉）。",
+    example:"Let's build on last year's success and aim higher.",
+    cloze:{text:"Let's ______ on last year's success and aim higher.", answer:"build", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:183, type:"phrase", level:"7+", topic:"work", dimension:"execution", english:"in everyone's best interest",
+    chinese:"符合所有人的利益",
+    source:"查理成长日记 S01E13", category:"phrase",
+    keywords:[{word:"best interest", pos:"phrase", meaning:"最大利益"}],
+    usage:"表示某个决定对大家都有利（常用于委婉宣布变动）。'It's in everyone's best interest if we make some changes.'（我们做些调整符合所有人的利益）。",
+    example:"Restructuring the team is in everyone's best interest.",
+    cloze:{text:"Restructuring the team is in everyone's ______ ______.", answer:"best|interest", hint:"填两个词，用 | 分隔"},
+    questions:[], comparison:null
+  },
+  {
+    id:184, type:"phrase", level:"6.5+", topic:"work", dimension:"pressure", english:"fire someone",
+    chinese:"解雇某人",
+    source:"查理成长日记 S01E13", category:"phrasal verb",
+    keywords:[{word:"fire", pos:"v.", meaning:"解雇"}],
+    usage:"辞退员工的口语说法。'Are you firing me?'（你是要炒我鱿鱼吗？）。",
+    example:"The company fired three managers after the scandal.",
+    cloze:{text:"The company ______ three managers after the scandal.", answer:"fired", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:185, type:"phrase", level:"7+", topic:"work", dimension:"execution", english:"turn things around",
+    chinese:"扭转局面",
+    source:"查理成长日记 S01E13", category:"phrase",
+    keywords:[{word:"turn around", pos:"phrasal verb", meaning:"扭转，转好"}],
+    usage:"把糟糕的处境变好。'I can turn this thing around.'（我可以扭转局面的）。",
+    example:"The new coach turned the team around within a season.",
+    cloze:{text:"The new coach turned the ______ around within a season.", answer:"team", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:186, type:"phrase", level:"6.5+", topic:"health", dimension:"body", english:"have a sweet tooth",
+    chinese:"爱吃甜食",
+    source:"查理成长日记 S01E13", category:"phrase",
+    keywords:[{word:"sweet tooth", pos:"phrase", meaning:"爱吃甜食的嗜好"}],
+    usage:"形容喜欢甜食。'I thought you might have a sweet tooth like me.'（我以为你也跟我一样爱吃甜食）。",
+    example:"I have a sweet tooth, so dessert is always my favourite part.",
+    cloze:{text:"I have a ______ tooth, so dessert is always my favourite part.", answer:"sweet", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:187, type:"phrase", level:"6.5+", topic:"skills", dimension:"mastery", english:"jazz something up",
+    chinese:"让……更有活力/更生动",
+    source:"查理成长日记 S01E13", category:"phrasal verb",
+    keywords:[{word:"jazz up", pos:"phrasal verb", meaning:"使活泼生动"}],
+    usage:"给平淡的东西增加趣味。'Okay, so I'll jazz them up.'（好，我可以让它们更活泼）。",
+    example:"Add some music to jazz up the presentation.",
+    cloze:{text:"Add some music to ______ up the presentation.", answer:"jazz", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:188, type:"phrase", level:"7+", topic:"skills", dimension:"mastery", english:"make something come alive",
+    chinese:"让……活起来，生动呈现",
+    source:"查理成长日记 S01E13", category:"phrase",
+    keywords:[{word:"come alive", pos:"phrase", meaning:"活起来，生动"}],
+    usage:"让抽象的内容变得生动可感。'Find a way to make the book come alive.'（找个法子让你读的书更生动）。",
+    example:"A great teacher can make history come alive in the classroom.",
+    cloze:{text:"A great teacher can make history ______ ______ in the classroom.", answer:"come|alive", hint:"填两个词，用 | 分隔"},
+    questions:[], comparison:null
+  },
+  {
+    id:189, type:"phrase", level:"6.5+", topic:"communication", dimension:"connect", english:"kiss up to someone",
+    chinese:"拍马屁，讨好",
+    source:"查理成长日记 S01E13", category:"phrasal verb",
+    keywords:[{word:"kiss up to", pos:"phrasal verb", meaning:"讨好，巴结"}],
+    usage:"为了好处而刻意讨好。'Instead of kissing up to your teacher...'（而不是来拍老师的马屁……）。",
+    example:"He's always kissing up to the boss instead of doing real work.",
+    cloze:{text:"He's always ______ up to the boss instead of doing real work.", answer:"kissing", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:190, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"my treat",
+    chinese:"我请客",
+    source:"查理成长日记 S01E14", category:"phrase",
+    keywords:[{word:"my treat", pos:"phrase", meaning:"我来付账"}],
+    usage:"表示由自己承担费用。'I'm taking you to lunch — my treat.'（我带你们去吃饭，我请客）。",
+    example:"Don't worry about the bill — it's my treat.",
+    cloze:{text:"Don't worry about the bill — it's my ______.", answer:"treat", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:191, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"kind of",
+    chinese:"有点，稍微",
+    source:"查理成长日记 S01E14", category:"phrase",
+    keywords:[{word:"kind of", pos:"phrase", meaning:"有点（缓和语气）"}],
+    usage:"委婉表达程度，雅思口语高频。'I'm kind of getting hungry.'（我有点饿了）。",
+    example:"I'm kind of tired after the long meeting.",
+    cloze:{text:"I'm ______ ______ tired after the long meeting.", answer:"kind|of", hint:"填两个词，用 | 分隔"},
+    questions:[], comparison:null
+  },
+  {
+    id:192, type:"phrase", level:"6.5+", topic:"work", dimension:"pressure", english:"mess things up",
+    chinese:"把事情搞砸",
+    source:"查理成长日记 S01E14", category:"phrasal verb",
+    keywords:[{word:"mess up", pos:"phrasal verb", meaning:"弄糟"}],
+    usage:"承认或指出把事情做坏了。'I'm usually the one who messes things up.'（通常都是我把事情搞砸）。",
+    example:"I messed things up by sending the email to the wrong person.",
+    cloze:{text:"I ______ things up by sending the email to the wrong person.", answer:"messed", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:193, type:"sentence", level:"6.5+", topic:"work", dimension:"execution", english:"We can fix this.",
+    chinese:"我们可以补救的。",
+    source:"查理成长日记 S01E14", category:"sentence pattern",
+    keywords:[{word:"fix", pos:"v.", meaning:"修复，补救"}],
+    usage:"安抚对方、表示问题可控。'We still have time — we can fix this.'（还有时间，我们可以补救）。",
+    example:"Don't panic — we can fix this before the deadline.",
+    cloze:{text:"Don't panic — we can ______ this before the deadline.", answer:"fix", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:194, type:"phrase", level:"6.5+", topic:"family", dimension:"bond", english:"put something away",
+    chinese:"把……收起来",
+    source:"查理成长日记 S01E14", category:"phrasal verb",
+    keywords:[{word:"put away", pos:"phrasal verb", meaning:"收好，放回"}],
+    usage:"把物品归位。'Honey, put your phone away.'（亲爱的，把手机收起来）。",
+    example:"Please put your toys away before dinner.",
+    cloze:{text:"Please ______ your toys away before dinner.", answer:"put", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:195, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"drop someone off",
+    chinese:"顺路送某人（到某地）",
+    source:"查理成长日记 S01E14", category:"phrasal verb",
+    keywords:[{word:"drop off", pos:"phrasal verb", meaning:"顺道送达"}],
+    usage:"开车顺路把某人放下。'You drop me off at the thrift store.'（你顺路把我放旧货店）。",
+    example:"Can you drop me off at the station on your way?",
+    cloze:{text:"Can you ______ me off at the station on your way?", answer:"drop", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:196, type:"phrase", level:"7+", topic:"values", dimension:"persist", english:"long gone",
+    chinese:"早就没了，找不回来了",
+    source:"查理成长日记 S01E14", category:"phrase",
+    keywords:[{word:"long gone", pos:"phrase", meaning:"早已消失"}],
+    usage:"表示某物已彻底失去。'That is long gone.'（那早就找不回来了）。",
+    example:"By the time I got there, the last bus was long gone.",
+    cloze:{text:"By the time I got there, the last bus was ______ ______.", answer:"long|gone", hint:"填两个词，用 | 分隔"},
+    questions:[], comparison:null
+  },
+  {
+    id:197, type:"phrase", level:"6.5+", topic:"education", dimension:"learning", english:"it's distracting",
+    chinese:"太分散注意力了",
+    source:"查理成长日记 S01E14", category:"phrase",
+    keywords:[{word:"distracting", pos:"adj.", meaning:"使人分心的"}],
+    usage:"抱怨某物干扰专注。'My phone is distracting.'（手机太让我分心了）。",
+    example:"The constant notifications are really distracting during study.",
+    cloze:{text:"The constant notifications are really ______ during study.", answer:"distracting", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:198, type:"sentence", level:"6.5+", topic:"communication", dimension:"express", english:"That's gotta be good.",
+    chinese:"那一定很棒（口语推断）。",
+    source:"查理成长日记 S01E14", category:"sentence pattern",
+    keywords:[{word:"gotta", pos:"口语", meaning:"（have got to）一定"}],
+    usage:"用口语推断某事肯定不错（带点反讽）。'The critics hated it — that means it's gotta be good.'（评论家讨厌它，那一定好看）。",
+    example:"A movie everyone hates? That's gotta be good.",
+    cloze:{text:"A movie everyone hates? That's ______ be good.", answer:"gotta", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:199, type:"phrase", level:"7+", topic:"values", dimension:"mood", english:"be the one who messes things up",
+    chinese:"总是搞砸事情的那个人",
+    source:"查理成长日记 S01E14", category:"phrase",
+    keywords:[{word:"the one who", pos:"phrase", meaning:"……的那个人"}],
+    usage:"自嘲式承认自己在某方面总出错。'I'm usually the one who messes things up.'（通常是我在捣蛋）。",
+    example:"In group projects, I'm usually the one who messes things up.",
+    cloze:{text:"In group projects, I'm usually the one who ______ things up.", answer:"messes", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:200, type:"phrase", level:"7+", topic:"media", dimension:"truth", english:"go viral",
+    chinese:"（视频/内容）病毒式走红",
+    source:"查理成长日记 S01E15", category:"phrase",
+    keywords:[{word:"go viral", pos:"phrase", meaning:"爆红，疯传"}],
+    usage:"形容内容在网络上快速传播。'That Charlie video has gone viral.'（查莉的视频火起来了）。",
+    example:"Her dance video went viral and got millions of views.",
+    cloze:{text:"Her dance video ______ viral and got millions of views.", answer:"went", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:201, type:"phrase", level:"7+", topic:"media", dimension:"truth", english:"one-hit wonder",
+    chinese:"昙花一现（只有一次成功）",
+    source:"查理成长日记 S01E15", category:"phrase",
+    keywords:[{word:"one-hit wonder", pos:"phrase", meaning:"只红一次的人/作品"}],
+    usage:"贬义或调侃某人只有一次成功。'You got lucky, one-hit wonder.'（你只是运气好，昙花一现）。",
+    example:"The band was a one-hit wonder — their second album flopped.",
+    cloze:{text:"The band was a one-______ wonder — their second album flopped.", answer:"hit", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:202, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"on the bright side",
+    chinese:"从好的方面看",
+    source:"查理成长日记 S01E15", category:"phrase",
+    keywords:[{word:"bright side", pos:"phrase", meaning:"光明的一面"}],
+    usage:"坏事之后找积极角度。'Well, on the bright side, you got the wrong trash bags too.'（往好处想，垃圾袋你也拿错了——一起换）。",
+    example:"We lost the game, but on the bright side, nobody got hurt.",
+    cloze:{text:"We lost the game, but on the bright ______, nobody got hurt.", answer:"side", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:203, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"I was wondering if...",
+    chinese:"我想问一下……（委婉请求）",
+    source:"查理成长日记 S01E15", category:"sentence pattern",
+    keywords:[{word:"wonder if", pos:"phrase", meaning:"想知道是否"}],
+    usage:"礼貌委婉地提出请求或问题。'I was wondering if you would wear my jersey on Friday.'（我在想周五你能不能穿我的球衣）。",
+    example:"I was wondering if you could help me with this report.",
+    cloze:{text:"I was ______ if you could help me with this report.", answer:"wondering", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:204, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"believe it or not",
+    chinese:"信不信由你",
+    source:"查理成长日记 S01E15", category:"phrase",
+    keywords:[{word:"believe it or not", pos:"phrase", meaning:"信不信由你"}],
+    usage:"引出看似难以置信的事实。'Believe it or not, you can use this phone wherever you go.'（信不信由你，这手机随处都能用）。",
+    example:"Believe it or not, I've never eaten pizza in my life.",
+    cloze:{text:"______ it or not, I've never eaten pizza in my life.", answer:"Believe", hint:"填一个词，句首大写"},
+    questions:[], comparison:null
+  },
+  {
+    id:205, type:"phrase", level:"7+", topic:"skills", dimension:"mastery", english:"dabble in",
+    chinese:"涉猎，浅尝",
+    source:"查理成长日记 S01E15", category:"phrasal verb",
+    keywords:[{word:"dabble in", pos:"phrasal verb", meaning:"浅尝辄止地涉足"}],
+    usage:"谦称自己对某事只略懂。'I dabble in the culinary arts.'（我对厨艺稍有涉猎）。",
+    example:"I dabble in photography, but I'm far from professional.",
+    cloze:{text:"I ______ in photography, but I'm far from professional.", answer:"dabble", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:206, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"knock someone down",
+    chinese:"把某人打倒，拉下马",
+    source:"查理成长日记 S01E15", category:"phrasal verb",
+    keywords:[{word:"knock down", pos:"phrasal verb", meaning:"击倒"}],
+    usage:"比喻攻击/贬低成功者。'Once you're on top, they want to knock you down.'（人一旦到巅峰，就有人想把你拉下马）。",
+    example:"Ignore the critics who try to knock you down.",
+    cloze:{text:"Ignore the critics who try to ______ you down.", answer:"knock", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:207, type:"phrase", level:"6.5+", topic:"skills", dimension:"mastery", english:"act something out",
+    chinese:"把……表演出来",
+    source:"查理成长日记 S01E15", category:"phrasal verb",
+    keywords:[{word:"act out", pos:"phrasal verb", meaning:"表演，演绎"}],
+    usage:"通过表演呈现内容。'You're gonna have to act it out for her.'（你得亲自演给她看）。",
+    example:"The teacher asked us to act out the scene from the play.",
+    cloze:{text:"The teacher asked us to ______ out the scene from the play.", answer:"act", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:208, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"be all out of something",
+    chinese:"（某物）用完了",
+    source:"查理成长日记 S01E15", category:"phrase",
+    keywords:[{word:"all out of", pos:"phrase", meaning:"完全用光"}],
+    usage:"强调资源耗尽。'I'm all out of family members.'（家里的成员都被我支走了）。",
+    example:"I'm all out of patience with this endless delay.",
+    cloze:{text:"I'm all ______ of patience with this endless delay.", answer:"out", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:209, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"straight up",
+    chinese:"直截了当地，实话实说",
+    source:"查理成长日记 S01E15", category:"phrase",
+    keywords:[{word:"straight up", pos:"phrase", meaning:"坦率地，直白"}],
+    usage:"强调说话直接不绕弯。'I'm tellin' ya straight up.'（我跟你说实话）。",
+    example:"Let me be straight up with you: the plan won't work.",
+    cloze:{text:"Let me be ______ up with you: the plan won't work.", answer:"straight", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:210, type:"phrase", level:"6.5+", topic:"friendship", dimension:"trust", english:"go nuts over something",
+    chinese:"为……着迷，疯狂喜欢",
+    source:"查理成长日记 S01E16", category:"phrase",
+    keywords:[{word:"go nuts", pos:"phrase", meaning:"发狂，疯狂"}],
+    usage:"形容对某事物极度喜爱。'Girls go nuts over babies.'（姑娘们都为宝宝着迷）。",
+    example:"Fans went nuts over the new album release.",
+    cloze:{text:"Fans ______ nuts over the new album release.", answer:"went", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:211, type:"phrase", level:"7+", topic:"communication", dimension:"discretion", english:"put labels on someone",
+    chinese:"给某人贴标签，下定义",
+    source:"查理成长日记 S01E16", category:"phrase",
+    keywords:[{word:"label", pos:"v.", meaning:"贴标签，归类"}],
+    usage:"拒绝把关系/人简单归类。'Let's not put labels on our relationship.'（先别给我们的关系下定义）。",
+    example:"We shouldn't put labels on people before we really know them.",
+    cloze:{text:"We shouldn't put ______ on people before we really know them.", answer:"labels", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:212, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"no kidding",
+    chinese:"说真的，没开玩笑",
+    source:"查理成长日记 S01E16", category:"phrase",
+    keywords:[{word:"no kidding", pos:"phrase", meaning:"不开玩笑/说正经的"}],
+    usage:"确认对方认真，或自己转正经。'No kidding.'（说正经的）。",
+    example:"No kidding, that exam was the hardest I've ever taken.",
+    cloze:{text:"______ kidding, that exam was the hardest I've ever taken.", answer:"No", hint:"填一个词，句首大写"},
+    questions:[], comparison:null
+  },
+  {
+    id:213, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"make a breakthrough",
+    chinese:"取得突破",
+    source:"查理成长日记 S01E16", category:"phrase",
+    keywords:[{word:"breakthrough", pos:"n.", meaning:"突破"}],
+    usage:"形容进展有实质跨越。'You two just made a breakthrough.'（你们俩终于有突破了）。",
+    example:"After months of research, the team made a major breakthrough.",
+    cloze:{text:"After months of research, the team made a major ______.", answer:"breakthrough", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:214, type:"idiom", level:"7+", topic:"values", dimension:"persist", english:"rip the bandage off",
+    chinese:"长痛不如短痛，快刀斩乱麻",
+    source:"查理成长日记 S01E16", category:"idiom",
+    keywords:[{word:"rip the bandage off", pos:"idiom", meaning:"一次性面对痛苦真相"}],
+    usage:"比喻与其拖着不如立刻面对残酷现实。'Just rip the bandage off and say it.'（干脆打开天窗说亮话）。",
+    example:"Stop delaying the bad news — just rip the bandage off.",
+    cloze:{text:"Stop delaying the bad news — just ______ the bandage off.", answer:"rip", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:215, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"tell it straight",
+    chinese:"直截了当地说",
+    source:"查理成长日记 S01E16", category:"phrase",
+    keywords:[{word:"straight", pos:"adv.", meaning:"直白地"}],
+    usage:"不拐弯抹角地告知。'You gotta tell it to her straight.'（你得直接告诉她）。",
+    example:"I'd rather you tell it straight than sugarcoat the truth.",
+    cloze:{text:"I'd rather you tell it ______ than sugarcoat the truth.", answer:"straight", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:216, type:"phrase", level:"6.5+", topic:"health", dimension:"body", english:"sprain one's ankle",
+    chinese:"扭伤脚踝",
+    source:"查理成长日记 S01E16", category:"phrase",
+    keywords:[{word:"sprain", pos:"v.", meaning:"扭伤"}],
+    usage:"运动受伤的常见说法。'I sprained my ankle.'（我扭伤了脚踝）。",
+    example:"She sprained her ankle playing basketball and had to rest for weeks.",
+    cloze:{text:"She ______ her ankle playing basketball and had to rest for weeks.", answer:"sprained", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:217, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"talk about bad timing",
+    chinese:"时机真是太糟了",
+    source:"查理成长日记 S01E16", category:"phrase",
+    keywords:[{word:"bad timing", pos:"phrase", meaning:"糟糕的时机"}],
+    usage:"感叹事情发生在最不该发生的时候。'Right before the talent show — talk about bad timing.'（正好在才艺秀前——时机太糟了）。",
+    example:"My phone died during the interview — talk about bad timing.",
+    cloze:{text:"My phone died during the interview — talk about ______ timing.", answer:"bad", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:218, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"fake an injury",
+    chinese:"假装受伤",
+    source:"查理成长日记 S01E16", category:"phrase",
+    keywords:[{word:"fake", pos:"v.", meaning:"伪造，假装"}],
+    usage:"为了逃避而假装受伤。'I faked the injury.'（我假装受伤的）。",
+    example:"He faked an injury to get out of the competition.",
+    cloze:{text:"He ______ an injury to get out of the competition.", answer:"faked", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:219, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"for your information",
+    chinese:"给你提个醒（更正你的说法）",
+    source:"查理成长日记 S01E16", category:"phrase",
+    keywords:[{word:"for your information", pos:"phrase", meaning:"（FYI）供你参考/更正"}],
+    usage:"略带不满地纠正对方。'For your information, I'm a great dancer.'（跟你说，我可是个很棒的舞者）。",
+    example:"For your information, I was there before you arrived.",
+    cloze:{text:"______ your information, I was there before you arrived.", answer:"For", hint:"填一个词，句首大写"},
+    questions:[], comparison:null
+  },
+  {
+    id:220, type:"phrase", level:"6.5+", topic:"work", dimension:"pressure", english:"take a hit",
+    chinese:"遭受打击，受挫",
+    source:"查理成长日记 S01E17", category:"phrase",
+    keywords:[{word:"take a hit", pos:"phrase", meaning:"受创，受挫"}],
+    usage:"指生意/名誉等受到损害。'The fried chicken business has taken a hit.'（炸鸡生意受到打击）。",
+    example:"Sales took a hit during the economic downturn.",
+    cloze:{text:"Sales ______ a hit during the economic downturn.", answer:"took", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:221, type:"phrase", level:"7+", topic:"values", dimension:"mood", english:"go one's way",
+    chinese:"如愿，按某人的意愿发展",
+    source:"查理成长日记 S01E17", category:"phrase",
+    keywords:[{word:"go one's way", pos:"phrase", meaning:"顺心如意"}],
+    usage:"形容事情如预期般顺利。'This is the first time something didn't go your way.'（这是头一回没如你的意）。",
+    example:"Not everything goes your way — you have to learn to adapt.",
+    cloze:{text:"Not everything goes your ______ — you have to learn to adapt.", answer:"way", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:222, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"sleep on it",
+    chinese:"（先睡一觉）从长计议",
+    source:"查理成长日记 S01E17", category:"phrase",
+    keywords:[{word:"sleep on it", pos:"phrase", meaning:"考虑一晚再做决定"}],
+    usage:"不急于当场决定。'I'm going to sleep on it.'（这事我明天再说）。",
+    example:"Don't decide now — sleep on it and tell me tomorrow.",
+    cloze:{text:"Don't decide now — ______ on it and tell me tomorrow.", answer:"sleep", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:223, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"look lively",
+    chinese:"打起精神，麻利点",
+    source:"查理成长日记 S01E17", category:"phrase",
+    keywords:[{word:"lively", pos:"adj.", meaning:"有活力的"}],
+    usage:"催促大家打起精神干活。'Doors open in 10, so look lively.'（快开门了，打起精神）。",
+    example:"The manager told the staff to look lively before the VIP arrived.",
+    cloze:{text:"The manager told the staff to look ______ before the VIP arrived.", answer:"lively", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:224, type:"idiom", level:"7+", topic:"values", dimension:"mood", english:"take someone down a peg",
+    chinese:"挫挫某人的锐气",
+    source:"查理成长日记 S01E17", category:"idiom",
+    keywords:[{word:"take down a peg", pos:"idiom", meaning:"打击骄气"}],
+    usage:"让自负的人收敛。'Somebody needs to take him down a peg.'（得有人给他泼泼冷水）。",
+    example:"His arrogance was getting out of hand, so I took him down a peg.",
+    cloze:{text:"His arrogance was getting out of hand, so I took him down a ______.", answer:"peg", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:225, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"mess with someone",
+    chinese:"招惹某人，跟某人捣乱",
+    source:"查理成长日记 S01E17", category:"phrasal verb",
+    keywords:[{word:"mess with", pos:"phrasal verb", meaning:"招惹，干涉"}],
+    usage:"指找某人麻烦或捉弄。'Want to help me mess with dad?'（想一起给老爸捣乱吗？）。",
+    example:"Don't mess with him — he's in a bad mood today.",
+    cloze:{text:"Don't ______ with him — he's in a bad mood today.", answer:"mess", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:226, type:"phrase", level:"6.5+", topic:"work", dimension:"career", english:"business is booming",
+    chinese:"生意兴隆",
+    source:"查理成长日记 S01E17", category:"phrase",
+    keywords:[{word:"booming", pos:"adj.", meaning:"兴旺的"}],
+    usage:"形容生意火爆。'Ever since you became Mr. Kwik, business is booming.'（自从你当上咕唧先生，生意一炮冲天）。",
+    example:"Their online store is booming thanks to the new campaign.",
+    cloze:{text:"Their online store is ______ thanks to the new campaign.", answer:"booming", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:227, type:"phrase", level:"7+", topic:"work", dimension:"career", english:"the start of something big",
+    chinese:"伟大事业的开端",
+    source:"查理成长日记 S01E17", category:"phrase",
+    keywords:[{word:"the start of something big", pos:"phrase", meaning:"大事的开端"}],
+    usage:"对未来的乐观展望。'Mr. Kwik could be the start of something big.'（咕唧先生可能是伟大历程的起点）。",
+    example:"This small project might be the start of something big.",
+    cloze:{text:"This small project might be the ______ of something big.", answer:"start", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:228, type:"phrase", level:"6.5+", topic:"values", dimension:"integrity", english:"self-worth and dignity",
+    chinese:"自我价值与尊严",
+    source:"查理成长日记 S01E17", category:"phrase",
+    keywords:[{word:"self-worth", pos:"n.", meaning:"自我价值"}],
+    usage:"谈论工作的深层意义。'A job is also about self-worth and dignity.'（工作也关乎自我价值与尊严）。",
+    example:"Work gives people more than money — it gives them self-worth and dignity.",
+    cloze:{text:"Work gives people more than money — it gives them ______ and dignity.", answer:"self-worth", hint:"填一个词（带连字符）"},
+    questions:[], comparison:null
+  },
+  {
+    id:229, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"push it",
+    chinese:"再加把劲，再加码",
+    source:"查理成长日记 S01E17", category:"phrase",
+    keywords:[{word:"push it", pos:"phrase", meaning:"加大力度"}],
+    usage:"要求对方做得更多更好。'Too easy, too expected. Push it, people.'（太普通了，大家再加把劲）。",
+    example:"Good start, but push it — I know you can do better.",
+    cloze:{text:"Good start, but ______ it — I know you can do better.", answer:"push", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:230, type:"phrasal verb", level:"6.5+", topic:"skills", dimension:"mastery", english:"come across",
+    chinese:"偶然发现，无意中遇到",
+    source:"查理成长日记 S01E18", category:"phrasal verb",
+    keywords:[{word:"come across", pos:"phrasal verb", meaning:"偶然发现"}],
+    usage:"指无意间找到/遇到。'I came across this gift certificate.'（我翻出了一张礼券）。",
+    example:"I came across an old photo album while cleaning the attic.",
+    cloze:{text:"I ______ across an old photo album while cleaning the attic.", answer:"came", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:231, type:"phrase", level:"6.5+", topic:"skills", dimension:"mastery", english:"figure something out",
+    chinese:"想出解决办法，弄明白",
+    source:"查理成长日记 S01E18", category:"phrasal verb",
+    keywords:[{word:"figure out", pos:"phrasal verb", meaning:"搞清楚，找到办法"}],
+    usage:"指找到解决方式。'I'll figure something out.'（我总有办法的）。",
+    example:"We'll figure out a way to make it work on time.",
+    cloze:{text:"We'll ______ out a way to make it work on time.", answer:"figure", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:232, type:"phrase", level:"6.5+", topic:"communication", dimension:"express", english:"listen up",
+    chinese:"听好了（引起注意）",
+    source:"查理成长日记 S01E18", category:"phrase",
+    keywords:[{word:"listen up", pos:"phrase", meaning:"注意听"}],
+    usage:"宣布重要事项前吸引注意。'Okay, kids, let's listen up.'（好了孩子们，听好了）。",
+    example:"Listen up, everyone — there's been a change of plans.",
+    cloze:{text:"______ up, everyone — there's been a change of plans.", answer:"Listen", hint:"填一个词，句首大写"},
+    questions:[], comparison:null
+  },
+  {
+    id:233, type:"sentence", level:"7+", topic:"communication", dimension:"express", english:"I can't stress this strongly enough.",
+    chinese:"我要再三强调这一点。",
+    source:"查理成长日记 S01E18", category:"sentence pattern",
+    keywords:[{word:"stress", pos:"v.", meaning:"强调"}],
+    usage:"强调事情极其重要。'I cannot stress this strongly enough: do not press the button.'（我要特别强调：绝对不要按按钮）。",
+    example:"I can't stress this strongly enough — back up your files regularly.",
+    cloze:{text:"I can't stress this strongly ______ — back up your files regularly.", answer:"enough", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:234, type:"phrase", level:"6.5+", topic:"skills", dimension:"mastery", english:"take something apart",
+    chinese:"把……拆开",
+    source:"查理成长日记 S01E18", category:"phrasal verb",
+    keywords:[{word:"take apart", pos:"phrasal verb", meaning:"拆解"}],
+    usage:"指拆解物品或系统。'You'd have to take the whole thing apart.'（你得把整个拆了重做）。",
+    example:"He took the old radio apart to see how it worked.",
+    cloze:{text:"He ______ the old radio apart to see how it worked.", answer:"took", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:235, type:"phrase", level:"6.5+", topic:"work", dimension:"execution", english:"be on duty",
+    chinese:"当班，值班",
+    source:"查理成长日记 S01E18", category:"phrase",
+    keywords:[{word:"on duty", pos:"phrase", meaning:"执勤，值班"}],
+    usage:"表示正在工作岗位上。'I'm on duty. Thank you.'（我正在工作，配合一下）。",
+    example:"The night nurse was on duty when the emergency happened.",
+    cloze:{text:"The night nurse was on ______ when the emergency happened.", answer:"duty", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:236, type:"phrase", level:"6.5+", topic:"communication", dimension:"conflict", english:"cut it out",
+    chinese:"别闹了，停下",
+    source:"查理成长日记 S01E18", category:"phrase",
+    keywords:[{word:"cut it out", pos:"phrase", meaning:"停止（捣乱）"}],
+    usage:"让对方停止烦人的行为。'Will you cut that out?'（别闹了啦）。",
+    example:"Cut it out, you two — the meeting is about to start.",
+    cloze:{text:"______ it out, you two — the meeting is about to start.", answer:"Cut", hint:"填一个词，句首大写"},
+    questions:[], comparison:null
+  },
+  {
+    id:237, type:"phrase", level:"6.5+", topic:"values", dimension:"mood", english:"get out of something",
+    chinese:"逃脱，逃避（责任/安排）",
+    source:"查理成长日记 S01E18", category:"phrasal verb",
+    keywords:[{word:"get out of", pos:"phrasal verb", meaning:"摆脱，逃避"}],
+    usage:"指躲开不想做的事。'I got out of mommy-and-PJ day.'（我逃过了一劫）。",
+    example:"He always finds a way to get out of doing the dishes.",
+    cloze:{text:"He always finds a way to get ______ of doing the dishes.", answer:"out", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:238, type:"phrase", level:"6.5+", topic:"communication", dimension:"discretion", english:"sneaky",
+    chinese:"偷偷摸摸的，狡猾的",
+    source:"查理成长日记 S01E18", category:"phrase",
+    keywords:[{word:"sneaky", pos:"adj.", meaning:"鬼鬼祟祟的"}],
+    usage:"形容暗中做某事。'Oh, sneaky.'（哇，真狡猾）。",
+    example:"That was sneaky — you hid the evidence before anyone noticed.",
+    cloze:{text:"That was ______ — you hid the evidence before anyone noticed.", answer:"sneaky", hint:"填一个词"},
+    questions:[], comparison:null
+  },
+  {
+    id:239, type:"sentence", level:"6.5+", topic:"communication", dimension:"express", english:"No one's blaming you.",
+    chinese:"没人怪你。",
+    source:"查理成长日记 S01E18", category:"sentence pattern",
+    keywords:[{word:"blame", pos:"v.", meaning:"责怪"}],
+    usage:"安抚自责的人。'Mom, you did everything you could. No one's blaming you.'（你已经尽力了，没人怪你）。",
+    example:"It was a team failure — no one's blaming you for it.",
+    cloze:{text:"It was a team failure — no one's ______ you for it.", answer:"blaming", hint:"填一个词"},
+    questions:[], comparison:null
   }
 ];
