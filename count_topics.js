@@ -1,5 +1,5 @@
 const fs = require('fs');
-const js = fs.readFileSync('index.html', 'utf8').match(/<script>([\s\S]*?)<\/script>/)[1];
+const js = fs.readFileSync('data.js', 'utf8');
 const m = js.match(/const expressions = \[([\s\S]*?)\n\];/);
 const data = m[1];
 const blocks = data.split(/\n  \{/).filter(b => b.includes('topic:'));

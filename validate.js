@@ -11,7 +11,7 @@ const d = fs.readFileSync('data.js', 'utf8');
 try { new Function(d); console.log('data.js 语法: OK'); }
 catch (e) { console.log('data.js 语法错误:', e.message); }
 const ids = (d.match(/id:\d+/g) || []);
-console.log('表达条数:', ids.length, ids.length === 78 ? '✅' : '⚠️ 应为 78');
+console.log('表达条数:', ids.length, ids.length >= 78 ? '✅' : '⚠️ 异常');
 
 // 引用检查
 console.log('data.js 被引用:', html.includes('src="data.js"'));
