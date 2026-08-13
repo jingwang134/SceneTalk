@@ -699,6 +699,7 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
         </div>
         <button class="ai-cfg-link" onclick="openAiSettings()" style="margin-left:auto">⚙️ 配置 AI</button>
         <button class="ai-cfg-link" onclick="testAiConn()" style="margin-left:4px">🔍 测试连接</button>
+        <button class="ai-cfg-link" onclick="testAiConn()" style="margin-left:4px">🔍 测试连接</button>
       </div>
       <div style="margin-top:16px">
 <div style="margin-top:16px">
@@ -2533,8 +2534,15 @@ function buildAnswerV2(parsed,key,exprs){
 
 function escapeHtml(s){ return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
-// ===================== 🎤 AI 智能生成（DeepSeek 直连） =====================
+// ===================== 🎤 AI 智能生成（DeepSeek 直连 / 本地服务代理） =====================
 let genAiMode = (function(){ try{ return localStorage.getItem('wb_ai_mode')||'template'; }catch(e){ return 'template'; } })();
+function isLocalServerMode(){
+  try{ return location.protocol==='http:' && (location.hostname==='127.0.0.1'||location.hostname==='localhost'); }catch(e){ return false; }
+}
+function defaultEndpoint(){
+  // 本地服务模式（本机 node server.js 托管）→ 用同源 /api/chat 转发，绕过浏览器直连限制
+  return isLocalServerMode() ? '/api/chat' : 'https://api.deepseek.com/chat/completions';
+}
 function setAiMode(m, btn){
   genAiMode=m;
   try{ localStorage.setItem('wb_ai_mode',m); }catch(e){}
@@ -2549,7 +2557,7 @@ function saveAiCfg(cfg){ try{ localStorage.setItem('wb_ai_cfg', JSON.stringify(c
 function openAiSettings(){
   const cfg=aiCfg();
   document.getElementById('aiKey').value=cfg.key||'';
-  document.getElementById('aiEndpoint').value=cfg.endpoint||'https://api.deepseek.com/chat/completions';
+  document.getElementById('aiEndpoint').value=cfg.endpoint||defaultEndpoint();
   document.getElementById('aiModel').value=cfg.model||'deepseek-chat';
   document.getElementById('aiOverlay').style.display='flex';
 }
@@ -2559,9 +2567,9 @@ function saveAiSettings(){
   const endpoint=document.getElementById('aiEndpoint').value.trim();
   const model=document.getElementById('aiModel').value.trim();
   if(!key){ alert('请填写 API Key（DeepSeek 开放平台 platform.deepseek.com 获取）'); return; }
-  saveAiCfg({key:key, endpoint:endpoint||'https://api.deepseek.com/chat/completions', model:model||'deepseek-chat'});
+  saveAiCfg({key:key, endpoint:endpoint||defaultEndpoint(), model:model||'deepseek-chat'});
   closeAiSettings();
-  showToast('✅ AI Key 已保存（仅存本浏览器）');
+  showToast(isLocalServerMode() ? '✅ 已保存：AI 将通过本地服务转发，网页可直接用' : '✅ AI Key 已保存（仅存本浏览器）');
 }
 
 const PERSONA_PROMPTS={
@@ -2590,13 +2598,16 @@ async function generateAIAnswer(q, reGen){
   const exprs=pickGenExprs(parsed.topic, 3);
   const p=PERSONAS[genStyle]||PERSONAS.vlogger;
   const tp=topicOf(parsed.topic);
+  // 本地服务模式自动切换：即使配置里存的是 DeepSeek 直连地址，也走 /api/chat 转发
+  let endpoint=cfg.endpoint||defaultEndpoint();
+  if(isLocalServerMode() && endpoint.indexOf('/api/chat')===-1) endpoint='/api/chat';
   box.innerHTML='<div class="gen-loading">🤖 '+p.ico+' '+p.name+' 正在组织回答… 首次调用约 15-30 秒，请稍候</div>';
   const sys='你是雅思口语金牌教练。根据用户题目生成地道、严格扣题的雅思口语答案。\n铁律：\n1. 严格回应题目内容，绝不跑题，不写与题目无关的套话\n2. 长度：Part1 只答2-4句短答；Part2 完整小故事（6句左右，含背景/细节/个人感受）；Part3 深度讨论（4-6句，正反两面论证）\n3. 完全模仿指定人设的口吻（口头禅、句式节奏、叙事逻辑），不要写成书面作文，保持真人感\n4. 尽量自然融入用户提供的2-3个地道表达，融入处用 **表达** 包裹标记\n5. 主体全英文，俚语受控（雅思考官能听懂），禁止搬运影视剧完整剧情\n6. 只输出JSON，不要任何多余文字，格式：\n{"lines":[{"en":"英文句子（含**标记**）","zh":"中文翻译","explain":"这句在雅思作答中的作用（扣题/铺垫/细节/升华等）"}],"notes":[{"phrase":"习语或词伙","meaning":"中文释义"}]}';
   const usr='题目：'+q+'\n题型：'+PART_LABEL[parsed.part]+'（对象：'+parsed.obj.cn+'）\n人设：'+(PERSONA_PROMPTS[genStyle]||PERSONA_PROMPTS.casual)+'\n可用地道表达（请尽量融入其中2-3个）：\n'+exprs.map(e=>'- '+e.english+'（'+e.chinese+'）').join('\n');
   try{
     const ctrl=new AbortController();
     const timer=setTimeout(function(){ ctrl.abort(); }, 90000);
-    const resp=await fetch(cfg.endpoint,{
+    const resp=await fetch(endpoint,{
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+cfg.key},
       body:JSON.stringify({model:cfg.model, messages:[{role:'system',content:sys},{role:'user',content:usr}], temperature:0.8, stream:false}),
@@ -2607,6 +2618,7 @@ async function generateAIAnswer(q, reGen){
       let msg='请求失败';
       if(resp.status===401) msg='API Key 无效或已过期（检查是否复制完整、是否有余额）';
       else if(resp.status===402) msg='账户余额不足，请到 DeepSeek 平台充值';
+      else if(resp.status===404 && endpoint.indexOf('/api/chat')!==-1) msg='本地服务未启动或地址不对——请先双击运行 start-scenepick.bat 启动服务';
       else if(resp.status===429) msg='请求过于频繁（限流），稍等几秒再试';
       else if(resp.status>=500) msg='AI 服务暂时不可用，稍后再试';
       box.innerHTML='<div class="gen-error">❌ '+msg+'（HTTP '+resp.status+'）<br><br><button class="q-btn ghost" onclick="openAiSettings()">⚙️ 检查配置</button> <button class="q-btn ghost" onclick="testAiConn()">🔍 测试连接</button> <button class="q-btn ghost" onclick="setAiMode(\'template\');generateAnswer()">🎛️ 改用模板生成</button></div>';
@@ -2639,21 +2651,31 @@ async function testAiConn(){
     box.innerHTML=L.join('');
     return;
   }
-  // ① 接口地址格式
-  try{ new URL(cfg.endpoint); L.push('✅ 接口地址格式正确：<code>'+escapeHtml(cfg.endpoint)+'</code><br>'); }
-  catch(e){
-    L.push('❌ 接口地址格式错误：<code>'+escapeHtml(cfg.endpoint)+'</code> —— 应形如 https://api.deepseek.com/chat/completions<br>');
-    L.push('</div>'); box.innerHTML=L.join(''); return;
+  // ① 接口地址格式（本地服务模式 /api/chat 跳过 URL 校验）
+  let endpoint=cfg.endpoint||defaultEndpoint();
+  if(isLocalServerMode() && endpoint.indexOf('/api/chat')===-1) endpoint='/api/chat';
+  if(endpoint.indexOf('/api/chat')===-1){
+    try{ new URL(endpoint); L.push('✅ 接口地址格式正确：<code>'+escapeHtml(endpoint)+'</code><br>'); }
+    catch(e){
+      L.push('❌ 接口地址格式错误：<code>'+escapeHtml(endpoint)+'</code> —— 应形如 https://api.deepseek.com/chat/completions<br>');
+      L.push('</div>'); box.innerHTML=L.join(''); return;
+    }
+  }else{
+    L.push('✅ 使用本地服务转发：<code>/api/chat</code>（需先运行 start-scenepick.bat 启动服务）<br>');
   }
   // ② 连接测试（不带 key，服务器应返回 401 = 连上了）
   try{
-    const resp=await fetch(cfg.endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:cfg.model,messages:[{role:'user',content:'hi'}]})});
+    const resp=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:cfg.model,messages:[{role:'user',content:'hi'}]})});
     if(resp.status===401) L.push('✅ 已连上 API 服务器（返回 401 属正常，说明地址对、网络通）<br>');
-    else if(resp.status===404||resp.status===405) L.push('❌ 接口地址不对（HTTP '+resp.status+'）—— 应为 https://api.deepseek.com/chat/completions，请修正<br>');
+    else if(resp.status===404||resp.status===405) L.push('❌ 接口地址不对（HTTP '+resp.status+'）—— 本地模式请确认 start-scenepick.bat 已运行；直连模式应为 https://api.deepseek.com/chat/completions<br>');
     else L.push('✅ 已连上 API（HTTP '+resp.status+'）<br>');
   }catch(e){
     if(e.name==='TypeError'){
-      L.push('❌ 浏览器无法连接 API —— 说明：<br>1）当前网络拦截了 api.deepseek.com（换网络/关代理试试）<br>2）或浏览器扩展拦截了请求（关广告拦截插件试试）<br>3）CORS 已实测放行，不是 CORS 问题<br>');
+      if(endpoint.indexOf('/api/chat')!==-1){
+        L.push('❌ 本地服务连不上 —— 请先双击运行 <b>start-scenepick.bat</b>（黑色窗口保持打开），然后刷新页面重试<br>');
+      }else{
+        L.push('❌ 浏览器无法连接 API —— 说明：<br>1）当前网络拦截了 api.deepseek.com（换网络/关代理试试）<br>2）或浏览器扩展拦截了请求（关广告拦截插件试试）<br>3）推荐改用本地服务模式：运行 start-scenepick.bat 打开 http://127.0.0.1:8799<br>');
+      }
     }else{
       L.push('❌ 连接异常：'+escapeHtml(e.message)+'<br>');
     }
@@ -2661,7 +2683,7 @@ async function testAiConn(){
   }
   // ③ Key 有效性（真实最小请求）
   try{
-    const resp=await fetch(cfg.endpoint,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+cfg.key},body:JSON.stringify({model:cfg.model,messages:[{role:'user',content:'hi'}],max_tokens:5})});
+    const resp=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+cfg.key},body:JSON.stringify({model:cfg.model,messages:[{role:'user',content:'hi'}],max_tokens:5})});
     if(resp.ok) L.push('✅ Key 有效！可以正常生成答案<br>');
     else if(resp.status===401) L.push('❌ Key 无效或已过期（HTTP 401）—— 到 platform.deepseek.com 重新复制完整 Key（sk- 开头）<br>');
     else if(resp.status===402) L.push('❌ 账户余额不足（HTTP 402）—— 到 DeepSeek 平台充值<br>');
