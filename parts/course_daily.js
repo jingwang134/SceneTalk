@@ -3,6 +3,7 @@
 // 学习体验 = 看剧学：每个场景 = 一段真实台本对话 + 情境 + 好在哪 + 同维度说法
 
 const COURSE_DAILY_UNIT1 = {
+  level: "入门",
   task: "委婉反驳",
   icon: "💬",
   en: "polite disagreement",
@@ -15,7 +16,9 @@ const COURSE_DAILY_UNIT1 = {
       lines: [
         { p: "It's just that…", zh: "只是……（引出真实原因）", use: "She trusts you. It's just that weird stuff happens at concerts." },
         { p: "The thing is…", zh: "重点是……", use: "The thing is, we can't afford it right now." },
-        { p: "It's not that…, it's just that…", zh: "不是……而是……（澄清误会）", use: "It's not that I don't like him, it's just that we never click." }
+        { p: "It's not that…, it's just that…", zh: "不是……而是……（澄清误会）", use: "It's not that I don't like him, it's just that we never click." },
+        { p: "I hear you, but I see it differently", zh: "我懂你的意思，但我的看法不一样", use: "I hear you, but I see it differently — I'd focus on quality first." },
+        { p: "Let me play devil's advocate here", zh: "我来唱个反调（换个角度）", use: "Let me play devil's advocate here — what if the plan backfires?" }
       ],
       risk: "家庭、朋友之间最常用"
     },
@@ -25,7 +28,9 @@ const COURSE_DAILY_UNIT1 = {
       lines: [
         { p: "I wouldn't say…", zh: "我倒不觉得……", use: "I wouldn't say too much time." },
         { p: "I'm not sure I'd agree with that", zh: "这个我倒不一定认同", use: "I'm not sure I'd agree with that, honestly." },
-        { p: "I see it a bit differently", zh: "我看得稍微有点不一样", use: "I see it a bit differently, but I get your point." }
+        { p: "I see it a bit differently", zh: "我看得稍微有点不一样", use: "I see it a bit differently, but I get your point." },
+        { p: "I'm not convinced that's the whole story", zh: "我不太相信事情就这么简单", use: "I'm not convinced that's the whole story — there must be more to it." },
+        { p: "That's one way to look at it", zh: "这是一种看法（言下之意：不止这一种）", use: "That's one way to look at it, though I see it quite differently." }
       ],
       risk: "同事、朋友间得体"
     },
@@ -35,7 +40,9 @@ const COURSE_DAILY_UNIT1 = {
       lines: [
         { p: "I would love to, but…", zh: "我很想去，但是……", use: "I would love to come, but I can't this weekend." },
         { p: "I wish I could, but…", zh: "我倒希望我能，但是……", use: "I wish I could help, but I'm swamped this week." },
-        { p: "I'd really like to, but…", zh: "我真的很想，但是……", use: "I'd really like to join, but I've got other plans." }
+        { p: "I'd really like to, but…", zh: "我真的很想，但是……", use: "I'd really like to join, but I've got other plans." },
+        { p: "I appreciate the offer, but…", zh: "很感谢你的提议，但是……", use: "I appreciate the offer, but I've already made other plans." },
+        { p: "Thanks for thinking of me, but…", zh: "谢谢你想到我，但是……", use: "Thanks for thinking of me, but I'll have to pass this time." }
       ],
       risk: "拒绝邀约、婉拒请求"
     }
@@ -50,7 +57,12 @@ const COURSE_DAILY_UNIT1 = {
       ],
       key: "It's just that…",
       why: "Phil 没说 Alex 错了，先给台阶（She trusts you），再用 It's just that 引出真实原因——反驳不伤人，还显得通情达理。",
-      alt: ["The thing is…", "It's not that…, it's just that…"]
+      alt: ["The thing is…", "It's not that…, it's just that…"],
+      words: [
+        { w: "It's just that…", zh: "只是……（软化开场句型）", tag: "句型" },
+        { w: "She trusts you", zh: "她相信你（先肯定再转折）", tag: "观点" },
+        { w: "weird stuff happens", zh: "总有意外状况（口语名词短语）", tag: "短语" }
+      ]
     },
     {
       id: "D02", show: "查理成长日记", ep: "S01E02", chars: ["奶奶", "妈妈"], dim: 1,
@@ -61,7 +73,12 @@ const COURSE_DAILY_UNIT1 = {
       ],
       key: "I wouldn't say…",
       why: "不否认奶奶的说法，只表达「我可不这么看」——I wouldn't say 把反驳轻轻拨开，一点火药味都没有。",
-      alt: ["I'm not sure I'd agree with that", "I see it a bit differently"]
+      alt: ["I'm not sure I'd agree with that", "I see it a bit differently"],
+      words: [
+        { w: "I wouldn't say…", zh: "我倒不觉得……（礼貌否定句型）", tag: "句型" },
+        { w: "a little too much", zh: "稍微有点多（程度限定词）", tag: "短语" },
+        { w: "hand her over", zh: "把孩子交出去（短语动词）", tag: "短语" }
+      ]
     },
     {
       id: "D03", show: "查理成长日记", ep: "S01E01", chars: ["Charlie", "妈妈"], dim: 0,
@@ -72,7 +89,12 @@ const COURSE_DAILY_UNIT1 = {
       ],
       key: "Don't take this the wrong way, but…",
       why: "明知要说的话可能冒犯，先上缓冲——把话的刺包起来再递出去，对方听到的是问题，不是指责。",
-      alt: ["I mean this in the nicest way…", "No offense, but…"]
+      alt: ["I mean this in the nicest way…", "No offense, but…"],
+      words: [
+        { w: "take this the wrong way", zh: "往坏处理解（固定搭配）", tag: "搭配" },
+        { w: "No offense, but…", zh: "无意冒犯，但是……（同义缓冲）", tag: "句型" },
+        { w: "打预防针", zh: "先声明立场再开口（观点表达）", tag: "观点" }
+      ]
     },
     {
       id: "D04", show: "卡戴珊家族", ep: "S01E02", chars: ["Kim", "对方"], dim: 2,
@@ -84,7 +106,12 @@ const COURSE_DAILY_UNIT1 = {
       ],
       key: "I would love to, but…",
       why: "拒绝的公式：I would love to（热情）→ but（难处）。对方先吃到糖再听到拒绝，不会觉得被敷衍。",
-      alt: ["I wish I could, but…", "I'd really like to, but…"]
+      alt: ["I wish I could, but…", "I'd really like to, but…"],
+      words: [
+        { w: "I would love to, but…", zh: "我很想去，但是……（先扬后抑句型）", tag: "句型" },
+        { w: "disinvite", zh: "取消邀请（动词，商务场景可用）", tag: "名词" },
+        { w: "feel bad about", zh: "过意不去（情绪表达）", tag: "短语" }
+      ]
     },
     {
       id: "D05", show: "卡戴珊家族", ep: "S01E06", chars: ["Kim", "对方"], dim: 2,
@@ -96,112 +123,144 @@ const COURSE_DAILY_UNIT1 = {
       ],
       key: "Why didn't you…?",
       why: "三步推进的强反驳：质问 → 听解释 → 摆事实推翻（didn't even…）。情绪升级，但逻辑还在——熟人之间才这么用。",
-      alt: ["How come you didn't…?", "You could've at least…"]
+      alt: ["How come you didn't…?", "You could've at least…"],
+      words: [
+        { w: "Why didn't you…?", zh: "你为什么不……？（质问开场）", tag: "句型" },
+        { w: "didn't even…", zh: "连……都没有（摆事实推翻）", tag: "观点" },
+        { w: "take it out on", zh: "冲……撒气（固定搭配）", tag: "搭配" }
+      ]
     }
   ]
 };
 
-// 句型总表（完成页/查阅用 · 情绪弱→强）
-const COURSE_DAILY_SKELETONS = [
-  { order: 1, emotion: "弱", key: "It's just that…", example: "She trusts you. It's just that weird stuff happens at concerts.", source: "摩登家庭 S01E04", dim: "软化开场" },
-  { order: 2, emotion: "弱", key: "I wouldn't say…", example: "Well, I wouldn't say too much time.", source: "查理成长日记 S01E02", dim: "礼貌否定" },
-  { order: 3, emotion: "弱-中等", key: "Don't take this the wrong way, but…", example: "Mom, don't take this the wrong way, but why…?", source: "查理成长日记 S01E01", dim: "软化开场" },
-  { order: 4, emotion: "弱", key: "I would love to, but…", example: "I would love to come, but I can't this weekend.", source: "卡戴珊家族 S01E02", dim: "先扬后抑" },
-  { order: 5, emotion: "中等", key: "Why didn't you…?", example: "Why didn't you invite me? … She didn't even have a dinner.", source: "卡戴珊家族 S01E06", dim: "先扬后抑" }
-];
-
-// ===== 生活口语课 · 单元2「职场博弈」剧情学习单元（雅思 6.5+） =====
+// ===== 雅思 6.5+ 单元2「职场博弈」剧情学习单元 =====
+// 内容全部来自《卡戴珊家族》第一季真实商业场景：谈合同 / 亮底线 / 传坏消息
 const COURSE_DAILY_UNIT2 = {
+  level: "雅思 6.5+",
   task: "职场博弈",
   icon: "💼",
   en: "negotiation & deal-making",
-  intro: "这一关，从 2 部剧 4 个场景学「职场博弈」——亮底线、摊牌、成交、拍板，看高手怎么把话说到点子上。",
-  shows: ["摩登家庭", "查理成长日记"],
+  intro: "这一关，从《卡戴珊家族》第 1 季的真实商业场景学「职场博弈」——Kim 怎么自己谈下 Balenciaga 合同、怎么给零售商立规矩，Kris 怎么开口传递坏消息。谈成、守住、说破，全是生意场上的真刀真枪。",
+  shows: ["卡戴珊家族"],
   dims: [
     {
+      name: "争取掌控", ico: "🕹️",
+      exp: "谈判桌上最硬气的牌，是「这事我自己能搞定」——不靠中间人，自己谈：",
+      lines: [
+        { p: "I can do this one on my own", zh: "这个我自己就能搞定", use: "I've learned the ins and outs of contracts — I can do this one on my own." },
+        { p: "It's the first time I've ever done my own contract", zh: "这是我第一次自己谈合同", use: "It's the first time I've ever done my own contract, and I feel more in control." },
+        { p: "I just feel more in control", zh: "我就是感觉更有掌控感", use: "With the whole team out of the picture, I just feel more in control." },
+        { p: "I've had practice with this", zh: "这种事我已经练过手了", use: "Don't worry about me — I've had practice with this kind of negotiation." },
+        { p: "You're a walking in-house attorney", zh: "你简直是行走的驻场律师", use: "She knows every clause in the contract — she's a walking in-house attorney." }
+      ],
+      risk: "商务谈判、争取项目时，展示「不依赖他人」的底气"
+    },
+    {
       name: "亮底线", ico: "🚧",
-      exp: "把不可退让的部分先说死，剩下的才有的谈：",
+      exp: "把不可退让的规则先说死——宁可不做这单，也不破例：",
       lines: [
-        { p: "It's non-negotiable.", zh: "这没得商量（底线不容讨论）", use: "The deadline is non-negotiable — we ship on Friday." },
-        { p: "I'm not budging on this", zh: "这点我不会让步", use: "I'm not budging on the price, but I'll throw in delivery." },
-        { p: "That's my final offer", zh: "这是我的最终报价", use: "That's my final offer — take it or leave it." }
+        { p: "We don't sell to retailers that…", zh: "我们不会卖给……（拒绝合作对象）", use: "We don't sell to retailers that won't carry the full size range." },
+        { p: "You have to carry the full size range", zh: "你必须进全码段", use: "No exceptions — you have to carry the full size range." },
+        { p: "If you don't agree to that, you can't carry the brand", zh: "不同意这一点，就没资格代理这个品牌", use: "That's the rule: if you don't agree to that, you can't carry the brand." },
+        { p: "There's no plus size section or petite section — it's one section", zh: "没有大码区、小码区——就是一个区", use: "Our racks are one section for everyone; there's no plus size section or petite section." },
+        { p: "It's non-negotiable", zh: "这没得商量", use: "The deadline is non-negotiable — we ship on Friday." }
       ],
-      risk: "谈判中表明立场，语气坚决但不失礼"
+      risk: "供应商、品牌谈判中表明立场，语气坚决但不失礼"
     },
     {
-      name: "摊牌开场", ico: "🎬",
-      exp: "一句话把谈话拉到正题，先立框架再给理由：",
+      name: "传坏消息", ico: "📢",
+      exp: "职场里最难开口的事——先顾全对方的情绪，再说事实：",
       lines: [
-        { p: "Here's the deal.", zh: "听好了，事实是这样的（摊牌开场）", use: "Here's the deal: I'll cover the deposit if you handle the rent." },
-        { p: "Let's cut to the chase", zh: "我们直说吧", use: "Let's cut to the chase — the budget won't stretch." },
-        { p: "The bottom line is…", zh: "说到底就是……", use: "The bottom line is we need a decision by Monday." }
+        { p: "One of the things I don't like is delivering bad news", zh: "我最不擅长的事之一，就是传达坏消息", use: "One of the things I don't like is delivering bad news, especially to the team." },
+        { p: "Who's going to be the one to tell her?", zh: "谁来告诉她？", use: "The results are in — who's going to be the one to tell her?" },
+        { p: "I don't want anybody to have their feelings hurt", zh: "我不想让任何人伤心", use: "I don't want anybody to have their feelings hurt, so let's break it gently." },
+        { p: "It's as big as it gets", zh: "这已经是天花板了", use: "A cover of that magazine? It's as big as it gets." },
+        { p: "There's not an upset bone in my body", zh: "我浑身上下没有一根不高兴的骨头", use: "I lost the bid, but there's not an upset bone in my body — it went to the right person." }
       ],
-      risk: "职场/谈判常用，先声夺人"
-    },
-    {
-      name: "拍板成交", ico: "🤝",
-      exp: "谈成了要锁死，用确定的句式把口头约定钉住：",
-      lines: [
-        { p: "We got a deal?", zh: "我们成交？", use: "We got a deal? — Deal. Shake on it." },
-        { p: "Shake hands on it", zh: "握手成交（一言为定）", use: "We shook hands on it, so the deal's done." },
-        { p: "Consider it done", zh: "包在我身上", use: "Consider it done — I'll have it ready by noon." }
-      ],
-      risk: "确认口头契约，比 Yes 更有力度"
+      risk: "谈反馈、谈落选、谈裁员时，情绪管理比信息本身更重要"
     }
   ],
   scenes: [
     {
-      id: "E01", show: "摩登家庭", ep: "S01E03", chars: ["Claire", "Haley"], dim: 0,
-      situation: "女儿要去朋友的婚礼借衣服，Claire 直接亮明底线——婚礼可以去，但裙子没得商量。",
+      id: "E01", show: "卡戴珊家族", ep: "S01E07", chars: ["Kim", "经纪人"], dim: 0,
+      situation: "Kim 接下 Balenciaga 广告邀约，但她刚学完合同法，决定这次自己谈合同、不靠经纪人和律师。",
       dialogue: [
-        { sp: "Haley", en: "But it's a wedding for some friend of yours I never even heard of.", zh: "可那婚礼是你的朋友办的，我压根没听说过。" },
-        { sp: "Claire", en: "It's non-negotiable. You can borrow a dress of Haley's again.", zh: "没得商量。裙子你可以再去跟海莉借。" },
-        { sp: "Haley", en: "No.", zh: "才不要。" }
+        { sp: "Kim", en: "Since I've been learning so much about contracts and law school, I feel like I can do this one on my own.", zh: "因为我一直在学合同法、上法学院，我觉得这次我自己就能搞定。" },
+        { sp: "经纪人", en: "Oh my God, you're like a walking in-house attorney.", zh: "天哪，你简直是个行走的驻场律师。" },
+        { sp: "Kim", en: "I feel like I've gotten to practice, and it's better to practice on a big deal than on myself.", zh: "我觉得我算是练过手了，而且拿大项目练手，总比拿自己练手强。" },
+        { sp: "经纪人", en: "Still get 10%?", zh: "我还是抽 10%？" },
+        { sp: "Kim", en: "You'll still get 10%.", zh: "你还是抽 10%。" }
       ],
-      key: "It's non-negotiable.",
-      why: "negotiable 是「可商量」，non-negotiable 直接封死讨论空间——谈条件前先让对方知道哪条线碰不得，谈判才有效率。比 I won't allow it 更冷静、更有掌控感。",
-      alt: ["I'm not budging on this", "That's my final offer"]
+      key: "I can do this one on my own",
+      why: "谈判桌上最硬的牌不是压价，是「I can do this one on my own」——一句话亮出「我有能力、有准备、不依赖中间人」。on my own（独立搞定）是雅思高频短语；配合名词 contract、词组 in-house attorney（驻场律师），就是商务 Part 2 的实质词汇。",
+      alt: ["It's the first time I've ever done my own contract", "I just feel more in control"],
+      words: [
+        { w: "contract", zh: "合同（名词）", tag: "名词" },
+        { w: "on my own", zh: "独立搞定（雅思高频短语）", tag: "短语" },
+        { w: "in-house attorney", zh: "驻场律师（名词）", tag: "名词" },
+        { w: "feel more in control", zh: "更有掌控感（观点表达）", tag: "观点" }
+      ]
     },
     {
-      id: "E02", show: "摩登家庭", ep: "S01E09", chars: ["Jay", "Phil"], dim: 1,
-      situation: "Phil 追女生屡屡受挫，Jay 一句话把真相摊开——浪漫没用，实力才有用。",
+      id: "E02", show: "卡戴珊家族", ep: "S01E09", chars: ["Kim", "品牌方"], dim: 1,
+      situation: "Good American 谈零售合作，Kim 立下铁律：想卖这个牌子，就必须进全码段，不许拆开只卖畅销码。",
       dialogue: [
-        { sp: "Phil", en: "Nothing's worked.", zh: "什么招都试过了。" },
-        { sp: "Jay", en: "Here's the deal. Girls don't go for all that romantic stuff. They go for power and success.", zh: "听好了，事实是这样的：女孩子不吃浪漫那一套，她们看中的是权势和成功。" }
+        { sp: "Kim", en: "We don't sell to retailers that won't buy the entire size range.", zh: "我们不卖给不肯进全码段的零售商。" },
+        { sp: "Kim", en: "You have to carry the full size range and you can't separate them.", zh: "你必须全码段进货，不能拆开卖。" },
+        { sp: "Kim", en: "There's no plus size section or petite section — it's one section, and if people don't agree to that, they can't carry the brand.", zh: "没有大码区、小码区——就是一个区。不同意这个原则，就别想代理这个品牌。" }
       ],
-      key: "Here's the deal.",
-      why: "Here's the deal 是摊牌开场白——先宣布「我要讲真话了」，再给结论，对方会立刻竖耳朵。职场谈判、给建议都适用，比 Listen 更有分量。",
-      alt: ["Let's cut to the chase", "The bottom line is…"]
+      key: "If you don't agree to that, you can't carry the brand",
+      why: "教科书级亮底线：先说不卖什么（We don't sell to...），再给规则（You have to...），最后给后果（you can't carry the brand）。carry（代理、在售）是商业英语的实质动词，full size range（全码段）是含金量高的名词词组——比简单的 don't accept 高出一整个台阶。",
+      alt: ["We don't sell to retailers that won't carry the full size range", "It's non-negotiable"],
+      words: [
+        { w: "retailer", zh: "零售商（名词）", tag: "名词" },
+        { w: "size range", zh: "尺码段（名词）", tag: "名词" },
+        { w: "non-negotiable", zh: "没得商量（形容词，强烈立场）", tag: "形容词" },
+        { w: "if you don't agree to that, you can't carry the brand", zh: "不同意就没资格代理（观点表达）", tag: "观点" }
+      ]
     },
     {
-      id: "E03", show: "查理成长日记", ep: "S01E09", chars: ["老爸", "孩子们"], dim: 2,
-      situation: "老爸要砍掉架着树屋的树枝，孩子们不答应——老爸用「等价交换」谈成了交易。",
+      id: "E03", show: "卡戴珊家族", ep: "S01E07", chars: ["Kris", "经纪人"], dim: 2,
+      situation: "两个女儿都在竞争 Vogue 封面，最后 Kim 拿到。Kris 既是经纪人又是妈妈，最难的就是开口跟 Kendall 说这件事。",
       dialogue: [
-        { sp: "老爸", en: "Dog goes in, branch comes off.", zh: "小狗进屋，树枝砍掉。" },
-        { sp: "老爸", en: "We got a deal?", zh: "我们成交不？" },
-        { sp: "孩子们", en: "We have a deal.", zh: "成交。" }
+        { sp: "Kris", en: "One of the things I don't like is delivering bad news, and on top of it, I'm their mom, which makes it worse.", zh: "当经纪人有很多事我不爱干，传达坏消息就是其中之一，而且我还是她们的妈妈，这就更难开口了。" },
+        { sp: "经纪人", en: "Who's going to be the one to tell her that Kim's getting the cover and not her?", zh: "谁来告诉她，封面给了 Kim 而不是她？" },
+        { sp: "Kris", en: "I don't want anybody to have their feelings hurt or be disappointed.", zh: "我不想让任何人伤心或失望。" }
       ],
-      key: "We got a deal?",
-      why: "谈判收尾的锁定句：提出交换条件后用 We got a deal? 确认，对方一旦答应就不好反悔——把口头承诺变成「已成交」。雅思 Part 2 讲谈判经历时这句点睛。",
-      alt: ["Shake hands on it", "Consider it done"]
+      key: "I don't want anybody to have their feelings hurt",
+      why: "传坏消息的经典话术：先表明立场（I don't want...），再谈正事。have their feelings hurt（让他们受伤）比 make them sad 精准得多——feelings hurt 是固定搭配，而 delivering bad news（传达坏消息）是职场高频名词短语。",
+      alt: ["Who's going to be the one to tell her?", "One of the things I don't like is delivering bad news"],
+      words: [
+        { w: "delivering bad news", zh: "传达坏消息（名词短语）", tag: "名词" },
+        { w: "have their feelings hurt", zh: "让他们受伤（固定搭配）", tag: "搭配" },
+        { w: "be the one to tell", zh: "由谁来说（观点表达）", tag: "观点" },
+        { w: "on top of it", zh: "更糟的是（递进连接）", tag: "短语" }
+      ]
     },
     {
-      id: "E04", show: "查理成长日记", ep: "S01E09", chars: ["老爸", "孩子们"], dim: 2,
-      situation: "孩子们想反悔重新商量，老爸一句「已经说定了」把话钉死——拍板之后不翻盘。",
+      id: "E04", show: "卡戴珊家族", ep: "S01E07", chars: ["Kendall", "Kris"], dim: 2,
+      situation: "Kendall 得知封面给了姐姐 Kim，没有半点不高兴——她认为这个封面给了「对的人」，还反过来安慰妈妈。",
       dialogue: [
-        { sp: "孩子们", en: "We changed our mind. We don't want to lose the treehouse after all.", zh: "我们改变主意了，我们一点也不想失去小树屋。" },
-        { sp: "老爸", en: "It's too late. I already shook hands on it.", zh: "太迟了，我都已经和别人说定了。" },
-        { sp: "孩子们", en: "Well, can we at least talk about this?", zh: "难道我们就不能再商量一下么？" }
+        { sp: "Kendall", en: "There's not an upset bone in my body because I think it went to the right person.", zh: "我浑身上下没有一根不高兴的骨头，因为我觉得这个封面给了对的人。" },
+        { sp: "Kendall", en: "Don't get me wrong, I would have been extremely honored and beyond excited to get this cover.", zh: "别误会，如果能拿到这个封面，我会无比荣幸、激动得要命。" },
+        { sp: "Kendall", en: "But I'm totally okay. I know I'll have another shot. Happy to give it up to my sister.", zh: "但我真的没关系。我知道以后还会有机会。我乐意把它让给我妹妹。" }
       ],
-      key: "I already shook hands on it.",
-      why: "shake hands on it 字面是「握手成交」，引申为「一言为定」。用来拒绝反悔特别有画面感——谈判桌上最怕的不是谈不拢，是谈成了又翻盘。",
-      alt: ["We've got a deal already", "A deal is a deal"]
+      key: "There's not an upset bone in my body",
+      why: "not an upset bone in my body（全身上下没有一根不高兴的骨头）是极具画面感的观点表达，比 I'm not angry 生动十倍。竞争落败后的体面退场：承认结果合理（it went to the right person）+ 表达风度（happy to give it up）——雅思 Part 3 谈 competition、fairness 的高分素材。",
+      alt: ["It went to the right person", "I'm happy to give it up to my sister"],
+      words: [
+        { w: "not an upset bone in my body", zh: "没有一根不高兴的骨头（观点表达）", tag: "观点" },
+        { w: "it went to the right person", zh: "给了对的人（体面退场的说法）", tag: "观点" },
+        { w: "shot", zh: "一次机会（名词，have another shot）", tag: "名词" },
+        { w: "beyond excited", zh: "激动不已（程度副词强化）", tag: "形容词" }
+      ]
     }
   ]
 };
 
-// ===== 生活口语课 · 单元3「把话说开」剧情学习单元（雅思 6.5+） =====
+// ===== 雅思 6.5+ 单元3「把话说开」剧情学习单元 =====
 const COURSE_DAILY_UNIT3 = {
+  level: "雅思 6.5+",
   task: "把话说开",
   icon: "💬",
   en: "addressing what's awkward",
@@ -214,7 +273,9 @@ const COURSE_DAILY_UNIT3 = {
       lines: [
         { p: "Address the elephant in the room", zh: "直面那个避而不谈的问题", use: "Let's address the elephant in the room: our sales are dropping." },
         { p: "Let's be honest about what's going on", zh: "我们诚实面对现状吧", use: "Let's be honest about what's going on — we're falling behind." },
-        { p: "I think we all know what this is about", zh: "我想我们都知道这是怎么回事", use: "I think we all know what this is about, so let's just say it." }
+        { p: "I think we all know what this is about", zh: "我想我们都知道这是怎么回事", use: "I think we all know what this is about, so let's just say it." },
+        { p: "Let's not beat around the bush", zh: "别绕弯子了", use: "Let's not beat around the bush — the numbers are going down." },
+        { p: "I'll cut to the chase", zh: "我直说了", use: "I'll cut to the chase: your idea needs a stronger plan." }
       ],
       risk: "需要勇气，但比装糊涂高效"
     },
@@ -224,7 +285,9 @@ const COURSE_DAILY_UNIT3 = {
       lines: [
         { p: "Sweep it under the rug", zh: "当没发生过，掩盖过去", use: "We can't just sweep this under the rug and pretend it's fine." },
         { p: "Let's just move past it", zh: "算了，翻篇吧", use: "Let's just move past it — no point rehashing." },
-        { p: "Don't bring that up again", zh: "别再提那事了", use: "Don't bring that up again — it's water under the bridge." }
+        { p: "Don't bring that up again", zh: "别再提那事了", use: "Don't bring that up again — it's water under the bridge." },
+        { p: "Let sleeping dogs lie", zh: "别去捅马蜂窝（旧事莫提）", use: "I know you want closure, but sometimes it's better to let sleeping dogs lie." },
+        { p: "Out of sight, out of mind", zh: "眼不见，心不烦", use: "He moved out last month — out of sight, out of mind." }
       ],
       risk: "口语场景常见；雅思里可用作对比（有人逃避 vs 有人直面）"
     },
@@ -234,7 +297,9 @@ const COURSE_DAILY_UNIT3 = {
       lines: [
         { p: "Talk it out", zh: "把话说开，谈清楚", use: "We need to talk it out before it gets worse." },
         { p: "Clear the air", zh: "把气氛缓和、把话说透", use: "Let's clear the air — I didn't mean to offend you." },
-        { p: "Get to the bottom of this", zh: "把这件事的根源弄清楚", use: "We should get to the bottom of this instead of guessing." }
+        { p: "Get to the bottom of this", zh: "把这件事的根源弄清楚", use: "We should get to the bottom of this instead of guessing." },
+        { p: "Let's hash it out", zh: "我们把话说透", use: "We've been avoiding this for weeks — let's hash it out today." },
+        { p: "We need to have a heart-to-heart", zh: "我们得开诚布公谈一次", use: "Before it gets worse, we need to have a heart-to-heart." }
       ],
       risk: "解决问题导向，比 argue 高级"
     }
@@ -249,7 +314,12 @@ const COURSE_DAILY_UNIT3 = {
       ],
       key: "Address the elephant in the room.",
       why: "elephant in the room = 大家心知肚明却避而不谈的事（大象太大反而没人看得到）。address it 就是主动点破。雅思 Part 3 谈社会问题、团队矛盾时，这句一出口就是 7 分词汇。",
-      alt: ["Let's be honest about what's going on", "I think we all know what this is about"]
+      alt: ["Let's be honest about what's going on", "I think we all know what this is about"],
+      words: [
+        { w: "elephant in the room", zh: "明摆着却没人提的问题（名词习语）", tag: "名词" },
+        { w: "address the issue", zh: "直面问题（动词 address 的正式用法）", tag: "动词" },
+        { w: "huddle up", zh: "围拢过来（团队召集的说法）", tag: "短语" }
+      ]
     },
     {
       id: "T02", show: "摩登家庭", ep: "S01E05", chars: ["Gloria", "对方"], dim: 1,
@@ -261,7 +331,12 @@ const COURSE_DAILY_UNIT3 = {
       ],
       key: "Sweep it under the rug.",
       why: "sweep it under the rug 字面「扫到地毯底下」= 掩盖问题。用在这里很妙：Gloria 建议逃避，对方拒绝——两种处理冲突本身就是好素材。雅思谈 conflict 时，可以用这对反义词组撑起一段对比。",
-      alt: ["Let's just move past it", "Don't bring that up again"]
+      alt: ["Let's just move past it", "Don't bring that up again"],
+      words: [
+        { w: "sweep it under the rug", zh: "掩盖问题（名词习语）", tag: "名词" },
+        { w: "the worst thing you could do", zh: "你最不该做的事（强烈否定观点）", tag: "观点" },
+        { w: "sweeper", zh: "忍气吞声的人（口语化名词）", tag: "名词" }
+      ]
     },
     {
       id: "T03", show: "摩登家庭", ep: "S01E05", chars: ["对方", "另一方"], dim: 2,
@@ -273,7 +348,12 @@ const COURSE_DAILY_UNIT3 = {
       ],
       key: "Talk it out.",
       why: "talk it out = 用对话把矛盾消化掉，比 argue（吵）高级在「解决问题导向」。对话里的僵局（一方想谈、一方拒绝）正好展示这个词的语境力量。",
-      alt: ["Clear the air", "Get to the bottom of this"]
+      alt: ["Clear the air", "Get to the bottom of this"],
+      words: [
+        { w: "talk it out", zh: "把话说开（解决问题导向的动词短语）", tag: "短语" },
+        { w: "Whose side are you on?", zh: "你到底站哪边？（立场质问）", tag: "句型" },
+        { w: "the one with the problem", zh: "有问题的那个人（指认说法）", tag: "名词" }
+      ]
     },
     {
       id: "T04", show: "摩登家庭", ep: "S01E04", chars: ["Claire", "妈妈"], dim: 2,
@@ -285,10 +365,29 @@ const COURSE_DAILY_UNIT3 = {
       ],
       key: "Don't get me wrong.",
       why: "don't get me wrong = 先给「我要说的话可能被误解」打预防针，再澄清。雅思口语里用它引出观点很自然：Don't get me wrong, I'm not against technology — I just think we need balance. 既显真诚又有结构。",
-      alt: ["Let me clarify", "To be clear, what I mean is…"]
+      alt: ["Let me clarify", "To be clear, what I mean is…"],
+      words: [
+        { w: "Don't get me wrong", zh: "别误会（澄清型观点表达）", tag: "观点" },
+        { w: "didn't see that coming", zh: "没想到会这样（口语习语）", tag: "短语" },
+        { w: "clarify", zh: "澄清（动词，正式表达）", tag: "动词" }
+      ]
     }
   ]
 };
+
+// 句型总表（完成页/查阅用 · 跨单元精华表达）
+const COURSE_DAILY_SKELETONS = [
+  { order: 1, emotion: "弱", key: "It's just that…", example: "She trusts you. It's just that weird stuff happens at concerts.", source: "摩登家庭 S01E04", dim: "软化开场" },
+  { order: 2, emotion: "弱", key: "I wouldn't say…", example: "Well, I wouldn't say too much time.", source: "查理成长日记 S01E02", dim: "礼貌否定" },
+  { order: 3, emotion: "弱", key: "I would love to, but…", example: "I would love to come, but I can't this weekend.", source: "卡戴珊家族 S01E02", dim: "先扬后抑" },
+  { order: 4, emotion: "中等", key: "I can do this one on my own", example: "I feel like I can do this one on my own.", source: "卡戴珊家族 S01E07", dim: "争取掌控" },
+  { order: 5, emotion: "中等", key: "We don't sell to retailers that…", example: "We don't sell to retailers that won't buy the entire size range.", source: "卡戴珊家族 S01E09", dim: "亮底线" },
+  { order: 6, emotion: "中等", key: "I don't want anybody to have their feelings hurt", example: "I don't want anybody to have their feelings hurt or be disappointed.", source: "卡戴珊家族 S01E07", dim: "传坏消息" },
+  { order: 7, emotion: "强", key: "There's not an upset bone in my body", example: "There's not an upset bone in my body because I think it went to the right person.", source: "卡戴珊家族 S01E07", dim: "传坏消息" },
+  { order: 8, emotion: "中等", key: "Address the elephant in the room", example: "I think we should address the elephant in the room.", source: "摩登家庭 S01E05", dim: "点破" },
+  { order: 9, emotion: "中等", key: "Sweep it under the rug", example: "Just sweep it under the rug.", source: "摩登家庭 S01E05", dim: "掩盖" },
+  { order: 10, emotion: "中等", key: "Talk it out", example: "I think you two need to talk it out.", source: "摩登家庭 S01E05", dim: "谈开" }
+];
 
 // 全部单元（地图/学习流共用）
 const COURSE_DAILY_UNITS = [COURSE_DAILY_UNIT1, COURSE_DAILY_UNIT2, COURSE_DAILY_UNIT3];

@@ -1,2 +1,5 @@
 *.bak
 *.pre-datajs
+_shots/
+land_course_v8.py
+_build_shots.py
