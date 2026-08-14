@@ -474,6 +474,37 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
 .dlq-word{font-size:14px;padding:10px 14px;border-radius:10px;border:1px solid #CECBF6;background:#EEEDFE;color:#3C3489;cursor:pointer}
 .dlq-word.sel{background:#E1F5EE;border-color:#1D9E75;color:#0F6E56}
 .dlg-sub{font-size:12.5px;color:#8892A0;margin-bottom:16px}
+.sc-intro{background:#fff;border:1px solid #EDEAE0;border-radius:18px;padding:24px;text-align:center}
+.sc-intro-ico{font-size:40px;margin-bottom:8px}
+.sc-intro-title{font-size:20px;font-weight:500;color:#2C2C2A}
+.sc-intro-desc{font-size:13.5px;color:#4A4A42;line-height:1.8;margin:10px 0;text-align:left;background:#FDFBF4;border-radius:10px;padding:12px 14px}
+.sc-intro-shows{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.sc-show-chip{font-size:12px;color:#534AB7;background:#EEEDFE;border-radius:16px;padding:4px 12px}
+.sc-intro-count{font-size:12px;color:#8892A0}
+.sc-card{background:#fff;border:1px solid #EDEAE0;border-radius:16px;padding:18px}
+.sc-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.sc-src{font-size:12px;color:#854F0B;background:#FAEEDA;border-radius:8px;padding:4px 10px}
+.sc-role{font-size:12px;color:#534AB7;background:#EEEDFE;border-radius:8px;padding:4px 10px}
+.sc-dim{font-size:11.5px;color:#0F6E56;background:#E1F5EE;border-radius:8px;padding:4px 10px;margin-left:auto}
+.sc-situation{font-size:13px;color:#4A4A42;background:#FDFBF4;border:1px dashed #F0E6CC;border-radius:10px;padding:10px 12px;margin-bottom:12px;line-height:1.7}
+.sc-dialogue{background:#FAFAF7;border:1px solid #EDEAE0;border-radius:12px;padding:12px 14px;margin-bottom:12px}
+.sc-line{display:flex;gap:10px;padding:7px 0}
+.sc-sp{flex:0 0 52px;font-size:12px;font-weight:500;color:#534AB7;padding-top:2px}
+.sc-en{font-size:14px;color:#2C2C2A;line-height:1.65}
+.sc-zh{font-size:12.5px;color:#5A6B7A;margin-top:2px;line-height:1.6}
+.sc-hl{background:#FBE9C9;color:#633806;font-weight:500;border-radius:4px;padding:0 3px}
+.sc-why{background:#EEEDFE;border:1px solid #CECBF6;border-radius:10px;padding:10px 14px;font-size:12.5px;color:#3C3489;line-height:1.8;margin-bottom:10px}
+.sc-alt{font-size:12px;color:#4A4A42}
+.sc-alt-chip{font-size:12px;color:#0F6E56;background:#E1F5EE;border-radius:14px;padding:4px 10px}
+.sc-dims-desc{font-size:13px;color:#4A4A42;background:#FDFBF4;border-radius:10px;padding:10px 14px;margin-bottom:12px;line-height:1.7}
+.sc-dim-card{background:#fff;border:1px solid #EDEAE0;border-radius:14px;padding:16px;margin-bottom:12px}
+.sc-dim-head{font-size:14px;font-weight:500;color:#2C2C2A;margin-bottom:4px}
+.sc-dim-exp{font-size:12px;color:#8892A0;font-weight:400}
+.sc-dim-line{padding:8px 0;border-bottom:1px dashed #F1EFE8}
+.sc-dim-p{font-size:13.5px;color:#3C3489;font-weight:500;margin-right:8px}
+.sc-dim-zh{font-size:12.5px;color:#7F77DD}
+.sc-dim-use{font-size:12px;color:#5A6B7A;margin-top:3px;line-height:1.6}
+.sc-dim-risk{font-size:11.5px;color:#A32D2D;margin-top:8px}
 .dlg-map{display:flex;flex-direction:column;gap:18px;padding:6px 0 10px}
 .dlg-node-wrap{position:relative}
 .dlg-link{position:absolute;top:-20px;left:90px;width:2px;height:20px;background:#D3D1C7}
@@ -1116,169 +1147,116 @@ function renderLibrary(){
 }
 
 // ===================== Detail Panel =====================
-// ===== 生活口语课 · 单元1「委婉反驳」语料卡（卡片版 · 一卡一关键说法）=====
-// schema: meta / key(关键说法) / dialogue(原台词,含高亮) / explain(解释:core核心短语+desc)
-//         / extends(同类说法) / apply(应用:core+example) / tags(emotion·formality·risk) / practice
-// 卡片序列 order 已按「情绪强度弱→强 + 来源穿插」人工排定（美剧3 + 真人秀2）
+// ===== 生活口语课 · 单元1「委婉反驳」剧情学习单元 =====
+// 结构：intro(开场) / shows(剧集来源) / dims(不同维度的观点表达) / scenes(剧情场景序列)
+// 学习体验 = 看剧学：每个场景 = 一段真实台本对话 + 情境 + 好在哪 + 同维度说法
 
-const COURSE_DAILY_UNIT1 = [
-  {
-    id: "D01", task: "委婉反驳", order: 1,
-    meta: { type: "tv_drama", show: "摩登家庭", ep: "S01E04", chars: ["Phil", "Alex"] },
-    key: "It's just that…",
-    dialogue: [
-      { sp: "Alex", en: "Mom just doesn't trust me, and it's not fair.", zh: "妈妈就是不相信我，这不公平。" },
-      { sp: "Phil", en: "She trusts you. It's just that weird stuff happens at concerts.", zh: "她相信你，只是演唱会那地方太容易出乱子。" }
-    ],
-    explain: {
-      core: "先肯定，再补一刀",
-      desc: "不直接说对方错了——先给个台阶（She trusts you），再用 it's just that 引出真实原因。反驳的刀藏在软垫后面。"
+const COURSE_DAILY_UNIT1 = {
+  task: "委婉反驳",
+  icon: "💬",
+  en: "polite disagreement",
+  intro: "这一关，我们从 4 部剧 5 个场景学「委婉反驳」——看看每个角色，是怎么把「不」说得让人舒服的。",
+  shows: ["摩登家庭", "查理成长日记", "卡戴珊家族"],
+  dims: [
+    {
+      name: "软化开场", ico: "🪶",
+      exp: "先把对方的话接住，再轻轻转向——不硬顶，留余地：",
+      lines: [
+        { p: "It's just that…", zh: "只是……（引出真实原因）", use: "She trusts you. It's just that weird stuff happens at concerts." },
+        { p: "The thing is…", zh: "重点是……", use: "The thing is, we can't afford it right now." },
+        { p: "It's not that…, it's just that…", zh: "不是……而是……（澄清误会）", use: "It's not that I don't like him, it's just that we never click." }
+      ],
+      risk: "家庭、朋友之间最常用"
     },
-    extends: [
-      { p: "The thing is…", zh: "重点是……（引出真正原因）" },
-      { p: "It's not that…, it's just that…", zh: "不是……而是……（澄清误会）" }
-    ],
-    order_sentence: "It's just that weird stuff happens.",
-    cloze_en: "She trusts you. ___ weird stuff happens at concerts.",
-    apply: {
-      core: "有保留地说出不同意见",
-      example: "I don't mean to criticize, it's just that the budget needs more thought. 我不是想挑刺，只是预算这块还得再想想。",
-      where: "雅思 Part 3 表达反对意见时，比 I disagree 高级；生活里圆场必备。"
+    {
+      name: "礼貌否定", ico: "🙂",
+      exp: "不正面冲突，只表达「我这么看跟你不太一样」：",
+      lines: [
+        { p: "I wouldn't say…", zh: "我倒不觉得……", use: "I wouldn't say too much time." },
+        { p: "I'm not sure I'd agree with that", zh: "这个我倒不一定认同", use: "I'm not sure I'd agree with that, honestly." },
+        { p: "I see it a bit differently", zh: "我看得稍微有点不一样", use: "I see it a bit differently, but I get your point." }
+      ],
+      risk: "同事、朋友间得体"
     },
-    tags: { emotion: "弱", formality: "informal-family", risk: "家庭对话场景，正式写作/考场慎用" },
-    practice: {
-      cloze: { prompt: "她不是不信任你，只是演唱会那地方容易出乱子。", answer: "It's just that", distractors: ["Just because", "Only if", "Even though"] },
-      rewrite: "爸爸没批评你乱花钱，只是希望你先存一笔应急金——用 It's just that 替他圆场。"
+    {
+      name: "先扬后抑", ico: "🎀",
+      exp: "先给足热情，再讲实际难处——拒绝不伤人：",
+      lines: [
+        { p: "I would love to, but…", zh: "我很想去，但是……", use: "I would love to come, but I can't this weekend." },
+        { p: "I wish I could, but…", zh: "我倒希望我能，但是……", use: "I wish I could help, but I'm swamped this week." },
+        { p: "I'd really like to, but…", zh: "我真的很想，但是……", use: "I'd really like to join, but I've got other plans." }
+      ],
+      risk: "拒绝邀约、婉拒请求"
     }
-  },
-  {
-    id: "D02", task: "委婉反驳", order: 2,
-    meta: { type: "tv_drama", show: "查理成长日记", ep: "S01E02", chars: ["奶奶", "妈妈"] },
-    key: "I wouldn't say…",
-    dialogue: [
-      { sp: "奶奶", en: "You spent a little too much time with Charlie, and you're ready to hand her over early.", zh: "你一定是照顾Charlie时间太长了，然后想早点把她交给我吧。" },
-      { sp: "妈妈", en: "Well, I wouldn't say too much time.", zh: "这个，其实也不能算是时间太长了吧。" },
-      { sp: "奶奶", en: "Well, I am ready too, so let me at her.", zh: "不过我也想接手了，所以还是我来照看她吧。" }
-    ],
-    explain: {
-      core: "我不觉得，但我不说你错",
-      desc: "I wouldn't say 是把对方的判断轻轻拨开——不正面否认，只是表达自己没这么看。比 No 柔和，比沉默有立场。"
+  ],
+  scenes: [
+    {
+      id: "D01", show: "摩登家庭", ep: "S01E04", chars: ["Phil", "Alex"], dim: 0,
+      situation: "Alex 抱怨妈妈不信任她，Phil 当和事佬——先肯定，再替妻子找补。",
+      dialogue: [
+        { sp: "Alex", en: "Mom just doesn't trust me, and it's not fair.", zh: "妈妈就是不相信我，这不公平。" },
+        { sp: "Phil", en: "She trusts you. It's just that weird stuff happens at concerts.", zh: "她相信你，只是演唱会那地方太容易出乱子。" }
+      ],
+      key: "It's just that…",
+      why: "Phil 没说 Alex 错了，先给台阶（She trusts you），再用 It's just that 引出真实原因——反驳不伤人，还显得通情达理。",
+      alt: ["The thing is…", "It's not that…, it's just that…"]
     },
-    extends: [
-      { p: "I'm not sure I'd agree with that", zh: "这个我倒不一定认同" },
-      { p: "I see it a bit differently", zh: "我看得稍微有点不一样" }
-    ],
-    order_sentence: "I wouldn't say too much time.",
-    cloze_en: "Well, ___ too much time.",
-    apply: {
-      core: "礼貌地不认同对方的定性",
-      example: "同事说这方案太冒险——I wouldn't say risky, I'd say bold. 我不觉得冒险，我觉得是有魄力。",
-      where: "职场/朋友间被贴标签时，先拨开标签再给理由。"
+    {
+      id: "D02", show: "查理成长日记", ep: "S01E02", chars: ["奶奶", "妈妈"], dim: 1,
+      situation: "奶奶调侃妈妈照顾宝宝太久、急着甩手，妈妈笑着软顶回去。",
+      dialogue: [
+        { sp: "奶奶", en: "You spent a little too much time with Charlie, and you're ready to hand her over early.", zh: "你一定是照顾Charlie时间太长了，然后想早点把她交给我吧。" },
+        { sp: "妈妈", en: "Well, I wouldn't say too much time.", zh: "这个，其实也不能算是时间太长了吧。" }
+      ],
+      key: "I wouldn't say…",
+      why: "不否认奶奶的说法，只表达「我可不这么看」——I wouldn't say 把反驳轻轻拨开，一点火药味都没有。",
+      alt: ["I'm not sure I'd agree with that", "I see it a bit differently"]
     },
-    tags: { emotion: "弱", formality: "informal-family", risk: "家庭拌嘴用语，考试不适用" },
-    practice: {
-      cloze: { prompt: "其实也不能算是时间太长了吧。", answer: "I wouldn't say", distractors: ["I don't say", "I won't say", "I can't say"] },
-      rewrite: "同事说你这个方案太冒险，你不完全认同——用 I wouldn't say 回应。"
+    {
+      id: "D03", show: "查理成长日记", ep: "S01E01", chars: ["Charlie", "妈妈"], dim: 0,
+      situation: "小孩想问一个可能冒犯的问题，先给妈妈打预防针。",
+      dialogue: [
+        { sp: "Charlie", en: "Mom, don't take this the wrong way, but why did you guys have to have another baby?", zh: "妈妈，别误会我的意思，但你们为什么非得生第四个宝宝呢？" },
+        { sp: "妈妈", en: "Well, because three kids was just too easy.", zh: "那个嘛，因为三个孩子太好养了。（反讽）" }
+      ],
+      key: "Don't take this the wrong way, but…",
+      why: "明知要说的话可能冒犯，先上缓冲——把话的刺包起来再递出去，对方听到的是问题，不是指责。",
+      alt: ["I mean this in the nicest way…", "No offense, but…"]
+    },
+    {
+      id: "D04", show: "卡戴珊家族", ep: "S01E02", chars: ["Kim", "对方"], dim: 2,
+      situation: "Kim 想接下合作邀约，但条件不允许，先表达热情再讲难处。",
+      dialogue: [
+        { sp: "Kim", en: "I would love to come and do a skit with you more than anything, but I feel like I can't go with Scott this weekend.", zh: "我特别特别想过去跟你一起演个小品，但我觉得这个周末我没法跟斯科特一起去。" },
+        { sp: "对方", en: "Yeah, and we already invited him. I feel bad. I would totally disinvite for you.", zh: "对，而且我们已经邀请他了。我觉得挺不好意思的。我完全愿意为你把他推掉。" },
+        { sp: "Kim", en: "No, I know, but I feel bad disinviting him.", zh: "不，我知道，但我觉得把人家推掉不太好。" }
+      ],
+      key: "I would love to, but…",
+      why: "拒绝的公式：I would love to（热情）→ but（难处）。对方先吃到糖再听到拒绝，不会觉得被敷衍。",
+      alt: ["I wish I could, but…", "I'd really like to, but…"]
+    },
+    {
+      id: "D05", show: "卡戴珊家族", ep: "S01E06", chars: ["Kim", "对方"], dim: 2,
+      situation: "生日被漏请，Kim 直接质问，对方解释后她摆事实跟进——情绪升级版的反驳。",
+      dialogue: [
+        { sp: "Kim", en: "Why didn't you invite me to your birthday?", zh: "你为什么不邀请我参加你的生日？" },
+        { sp: "对方", en: "I didn't really invite anyone to my birthday.", zh: "我本来就没请任何人来我的生日。" },
+        { sp: "Kim", en: "She didn't even have a dinner. She had a birthday party at a club.", zh: "她根本没办生日晚宴，她是在夜店办的生日派对。" }
+      ],
+      key: "Why didn't you…?",
+      why: "三步推进的强反驳：质问 → 听解释 → 摆事实推翻（didn't even…）。情绪升级，但逻辑还在——熟人之间才这么用。",
+      alt: ["How come you didn't…?", "You could've at least…"]
     }
-  },
-  {
-    id: "D03", task: "委婉质疑", order: 3,
-    meta: { type: "tv_drama", show: "查理成长日记", ep: "S01E01", chars: ["Charlie", "妈妈"] },
-    key: "Don't take this the wrong way, but…",
-    dialogue: [
-      { sp: "Charlie", en: "Mom, don't take this the wrong way, but why did you guys have to have another baby?", zh: "妈妈，别误会我的意思，但你们为什么非得生第四个宝宝呢？" },
-      { sp: "妈妈", en: "Well, because three kids was just too easy.", zh: "那个嘛，因为三个孩子太好养了。（反讽）" }
-    ],
-    explain: {
-      core: "先说别误会，再开口",
-      desc: "明知要说的话可能冒犯，先给一句缓冲——把话的刺包起来再递出去。对方听到的是问题，不是指责。"
-    },
-    extends: [
-      { p: "I mean this in the nicest way…", zh: "我是好意说的……" },
-      { p: "No offense, but…", zh: "无意冒犯，但是……" }
-    ],
-    order_sentence: "Don't take this the wrong way, but why?",
-    cloze_en: "Mom, ___, but why did you have another baby?",
-    apply: {
-      core: "给可能冒犯的话加保险",
-      example: "Don't take this the wrong way, but I think your idea needs a backup plan. 别误会我的意思，不过我觉得你的方案得有个备选。",
-      where: "给朋友/同事提尖锐意见前，先上缓冲。注意：还是有点冒犯性，只对亲近的人用。"
-    },
-    tags: { emotion: "弱-中等", formality: "informal-family", risk: "带点冒犯性，仅限亲近的人，考场禁用" },
-    practice: {
-      cloze: { prompt: "别误会我的意思，但我觉得这个方案行不通。", answer: "Don't take this the wrong way", distractors: ["Don't put it this way", "Don't say it this way", "Don't make it wrong"] },
-      rewrite: "想给室友提意见但又怕伤感情——用这句缓冲。"
-    }
-  },
-  {
-    id: "D04", task: "委婉拒绝", order: 4,
-    meta: { type: "reality_show", show: "卡戴珊家族", ep: "S01E02", chars: ["Kim", "对方"] },
-    key: "I would love to, but…",
-    dialogue: [
-      { sp: "Kim", en: "I would love to come and do a skit with you more than anything, but I feel like I can't go with Scott this weekend.", zh: "我特别特别想过去跟你一起演个小品，但我觉得这个周末我没法跟斯科特一起去。" },
-      { sp: "对方", en: "Yeah, and we already invited him. I feel bad. I would totally disinvite for you.", zh: "对，而且我们已经邀请他了。我觉得挺不好意思的。我完全愿意为你把他推掉。" },
-      { sp: "Kim", en: "No, I know, but I feel bad disinviting him.", zh: "不，我知道，但我觉得把人家推掉不太好。" }
-    ],
-    explain: {
-      core: "先给热情，再讲难处",
-      desc: "拒绝的公式：I would love to（热情）→ but（难处）。对方先吃到糖，再听到拒绝，不会觉得被敷衍。"
-    },
-    extends: [
-      { p: "I'd really like to, but…", zh: "我真的很想去，但是……" },
-      { p: "I wish I could, but…", zh: "我倒是希望我能去，但是……" }
-    ],
-    order_sentence: "I would love to, but I can't this weekend.",
-    cloze_en: "___ come, but I can't this weekend.",
-    apply: {
-      core: "拒绝邀约而不伤感情",
-      example: "I would love to come to your party, but I have to finish a report tonight. 我特别想去你的派对，但今晚得赶完报告。",
-      where: "朋友邀约/同事搭伙，先扬后抑最得体。"
-    },
-    tags: { emotion: "弱", formality: "informal-friend", risk: "朋友间客套话，面试等正式场合慎用" },
-    practice: {
-      cloze: { prompt: "我特别想去你的派对，但今晚我得加班。", answer: "I would love to", distractors: ["I would like it", "I want to love", "I'd love it that"] },
-      rewrite: "朋友邀你周末露营，你有事去不了——用这个句式先扬后抑。"
-    }
-  },
-  {
-    id: "D05", task: "抱怨式反驳", order: 5,
-    meta: { type: "reality_show", show: "卡戴珊家族", ep: "S01E06", chars: ["Kim", "对方"] },
-    key: "Why didn't you…?",
-    dialogue: [
-      { sp: "Kim", en: "Why didn't you invite me to your birthday?", zh: "你为什么不邀请我参加你的生日？" },
-      { sp: "对方", en: "I didn't really invite anyone to my birthday.", zh: "我本来就没请任何人来我的生日。" },
-      { sp: "Kim", en: "She didn't even have a dinner. She had a birthday party at a club.", zh: "她根本没办生日晚宴，她是在夜店办的生日派对。" }
-    ],
-    explain: {
-      core: "质问开场，摆事实跟进",
-      desc: "三步推进的强反驳：Why didn't you（质问）→ 对方解释 → 摆事实推翻（didn't even…）。情绪升级，但逻辑还在。"
-    },
-    extends: [
-      { p: "How come you didn't…?", zh: "你怎么没……？（口语质问）" },
-      { p: "You could've at least…", zh: "你至少也该……（不满）" }
-    ],
-    order_sentence: "Why didn't you tell me earlier?",
-    cloze_en: "___ invite me to your birthday?",
-    apply: {
-      core: "熟人之间直接表达不满",
-      example: "Why didn't you tell me earlier? I could've helped. 你为什么不早点告诉我？我本来能帮忙的。",
-      where: "只对熟人用，情绪浓度高；考场/职场禁用。"
-    },
-    tags: { emotion: "中等", formality: "informal-family", risk: "带情绪质问，仅限熟人场合，考场禁用" },
-    practice: {
-      cloze: { prompt: "你为什么不早点告诉我？", answer: "Why didn't you", distractors: ["Why you didn't", "Why not you", "Why haven't you been"] },
-      rewrite: "室友没喊你一起拼单，你有点不高兴——用 Why didn't you 开场。"
-    }
-  }
-];
+  ]
+};
 
-// 句型总表（页底查阅用，按情绪强度 弱→强 机械排序）
+// 句型总表（完成页/查阅用 · 情绪弱→强）
 const COURSE_DAILY_SKELETONS = [
-  { order: 1, emotion: "弱", key: "It's just that…", example: "She trusts you. It's just that weird stuff happens at concerts.", source: "摩登家庭 S01E04", card: "D01" },
-  { order: 2, emotion: "弱", key: "I wouldn't say…", example: "Well, I wouldn't say too much time.", source: "查理成长日记 S01E02", card: "D02" },
-  { order: 3, emotion: "弱-中等", key: "Don't take this the wrong way, but…", example: "Mom, don't take this the wrong way, but why…?", source: "查理成长日记 S01E01", card: "D03" },
-  { order: 4, emotion: "弱", key: "I would love to, but…", example: "I would love to come, but I feel like I can't this weekend.", source: "卡戴珊家族 S01E02", card: "D04" },
-  { order: 5, emotion: "中等", key: "Why didn't you…?", example: "Why didn't you invite me? … She didn't even have a dinner.", source: "卡戴珊家族 S01E06", card: "D05" }
+  { order: 1, emotion: "弱", key: "It's just that…", example: "She trusts you. It's just that weird stuff happens at concerts.", source: "摩登家庭 S01E04", dim: "软化开场" },
+  { order: 2, emotion: "弱", key: "I wouldn't say…", example: "Well, I wouldn't say too much time.", source: "查理成长日记 S01E02", dim: "礼貌否定" },
+  { order: 3, emotion: "弱-中等", key: "Don't take this the wrong way, but…", example: "Mom, don't take this the wrong way, but why…?", source: "查理成长日记 S01E01", dim: "软化开场" },
+  { order: 4, emotion: "弱", key: "I would love to, but…", example: "I would love to come, but I can't this weekend.", source: "卡戴珊家族 S01E02", dim: "先扬后抑" },
+  { order: 5, emotion: "中等", key: "Why didn't you…?", example: "Why didn't you invite me? … She didn't even have a dinner.", source: "卡戴珊家族 S01E06", dim: "先扬后抑" }
 ];
 
 
@@ -1532,147 +1510,116 @@ function courseUnitDone(){
 function saveUnitDone(stars){
   try{ localStorage.setItem("wb_course_unit1", JSON.stringify({done:true, stars:stars})); }catch(e){}
 }
-// ===================== 多邻国式关卡（单元=闯关：10题混合题型） =====================
-var qList=[], qIndex=0, qCorrect=0, qCombo=0, orderSel=[], orderWords=[], orderAnsStr="";
-function openUnit(i){ buildUnitQuiz(); renderUnitQ(); }
-function buildUnitQuiz(){
-  const cards=COURSE_DAILY_UNIT1;
-  qList=[];
-  const pairs=[[0,3],[1,3],[2,0],[1,2],[0,1]];
-  cards.forEach(function(card,ci){
-    const pair=pairs[ci%pairs.length];
-    pair.forEach(function(t){ const q=makeUnitQ(card,t); if(q) qList.push(q); });
-  });
-  qList=shuffleArr(qList);
-  qIndex=0; qCorrect=0; qCombo=0;
-}
-function makeUnitQ(card,t){
-  if(t===0){
-    const all=COURSE_DAILY_UNIT1.map(function(x){return x.explain.core;});
-    const wrongs=shuffleArr(all.filter(function(x){return x!==card.explain.core;})).slice(0,3);
-    return {type:"en-zh", card:card, q:card.apply.example, opts:shuffleArr([card.explain.core].concat(wrongs)), ans:card.explain.core, tip:"这句英文，核心含义是？"};
-  }
-  if(t===1){
-    return {type:"zh-en", card:card, q:card.practice.cloze.prompt, opts:shuffleArr([card.key].concat(card.practice.cloze.distractors)), ans:card.key, tip:"这句中文，剧里会怎么说？"};
-  }
-  if(t===2){
-    return {type:"cloze", card:card, q:card.cloze_en, opts:shuffleArr([card.practice.cloze.answer].concat(card.practice.cloze.distractors)), ans:card.practice.cloze.answer, tip:card.practice.cloze.prompt};
-  }
-  if(t===3){
-    return {type:"order", card:card, q:card.order_sentence, ans:card.order_sentence, tip:"把单词排成一句完整的英文"};
-  }
-  return null;
-}
-function renderUnitQ(){
-  const c=document.getElementById("learnCourse");
+// ===================== 剧情学习流（看剧学表达 · 场景→维度→完成） =====================
+var sceneIdx = 0;
+function openUnit(i){ sceneIdx = 0; renderUnitIntro(); }
+function renderUnitIntro(){
+  const U = COURSE_DAILY_UNIT1;
+  const c = document.getElementById("learnCourse");
   if(!c) return;
-  const q=qList[qIndex];
-  if(!q) return;
-  const pct=Math.round(qIndex/qList.length*100);
-  const typeLabel=q.type==="en-zh"?"🔤 含义选择":q.type==="zh-en"?"💬 中译英":q.type==="cloze"?"✏️ 选词填空":"🧩 句子排序";
   c.innerHTML=''+
     '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
-      '<button class="q-btn ghost" onclick="renderCourseHome()">✕</button>'+
-      '<div class="dlq-ring"><svg viewBox="0 0 48 48" width="42" height="42"><circle cx="24" cy="24" r="20" fill="none" stroke="#F1EFE8" stroke-width="6"/><circle cx="24" cy="24" r="20" fill="none" stroke="#1D9E75" stroke-width="6" stroke-dasharray="125.6" stroke-dashoffset="'+Math.round(125.6*(1-qIndex/qList.length))+' " stroke-linecap="round" transform="rotate(-90 24 24)"/></svg></div>'+
-      '<div class="dlq-count" style="font-size:13px;font-weight:500">💬 委婉反驳 <span style="color:#8892A0;font-weight:400">'+(qIndex+1)+'/'+qList.length+'</span></div>'+
+      '<button class="q-btn ghost" onclick="renderCourseHome()">← 地图</button>'+
+      '<span class="filter-label">'+U.icon+' '+U.task+'</span>'+
     '</div>'+
-    '<div class="dlq-card">'+
-      '<div class="dlq-type">'+typeLabel+'</div>'+
-      '<div class="dlq-prompt">'+q.q+'</div>'+
-      '<div class="dlq-tip">'+q.tip+'</div>'+
-      (q.type==="order"
-        ? '<div class="dlq-order"><div class="dlq-order-ans" id="orderAns"></div><div class="dlq-order-pool" id="orderPool"></div></div>'
-        : '<div class="dlq-opts" id="dlqOpts">'+q.opts.map(function(o,i){return '<button class="dlq-opt" onclick="answerUnitQuiz(this)">'+o+'</button>';}).join("")+'</div>')+
-      '<div class="dlq-fb" id="dlqFb"></div>'+
+    '<div class="sc-intro">'+
+      '<div class="sc-intro-ico">'+U.icon+'</div>'+
+      '<div class="sc-intro-title">'+U.task+' <span style="color:#8892A0;font-weight:400">· '+U.en+'</span></div>'+
+      '<div class="sc-intro-desc">'+U.intro+'</div>'+
+      '<div class="sc-intro-shows">'+U.shows.map(function(s){return '<span class="sc-show-chip">📺 '+s+'</span>';}).join("")+'</div>'+
+      '<div class="sc-intro-count">共 '+U.scenes.length+' 个剧情场景 · 来自真实台本</div>'+
+      '<button class="q-btn reveal" style="width:100%;margin-top:14px;padding:13px" onclick="renderUnitScene()">▶ 开始看第 1 个场景</button>'+
     '</div>';
-  if(q.type==="order") startOrder(q);
 }
-function answerUnitQuiz(el){
-  const q=qList[qIndex];
-  const fb=document.getElementById("dlqFb");
-  const ok=el.textContent.trim()===q.ans.trim();
-  if(ok){ qCorrect++; qCombo++; } else { qCombo=0; }
-  document.querySelectorAll("#dlqOpts .dlq-opt").forEach(function(b){
-    if(b.textContent.trim()===q.ans.trim()){ b.style.background="#EDF7F0"; b.style.borderColor="#1D9E75"; }
-    if(b===el&&!ok){ el.style.background="#FCEBEB"; el.style.borderColor="#E24B4A"; }
-  });
-  const combo=qCombo>=2?' <b style="color:#854F0B">🔥 连击 x'+qCombo+'</b>':"";
-  const trap = ok ? "" : '<div class="dlq-trap">⚠️ 错因：<b>'+el.textContent+'</b> 是中式直译或语气不当的说法，母语者不这么用——记住这个坑，比记住答案更值钱。</div>';
-  fb.innerHTML='<div class="dlq-fb-box '+(ok?"ok":"bad")+'">'+(ok?"✅ 正确！"+combo:"❌ 正确答案：<b>"+q.ans+"</b>")+'</div>'+trap+
-    explainCardHtml(q.card)+
-    '<button class="q-btn reveal" style="width:100%;margin-top:12px" onclick="nextUnitQ()">'+(qIndex>=qList.length-1?"🏁 查看成绩":"下一题 →")+'</button>';
+function renderUnitScene(){
+  const U = COURSE_DAILY_UNIT1;
+  const c = document.getElementById("learnCourse");
+  if(!c) return;
+  const sc = U.scenes[sceneIdx];
+  if(!sc){ renderUnitDims(); return; }
+  const dim = U.dims[sc.dim];
+  const pct = Math.round(sceneIdx/U.scenes.length*100);
+  const dlg = sc.dialogue.map(function(d){
+    const hl = d.en.indexOf(sc.key.split("…")[0].split("?")[0].split(",")[0])!==-1;
+    return '<div class="sc-line"><span class="sc-sp">'+d.sp+'</span><div><div class="sc-en">'+(hl?'<span class="sc-hl">'+d.en+'</span>':d.en)+'</div><div class="sc-zh">'+d.zh+'</div></div></div>';
+  }).join("");
+  c.innerHTML=''+
+    '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
+      '<button class="q-btn ghost" onclick="openUnit(0)">← 重看开场</button>'+
+      '<div class="dlq-ring"><svg viewBox="0 0 48 48" width="42" height="42"><circle cx="24" cy="24" r="20" fill="none" stroke="#F1EFE8" stroke-width="6"/><circle cx="24" cy="24" r="20" fill="none" stroke="#1D9E75" stroke-width="6" stroke-dasharray="125.6" stroke-dashoffset="'+Math.round(125.6*(1-sceneIdx/U.scenes.length))+' " stroke-linecap="round" transform="rotate(-90 24 24)"/></svg></div>'+
+      '<div class="dlq-count" style="font-size:13px;font-weight:500">场景 '+(sceneIdx+1)+' / '+U.scenes.length+'</div>'+
+    '</div>'+
+    '<div class="sc-card">'+
+      '<div class="sc-head"><span class="sc-src">📺 '+sc.show+' '+sc.ep+'</span><span class="sc-role">'+sc.chars.join(' / ')+'</span><span class="sc-dim">'+dim.ico+' '+dim.name+'</span></div>'+
+      '<div class="sc-situation">🎬 情境：'+sc.situation+'</div>'+
+      '<div class="sc-dialogue">'+dlg+'</div>'+
+      '<div class="sc-why"><b>💡 这句好在哪</b><div>'+sc.why+'</div></div>'+
+      '<div class="sc-alt"><b>🔗 同维度换着说</b><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">'+sc.alt.map(function(a){return '<span class="sc-alt-chip">'+a+'</span>';}).join("")+'</div></div>'+
+    '</div>'+
+    '<button class="q-btn reveal" style="width:100%;margin-top:14px;padding:13px" onclick="nextScene()">'+(sceneIdx>=U.scenes.length-1?'✅ 场景看完 · 看维度总结':'✅ 看懂了，下一个场景 →')+'</button>';
 }
-function startOrder(q){
-  orderAnsStr=q.ans; orderSel=[]; orderWords=shuffleArr(q.ans.split(/\s+/));
-  paintOrder();
+function nextScene(){
+  const U = COURSE_DAILY_UNIT1;
+  sceneIdx++;
+  if(sceneIdx>=U.scenes.length){ renderUnitDims(); return; }
+  renderUnitScene();
 }
-function paintOrder(){
-  const a=document.getElementById("orderAns"), p=document.getElementById("orderPool");
-  if(!a||!p) return;
-  a.innerHTML=orderSel.length
-    ? orderSel.map(function(w,i){return '<button class="dlq-word sel" onclick="unpickOrder('+i+')">'+w+'</button>';}).join("")
-    : '<span class="dlq-order-hint">点下方单词组句</span>';
-  p.innerHTML=orderWords.map(function(w,i){return '<button class="dlq-word" onclick="pickOrder('+i+')">'+w+'</button>';}).join("");
-  if(orderWords.length===0&&orderSel.length>0){
-    const q=qList[qIndex];
-    const ok=orderSel.join(" ")===orderAnsStr;
-    if(ok){ qCorrect++; qCombo++; } else { qCombo=0; }
-    const combo=qCombo>=2?' <b style="color:#854F0B">🔥 连击 x'+qCombo+'</b>':"";
-    const fb=document.getElementById("dlqFb");
-    if(fb) fb.innerHTML='<div class="dlq-fb-box '+(ok?"ok":"bad")+'">'+(ok?"✅ 语序正确！"+combo:"❌ 正确答案：<b>"+orderAnsStr+"</b>")+'</div>'+
-      explainCardHtml(q.card)+
-      '<button class="q-btn reveal" style="width:100%;margin-top:12px" onclick="nextUnitQ()">'+(qIndex>=qList.length-1?"🏁 查看成绩":"下一题 →")+'</button>';
-  }
-}
-function pickOrder(i){ orderSel.push(orderWords[i]); orderWords.splice(i,1); paintOrder(); }
-function unpickOrder(i){ orderWords.push(orderSel[i]); orderSel.splice(i,1); paintOrder(); }
-function nextUnitQ(){
-  qIndex++;
-  if(qIndex>=qList.length){ finishUnit(); return; }
-  renderUnitQ();
+function renderUnitDims(){
+  const U = COURSE_DAILY_UNIT1;
+  const c = document.getElementById("learnCourse");
+  if(!c) return;
+  c.innerHTML=''+
+    '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
+      '<button class="q-btn ghost" onclick="openUnit(0)">← 地图</button>'+
+      '<span class="filter-label">🧭 不同维度的观点表达</span>'+
+    '</div>'+
+    '<div class="sc-dims-desc">同一个「委婉反驳」，有 '+U.dims.length+' 种打开方式——记住维度，就是记住了组织回答的骨架。</div>'+
+    U.dims.map(function(d,di){
+      return '<div class="sc-dim-card">'+
+        '<div class="sc-dim-head">'+d.ico+' '+d.name+' <span class="sc-dim-exp">'+d.exp+'</span></div>'+
+        d.lines.map(function(l){
+          return '<div class="sc-dim-line"><span class="sc-dim-p">'+l.p+'</span><span class="sc-dim-zh">'+l.zh+'</span>'+(l.use?'<div class="sc-dim-use">'+l.use+'</div>':"")+'</div>';
+        }).join("")+
+        '<div class="sc-dim-risk">⚠️ '+d.risk+'</div>'+
+      '</div>';
+    }).join("")+
+    '<div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">'+
+      '<button class="q-btn ghost" style="flex:1" onclick="renderSkelTable()">📋 句型总表</button>'+
+      '<button class="q-btn reveal" style="flex:1" onclick="finishUnit()">🏁 完成本关</button>'+
+    '</div>';
 }
 function finishUnit(){
-  const c=document.getElementById("learnCourse");
-  const acc=qCorrect/qList.length;
-  const stars=acc>=0.9?3:acc>=0.7?2:1;
-  saveUnitDone(stars);
+  const U = COURSE_DAILY_UNIT1;
+  const c = document.getElementById("learnCourse");
+  if(!c) return;
+  saveUnitDone(3);
   c.innerHTML=''+
     '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
-      '<button class="q-btn ghost" onclick="renderCourseHome()">← 单元列表</button>'+
-      '<span class="filter-label">💬 委婉反驳 · 完成</span>'+
+      '<button class="q-btn ghost" onclick="renderCourseHome()">← 地图</button>'+
+      '<span class="filter-label">'+U.icon+' '+U.task+' · 完成</span>'+
     '</div>'+
     '<div class="dlq-done">'+
-      '<div style="font-size:26px">🏁</div>'+
-      '<div style="font-size:20px;font-weight:500;margin:8px 0">关卡完成！</div>'+
-      '<div class="dlq-stars">'+("⭐".repeat(stars))+'<span style="color:#D3D1C7">'+("⭐".repeat(3-stars))+'</span></div>'+
-      '<div style="font-size:15px;margin:8px 0">答对 <b>'+qCorrect+'</b> / '+qList.length+' 题</div>'+
-      '<div style="font-size:12px;color:#8892A0">答错的题都配了讲解卡，可以「再练一次」巩固</div>'+
       '<div class="dlg-congrats">🎉</div>'+
+      '<div style="font-size:20px;font-weight:500;margin:8px 0">本关完成！</div>'+
+      '<div class="dlq-stars">⭐⭐⭐</div>'+
+      '<div style="font-size:13.5px;margin:8px 0">已看完 <b>'+U.scenes.length+'</b> 个剧情场景 · 掌握 <b>'+U.dims.length+'</b> 个维度</div>'+
+      '<div style="font-size:12px;color:#8892A0">下回遇到类似场景，试着用这些说法软着陆</div>'+
       '<div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap">'+
-        '<button class="q-btn reveal" onclick="openUnit(0)">🔄 再练一次</button>'+
+        '<button class="q-btn reveal" onclick="openUnit(0)">🔄 再看一遍</button>'+
         '<button class="q-btn ghost" onclick="renderSkelTable()">📋 句型总表</button>'+
       '</div>'+
     '</div>';
 }
 function renderSkelTable(){
-  const c=document.getElementById("learnCourse");
+  const c = document.getElementById("learnCourse");
   c.innerHTML=''+
     '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
-      '<button class="q-btn ghost" onclick="renderCourseHome()">← 单元列表</button>'+
+      '<button class="q-btn ghost" onclick="renderCourseHome()">← 地图</button>'+
       '<span class="filter-label">📋 句型总表（情绪弱→强）</span>'+
     '</div>'+
     COURSE_DAILY_SKELETONS.map(function(s){
       return '<div class="skel-row"><span class="skel-e">'+s.emotion+'</span><span class="skel-s">'+s.key+'</span><span class="skel-x">'+s.example+'</span><span class="skel-src">'+s.source+'</span></div>';
     }).join("");
-}
-function explainCardHtml(card){
-  return '<div class="cc2-card" style="margin-top:12px">'+
-    '<div class="cc2-key" style="border-radius:12px;padding:14px;margin-bottom:10px"><div style="font-size:11px;color:#AFA9EC">✦ 关键说法</div><div style="font-size:18px;font-weight:500;color:#fff;margin-top:4px">'+card.key+'</div></div>'+
-    '<div class="cc2-sec"><div class="cc2-sec-label">💡 解释</div><div class="cc2-core">「'+card.explain.core+'」</div><div class="cc2-desc">'+card.explain.desc+'</div></div>'+
-    '<div class="cc2-sec"><div class="cc2-sec-label">🔗 同类说法 · 换着说</div>'+card.extends.map(function(x){return '<div class="cc2-ext"><span class="cc2-ext-p">'+x.p+'</span><span class="cc2-ext-zh">'+x.zh+'</span></div>';}).join("")+'</div>'+
-    '<div class="cc2-sec"><div class="cc2-sec-label">🚀 用起来</div><div class="cc2-example">'+card.apply.example+'</div><div class="cc2-where">📍 '+card.apply.where+'</div></div>'+
-    '<div class="cc2-risk">⚠️ '+card.tags.risk+'</div>'+
-  '</div>';
 }
 function showLearnView(view){
   const map={home:"learnHome",browse:"libraryView",path:"trainPath",wordbook:"trainWordbook",course:"learnCourse"};
