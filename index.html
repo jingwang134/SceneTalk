@@ -1259,6 +1259,189 @@ const COURSE_DAILY_SKELETONS = [
   { order: 5, emotion: "中等", key: "Why didn't you…?", example: "Why didn't you invite me? … She didn't even have a dinner.", source: "卡戴珊家族 S01E06", dim: "先扬后抑" }
 ];
 
+// ===== 生活口语课 · 单元2「职场博弈」剧情学习单元（雅思 6.5+） =====
+const COURSE_DAILY_UNIT2 = {
+  task: "职场博弈",
+  icon: "💼",
+  en: "negotiation & deal-making",
+  intro: "这一关，从 2 部剧 4 个场景学「职场博弈」——亮底线、摊牌、成交、拍板，看高手怎么把话说到点子上。",
+  shows: ["摩登家庭", "查理成长日记"],
+  dims: [
+    {
+      name: "亮底线", ico: "🚧",
+      exp: "把不可退让的部分先说死，剩下的才有的谈：",
+      lines: [
+        { p: "It's non-negotiable.", zh: "这没得商量（底线不容讨论）", use: "The deadline is non-negotiable — we ship on Friday." },
+        { p: "I'm not budging on this", zh: "这点我不会让步", use: "I'm not budging on the price, but I'll throw in delivery." },
+        { p: "That's my final offer", zh: "这是我的最终报价", use: "That's my final offer — take it or leave it." }
+      ],
+      risk: "谈判中表明立场，语气坚决但不失礼"
+    },
+    {
+      name: "摊牌开场", ico: "🎬",
+      exp: "一句话把谈话拉到正题，先立框架再给理由：",
+      lines: [
+        { p: "Here's the deal.", zh: "听好了，事实是这样的（摊牌开场）", use: "Here's the deal: I'll cover the deposit if you handle the rent." },
+        { p: "Let's cut to the chase", zh: "我们直说吧", use: "Let's cut to the chase — the budget won't stretch." },
+        { p: "The bottom line is…", zh: "说到底就是……", use: "The bottom line is we need a decision by Monday." }
+      ],
+      risk: "职场/谈判常用，先声夺人"
+    },
+    {
+      name: "拍板成交", ico: "🤝",
+      exp: "谈成了要锁死，用确定的句式把口头约定钉住：",
+      lines: [
+        { p: "We got a deal?", zh: "我们成交？", use: "We got a deal? — Deal. Shake on it." },
+        { p: "Shake hands on it", zh: "握手成交（一言为定）", use: "We shook hands on it, so the deal's done." },
+        { p: "Consider it done", zh: "包在我身上", use: "Consider it done — I'll have it ready by noon." }
+      ],
+      risk: "确认口头契约，比 Yes 更有力度"
+    }
+  ],
+  scenes: [
+    {
+      id: "E01", show: "摩登家庭", ep: "S01E03", chars: ["Claire", "Haley"], dim: 0,
+      situation: "女儿要去朋友的婚礼借衣服，Claire 直接亮明底线——婚礼可以去，但裙子没得商量。",
+      dialogue: [
+        { sp: "Haley", en: "But it's a wedding for some friend of yours I never even heard of.", zh: "可那婚礼是你的朋友办的，我压根没听说过。" },
+        { sp: "Claire", en: "It's non-negotiable. You can borrow a dress of Haley's again.", zh: "没得商量。裙子你可以再去跟海莉借。" },
+        { sp: "Haley", en: "No.", zh: "才不要。" }
+      ],
+      key: "It's non-negotiable.",
+      why: "negotiable 是「可商量」，non-negotiable 直接封死讨论空间——谈条件前先让对方知道哪条线碰不得，谈判才有效率。比 I won't allow it 更冷静、更有掌控感。",
+      alt: ["I'm not budging on this", "That's my final offer"]
+    },
+    {
+      id: "E02", show: "摩登家庭", ep: "S01E09", chars: ["Jay", "Phil"], dim: 1,
+      situation: "Phil 追女生屡屡受挫，Jay 一句话把真相摊开——浪漫没用，实力才有用。",
+      dialogue: [
+        { sp: "Phil", en: "Nothing's worked.", zh: "什么招都试过了。" },
+        { sp: "Jay", en: "Here's the deal. Girls don't go for all that romantic stuff. They go for power and success.", zh: "听好了，事实是这样的：女孩子不吃浪漫那一套，她们看中的是权势和成功。" }
+      ],
+      key: "Here's the deal.",
+      why: "Here's the deal 是摊牌开场白——先宣布「我要讲真话了」，再给结论，对方会立刻竖耳朵。职场谈判、给建议都适用，比 Listen 更有分量。",
+      alt: ["Let's cut to the chase", "The bottom line is…"]
+    },
+    {
+      id: "E03", show: "查理成长日记", ep: "S01E09", chars: ["老爸", "孩子们"], dim: 2,
+      situation: "老爸要砍掉架着树屋的树枝，孩子们不答应——老爸用「等价交换」谈成了交易。",
+      dialogue: [
+        { sp: "老爸", en: "Dog goes in, branch comes off.", zh: "小狗进屋，树枝砍掉。" },
+        { sp: "老爸", en: "We got a deal?", zh: "我们成交不？" },
+        { sp: "孩子们", en: "We have a deal.", zh: "成交。" }
+      ],
+      key: "We got a deal?",
+      why: "谈判收尾的锁定句：提出交换条件后用 We got a deal? 确认，对方一旦答应就不好反悔——把口头承诺变成「已成交」。雅思 Part 2 讲谈判经历时这句点睛。",
+      alt: ["Shake hands on it", "Consider it done"]
+    },
+    {
+      id: "E04", show: "查理成长日记", ep: "S01E09", chars: ["老爸", "孩子们"], dim: 2,
+      situation: "孩子们想反悔重新商量，老爸一句「已经说定了」把话钉死——拍板之后不翻盘。",
+      dialogue: [
+        { sp: "孩子们", en: "We changed our mind. We don't want to lose the treehouse after all.", zh: "我们改变主意了，我们一点也不想失去小树屋。" },
+        { sp: "老爸", en: "It's too late. I already shook hands on it.", zh: "太迟了，我都已经和别人说定了。" },
+        { sp: "孩子们", en: "Well, can we at least talk about this?", zh: "难道我们就不能再商量一下么？" }
+      ],
+      key: "I already shook hands on it.",
+      why: "shake hands on it 字面是「握手成交」，引申为「一言为定」。用来拒绝反悔特别有画面感——谈判桌上最怕的不是谈不拢，是谈成了又翻盘。",
+      alt: ["We've got a deal already", "A deal is a deal"]
+    }
+  ]
+};
+
+// ===== 生活口语课 · 单元3「把话说开」剧情学习单元（雅思 6.5+） =====
+const COURSE_DAILY_UNIT3 = {
+  task: "把话说开",
+  icon: "💬",
+  en: "addressing what's awkward",
+  intro: "这一关，从 4 个真实场景学「把话说开」——点破、掩盖、谈开、澄清，看成年人怎么处理尴尬话题。",
+  shows: ["摩登家庭"],
+  dims: [
+    {
+      name: "点破", ico: "💡",
+      exp: "把大家心知肚明却没人提的事摆上台面：",
+      lines: [
+        { p: "Address the elephant in the room", zh: "直面那个避而不谈的问题", use: "Let's address the elephant in the room: our sales are dropping." },
+        { p: "Let's be honest about what's going on", zh: "我们诚实面对现状吧", use: "Let's be honest about what's going on — we're falling behind." },
+        { p: "I think we all know what this is about", zh: "我想我们都知道这是怎么回事", use: "I think we all know what this is about, so let's just say it." }
+      ],
+      risk: "需要勇气，但比装糊涂高效"
+    },
+    {
+      name: "掩盖", ico: "🙈",
+      exp: "假装没事发生——短痛换长痛，但有时是人之常情：",
+      lines: [
+        { p: "Sweep it under the rug", zh: "当没发生过，掩盖过去", use: "We can't just sweep this under the rug and pretend it's fine." },
+        { p: "Let's just move past it", zh: "算了，翻篇吧", use: "Let's just move past it — no point rehashing." },
+        { p: "Don't bring that up again", zh: "别再提那事了", use: "Don't bring that up again — it's water under the bridge." }
+      ],
+      risk: "口语场景常见；雅思里可用作对比（有人逃避 vs 有人直面）"
+    },
+    {
+      name: "谈开", ico: "🫱",
+      exp: "把矛盾摊开来谈，而不是各怀心事：",
+      lines: [
+        { p: "Talk it out", zh: "把话说开，谈清楚", use: "We need to talk it out before it gets worse." },
+        { p: "Clear the air", zh: "把气氛缓和、把话说透", use: "Let's clear the air — I didn't mean to offend you." },
+        { p: "Get to the bottom of this", zh: "把这件事的根源弄清楚", use: "We should get to the bottom of this instead of guessing." }
+      ],
+      risk: "解决问题导向，比 argue 高级"
+    }
+  ],
+  scenes: [
+    {
+      id: "T01", show: "摩登家庭", ep: "S01E05", chars: ["Jay", "全家人"], dim: 0,
+      situation: "家庭聚会气氛怪异，Jay 决定不装了——先把大家都回避的问题点名。",
+      dialogue: [
+        { sp: "Jay", en: "I think we should address the elephant in the room.", zh: "我觉得我们不该忽视这个明摆着的问题。" },
+        { sp: "Jay", en: "Uh, Luke, Manny. Bring it in. Come on. Huddle up.", zh: "卢克、曼尼，都过来，快点，围过来。" }
+      ],
+      key: "Address the elephant in the room.",
+      why: "elephant in the room = 大家心知肚明却避而不谈的事（大象太大反而没人看得到）。address it 就是主动点破。雅思 Part 3 谈社会问题、团队矛盾时，这句一出口就是 7 分词汇。",
+      alt: ["Let's be honest about what's going on", "I think we all know what this is about"]
+    },
+    {
+      id: "T02", show: "摩登家庭", ep: "S01E05", chars: ["Gloria", "对方"], dim: 1,
+      situation: "有人提议把问题查清楚，Gloria 建议直接当没发生过——两种处理方式的交锋。",
+      dialogue: [
+        { sp: "对方", en: "I think I'm gonna find out what it is.", zh: "我觉得我该查出这到底是怎么回事。" },
+        { sp: "Gloria", en: "That's the worst thing you could do. Just sweep it under the rug.", zh: "那是你最不该做的。就当没发生过，忍忍就过去了。" },
+        { sp: "对方", en: "I'm not a sweeper. Trust me on this.", zh: "我可不是那种忍气吞声的人。听我的没错。" }
+      ],
+      key: "Sweep it under the rug.",
+      why: "sweep it under the rug 字面「扫到地毯底下」= 掩盖问题。用在这里很妙：Gloria 建议逃避，对方拒绝——两种处理冲突本身就是好素材。雅思谈 conflict 时，可以用这对反义词组撑起一段对比。",
+      alt: ["Let's just move past it", "Don't bring that up again"]
+    },
+    {
+      id: "T03", show: "摩登家庭", ep: "S01E05", chars: ["对方", "另一方"], dim: 2,
+      situation: "掩盖不是办法，有人坚持要把话谈开——可对方还堵着气。",
+      dialogue: [
+        { sp: "对方", en: "I think you two need to talk it out.", zh: "我觉得你们俩得把这件事谈开。" },
+        { sp: "另一方", en: "I don't have anything to say to her.", zh: "我跟她没什么好说的。" },
+        { sp: "对方", en: "She's the one with the problem, not me. Whose side are you on?", zh: "有问题的明明是她，不是我。你到底向着谁？" }
+      ],
+      key: "Talk it out.",
+      why: "talk it out = 用对话把矛盾消化掉，比 argue（吵）高级在「解决问题导向」。对话里的僵局（一方想谈、一方拒绝）正好展示这个词的语境力量。",
+      alt: ["Clear the air", "Get to the bottom of this"]
+    },
+    {
+      id: "T04", show: "摩登家庭", ep: "S01E04", chars: ["Claire", "妈妈"], dim: 2,
+      situation: "说了句可能被误会的话，赶紧澄清——别想歪，我说的是另一回事。",
+      dialogue: [
+        { sp: "Claire", en: "I just can't give myself to him sexually.", zh: "我就是没法对他以身相许。" },
+        { sp: "妈妈", en: "Okay, Mom. Did not see that coming.", zh: "得了，妈，没想到你突然说这么劲爆的。" },
+        { sp: "Claire", en: "Oh, oh. Don't get me wrong. We satisfy each other down there.", zh: "不不，别误会。我们在那方面还是很和谐的。" }
+      ],
+      key: "Don't get me wrong.",
+      why: "don't get me wrong = 先给「我要说的话可能被误解」打预防针，再澄清。雅思口语里用它引出观点很自然：Don't get me wrong, I'm not against technology — I just think we need balance. 既显真诚又有结构。",
+      alt: ["Let me clarify", "To be clear, what I mean is…"]
+    }
+  ]
+};
+
+// 全部单元（地图/学习流共用）
+const COURSE_DAILY_UNITS = [COURSE_DAILY_UNIT1, COURSE_DAILY_UNIT2, COURSE_DAILY_UNIT3];
+
 
 // ===== 试点：work/deal 维度场景数据（剧集式学习 · 从台本自动挖掘） =====
 const SCENES_DEAL = [{"id": 33, "context": ["But it's a wedding for some friend of", "yours I never even heard of.要结婚的可是你的朋友 虽然我完全没听说过", "I t ' s  non-negotiable . You can borrow a", "dress of Haley's again.没得商量 裙子你可以再去跟海莉借", "N o . 才不要", "That sends an ugly message- that I'm"], "hit": 2}, {"id": 73, "context": ["在餐厅为她递上一杯牛奶摩登家庭-S01E09- 双语台词", "第3页/共1 6页", "Nothing's worked. - Here's the deal. 全都不奏效 -事实上", "Girls don't go for all that romantic stuff. 女孩子不吃浪漫那一套", "They go for power and success. 她们喜欢有权势的或成功的男人", "And since you don't have either one of"], "hit": 2}, {"id": 106, "context": ["So you think mason's faster. 那么你认为Mason更快", "I think charlie's faster. 我认为Charlie更快", "There's only one way to settle this. 只有一个办法来一判高下", "We challenge you to a baby race. 你敢不敢参加宝宝赛跑", "Oh, it is on. 噢 我接受你的挑战", "And you're gonna be sorry 你会后悔的"], "hit": 2}, {"id": 144, "context": ["Well, no problem. 哎呀 那没问题", "Dog goes in, branch comes off. 小狗进屋 树枝砍掉", "We got a deal? 我们成交不", "We have a deal. 成交", "Dad, that branch holds our treehouse . 老爸 那根树杈还架着我们的小树屋呢", "Well, so what? You kids haven't been up"], "hit": 2}, {"id": 145, "context": ["lose the treehouse after all.我们改变主意了 我们一点也不想失去这个小树", "屋", "It's too late. I already shook hands on it. 太迟了 我都已经和别人说定了", "Well, can we at least talk about this? 难道我们就不能再商量一下么", "Yeah, maybe take a family vote? 对啊 也许我们应该进行家庭投票表决", "This isn't a democracy, guys. 家庭又不是民主政体啥的 伙计们"], "hit": 2}, {"id": 169, "context": ["Uh here you go. 呃 请拿好", "Thanks. 谢谢", "Keep the change. 不用找零了", "EnJoy your Kwikki Chikki. 请愉快享用咕唧鸡", "I think I was just grilled with love. 我觉得刚才自己被爱心烘烤了", "Would you mind answering a few questions 您是否介意回答几个问题呢"], "hit": 2}];
@@ -1470,51 +1653,46 @@ let unitIdx = 0;
 function renderCourseHome(){
   const c = document.getElementById("learnCourse");
   if(!c) return;
-  const done = courseUnitDone();
-  const units = [
-    {id:"D", ico:"💬", name:"委婉反驳", sub:"polite disagreement", cards:5, status: done.done ? "done" : "current", stars: done.stars||0, tip:"先肯定再补一刀"},
-    {id:"R", ico:"🙅", name:"委婉拒绝", sub:"polite refusal", cards:0, status:"locked", tip:"I'd love to, but…"},
-    {id:"S", ico:"😅", name:"尴尬圆场", sub:"saving the moment", cards:0, status:"locked", tip:"轻松化解冷场"},
-    {id:"F", ico:"🏠", name:"家庭拌嘴", sub:"family bickering", cards:0, status:"locked", tip:"亲密关系的火药味"},
-    {id:"A", ico:"🙏", name:"道歉安抚", sub:"apology & comfort", cards:0, status:"locked", tip:"说错话后的补救"},
-    {id:"H", ico:"🤝", name:"请求帮忙", sub:"asking a favor", cards:0, status:"locked", tip:"开口求助的艺术"}
-  ];
+  const units = COURSE_DAILY_UNITS;
+  let firstOpen = -1;
+  units.forEach(function(u,i){ if(firstOpen<0 && !courseUnitDone(i).done) firstOpen=i; });
   c.innerHTML=''+
     '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">'+
       '<button class="q-btn ghost" onclick="renderLearnHome()">← 返回主页</button>'+
       '<span class="filter-label">🎯 生活口语课</span>'+
     '</div>'+
-    '<div class="dlg-sub">每天闯一关，学会一个「交际任务」的所有说法</div>'+
+    '<div class="dlg-sub">每天闯一关，学会一个「交际任务」的所有说法 · 已通关 '+units.filter(function(u,i){return courseUnitDone(i).done;}).length+'/'+units.length+' 关</div>'+
     '<div class="dlg-map">'+
       units.map(function(u,i){
-        const cls = u.status==="locked" ? "dlg-node locked" : u.status==="done" ? "dlg-node done" : "dlg-node current";
+        const st = courseUnitDone(i).done ? "done" : (i===firstOpen ? "current" : "locked");
         const left = i%2===0 ? 0 : 130;
-        const body = u.status==="locked"
-          ? '<div class="dlg-lock">🔒</div><div class="dlg-name">'+u.name+'</div><div class="dlg-sub2">'+u.sub+'</div>'
-          : '<div class="dlg-ico">'+u.ico+'</div><div class="dlg-name">'+u.name+'</div><div class="dlg-sub2">'+u.sub+'</div>'+
-            (u.status==="done"
-              ? '<div class="dlg-stars">'+("⭐".repeat(u.stars))+'<span style="color:#D3D1C7">'+("⭐".repeat(3-u.stars))+'</span></div><div class="dlg-tip">已通关</div>'
-              : '<div class="dlg-stars" style="color:#7F77DD">●</div><div class="dlg-tip">'+u.tip+'</div>');
+        const body = st==="locked"
+          ? '<div class="dlg-lock">🔒</div><div class="dlg-name">'+u.icon+' '+u.task+'</div><div class="dlg-sub2">'+u.en+'</div>'
+          : '<div class="dlg-ico">'+u.icon+'</div><div class="dlg-name">'+u.task+'</div><div class="dlg-sub2">'+u.en+'</div>'+
+            (st==="done"
+              ? '<div class="dlg-stars">⭐⭐⭐</div><div class="dlg-tip">已通关</div>'
+              : '<div class="dlg-stars" style="color:#7F77DD">●</div><div class="dlg-tip">'+u.scenes.length+' 个场景 · '+u.dims.length+' 个维度</div>');
         return '<div class="dlg-node-wrap" style="margin-left:'+left+'px">'+
           (i>0?'<div class="dlg-link"></div>':"")+
-          '<div class="'+cls+'" onclick="'+(u.status!=="locked"?"openUnit(0)":"")+'">'+body+'</div>'+
+          '<div class="dlg-node '+st+'" onclick="'+(st!=="locked"?"openUnit("+i+")":"")+'">'+body+'</div>'+
           '</div>';
       }).join("")+
     '</div>'+
-    '<div class="dlg-foot">🗺️ 前方还有 '+units.filter(function(u){return u.status==="locked";}).length+' 关等待解锁 · 每关一个交际任务，从多部剧聚合同场景说法</div>';
+    '<div class="dlg-foot">🗺️ 前方还有 '+(units.length-firstOpen-1)+' 关等待解锁 · 全部来自真实台本场景</div>';
 }
-function courseUnitDone(){
-  try{ var d = JSON.parse(localStorage.getItem("wb_course_unit1")||"{}"); return {done:!!d.done, stars:d.stars||0}; }
+function courseUnitDone(idx){
+  try{ var d = JSON.parse(localStorage.getItem("wb_course_unit"+idx)||"{}"); return {done:!!d.done, stars:d.stars||0}; }
   catch(e){ return {done:false, stars:0}; }
 }
 function saveUnitDone(stars){
-  try{ localStorage.setItem("wb_course_unit1", JSON.stringify({done:true, stars:stars})); }catch(e){}
+  try{ localStorage.setItem("wb_course_unit"+unitCur, JSON.stringify({done:true, stars:stars})); }catch(e){}
 }
-// ===================== 剧情学习流（看剧学表达 · 场景→维度→完成） =====================
+// ===================== 剧情学习流（看剧学表达 · 多单元） =====================
+var unitCur = 0;
 var sceneIdx = 0;
-function openUnit(i){ sceneIdx = 0; renderUnitIntro(); }
+function openUnit(i){ unitCur = i; sceneIdx = 0; renderUnitIntro(); }
 function renderUnitIntro(){
-  const U = COURSE_DAILY_UNIT1;
+  const U = COURSE_DAILY_UNITS[unitCur];
   const c = document.getElementById("learnCourse");
   if(!c) return;
   c.innerHTML=''+
@@ -1532,7 +1710,7 @@ function renderUnitIntro(){
     '</div>';
 }
 function renderUnitScene(){
-  const U = COURSE_DAILY_UNIT1;
+  const U = COURSE_DAILY_UNITS[unitCur];
   const c = document.getElementById("learnCourse");
   if(!c) return;
   const sc = U.scenes[sceneIdx];
@@ -1540,12 +1718,12 @@ function renderUnitScene(){
   const dim = U.dims[sc.dim];
   const pct = Math.round(sceneIdx/U.scenes.length*100);
   const dlg = sc.dialogue.map(function(d){
-    const hl = d.en.indexOf(sc.key.split("…")[0].split("?")[0].split(",")[0])!==-1;
+    const hl = d.en.indexOf(sc.key.split("…")[0].split("?")[0].split(",")[0].replace(/\.$/, ""))!==-1;
     return '<div class="sc-line"><span class="sc-sp">'+d.sp+'</span><div><div class="sc-en">'+(hl?'<span class="sc-hl">'+d.en+'</span>':d.en)+'</div><div class="sc-zh">'+d.zh+'</div></div></div>';
   }).join("");
   c.innerHTML=''+
     '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
-      '<button class="q-btn ghost" onclick="openUnit(0)">← 重看开场</button>'+
+      '<button class="q-btn ghost" onclick="openUnit('+unitCur+')">← 重看开场</button>'+
       '<div class="dlq-ring"><svg viewBox="0 0 48 48" width="42" height="42"><circle cx="24" cy="24" r="20" fill="none" stroke="#F1EFE8" stroke-width="6"/><circle cx="24" cy="24" r="20" fill="none" stroke="#1D9E75" stroke-width="6" stroke-dasharray="125.6" stroke-dashoffset="'+Math.round(125.6*(1-sceneIdx/U.scenes.length))+' " stroke-linecap="round" transform="rotate(-90 24 24)"/></svg></div>'+
       '<div class="dlq-count" style="font-size:13px;font-weight:500">场景 '+(sceneIdx+1)+' / '+U.scenes.length+'</div>'+
     '</div>'+
@@ -1559,22 +1737,22 @@ function renderUnitScene(){
     '<button class="q-btn reveal" style="width:100%;margin-top:14px;padding:13px" onclick="nextScene()">'+(sceneIdx>=U.scenes.length-1?'✅ 场景看完 · 看维度总结':'✅ 看懂了，下一个场景 →')+'</button>';
 }
 function nextScene(){
-  const U = COURSE_DAILY_UNIT1;
+  const U = COURSE_DAILY_UNITS[unitCur];
   sceneIdx++;
   if(sceneIdx>=U.scenes.length){ renderUnitDims(); return; }
   renderUnitScene();
 }
 function renderUnitDims(){
-  const U = COURSE_DAILY_UNIT1;
+  const U = COURSE_DAILY_UNITS[unitCur];
   const c = document.getElementById("learnCourse");
   if(!c) return;
   c.innerHTML=''+
     '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
-      '<button class="q-btn ghost" onclick="openUnit(0)">← 地图</button>'+
+      '<button class="q-btn ghost" onclick="openUnit('+unitCur+')">← 地图</button>'+
       '<span class="filter-label">🧭 不同维度的观点表达</span>'+
     '</div>'+
-    '<div class="sc-dims-desc">同一个「委婉反驳」，有 '+U.dims.length+' 种打开方式——记住维度，就是记住了组织回答的骨架。</div>'+
-    U.dims.map(function(d,di){
+    '<div class="sc-dims-desc">同一个「'+U.task+'」，有 '+U.dims.length+' 种打开方式——记住维度，就是记住了组织回答的骨架。</div>'+
+    U.dims.map(function(d){
       return '<div class="sc-dim-card">'+
         '<div class="sc-dim-head">'+d.ico+' '+d.name+' <span class="sc-dim-exp">'+d.exp+'</span></div>'+
         d.lines.map(function(l){
@@ -1589,7 +1767,7 @@ function renderUnitDims(){
     '</div>';
 }
 function finishUnit(){
-  const U = COURSE_DAILY_UNIT1;
+  const U = COURSE_DAILY_UNITS[unitCur];
   const c = document.getElementById("learnCourse");
   if(!c) return;
   saveUnitDone(3);
@@ -1605,8 +1783,9 @@ function finishUnit(){
       '<div style="font-size:13.5px;margin:8px 0">已看完 <b>'+U.scenes.length+'</b> 个剧情场景 · 掌握 <b>'+U.dims.length+'</b> 个维度</div>'+
       '<div style="font-size:12px;color:#8892A0">下回遇到类似场景，试着用这些说法软着陆</div>'+
       '<div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap">'+
-        '<button class="q-btn reveal" onclick="openUnit(0)">🔄 再看一遍</button>'+
+        '<button class="q-btn reveal" onclick="openUnit('+unitCur+')">🔄 再看一遍</button>'+
         '<button class="q-btn ghost" onclick="renderSkelTable()">📋 句型总表</button>'+
+        '<button class="q-btn ghost" onclick="renderCourseHome()">🗺️ 下一关</button>'+
       '</div>'+
     '</div>';
 }
