@@ -473,6 +473,27 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
 .dlq-order-pool{display:flex;flex-wrap:wrap;gap:8px}
 .dlq-word{font-size:14px;padding:10px 14px;border-radius:10px;border:1px solid #CECBF6;background:#EEEDFE;color:#3C3489;cursor:pointer}
 .dlq-word.sel{background:#E1F5EE;border-color:#1D9E75;color:#0F6E56}
+.dlg-sub{font-size:12.5px;color:#8892A0;margin-bottom:16px}
+.dlg-map{display:flex;flex-direction:column;gap:18px;padding:6px 0 10px}
+.dlg-node-wrap{position:relative}
+.dlg-link{position:absolute;top:-20px;left:90px;width:2px;height:20px;background:#D3D1C7}
+.dlg-node{width:190px;border-radius:18px;padding:16px;cursor:pointer;text-align:center;transition:transform .15s}
+.dlg-node:hover{transform:scale(1.03)}
+.dlg-node.current{background:#EEEDFE;border:2px solid #534AB7;box-shadow:0 0 0 4px rgba(83,74,183,.12)}
+.dlg-node.done{background:#E1F5EE;border:2px solid #1D9E75}
+.dlg-node.locked{background:#F1EFE8;border:2px dashed #D3D1C7;opacity:.75;cursor:default}
+.dlg-ico{font-size:30px;margin-bottom:6px}
+.dlg-lock{font-size:24px;margin-bottom:4px}
+.dlg-name{font-size:15px;font-weight:500;color:#2C2C2A}
+.dlg-node.locked .dlg-name{color:#888780}
+.dlg-sub2{font-size:11.5px;color:#8892A0;margin-top:2px}
+.dlg-stars{font-size:15px;margin:6px 0 2px;letter-spacing:2px}
+.dlg-tip{font-size:11px;color:#7F77DD;margin-top:2px}
+.dlg-foot{font-size:12px;color:#8892A0;margin-top:12px;padding-top:10px;border-top:1px dashed #EDEAE0}
+.dlg-ring{flex:0 0 auto}
+.dlq-trap{background:#FDF6E8;border:1px solid #F0DFB0;border-radius:8px;padding:8px 12px;font-size:12px;color:#8A6D2F;margin-top:8px;line-height:1.7}
+.dlg-congrats{font-size:34px;animation:dlgPop .5s ease;display:inline-block}
+@keyframes dlgPop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
 .dlq-done{background:#fff;border:1px solid #EDEAE0;border-radius:16px;padding:28px;text-align:center}
 .dlq-stars{font-size:24px;letter-spacing:4px}
 .cc2-card{background:#fff;border:1px solid #EDEAE0;border-radius:16px;padding:18px;box-shadow:0 1px 4px rgba(44,44,42,.05)}
@@ -1471,22 +1492,45 @@ let unitIdx = 0;
 function renderCourseHome(){
   const c = document.getElementById("learnCourse");
   if(!c) return;
-  c.innerHTML = `
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-      <button class="q-btn ghost" onclick="renderLearnHome()">← 返回主页</button>
-      <span class="filter-label">🎯 生活口语课</span>
-    </div>
-    <div class="section-desc" style="margin-bottom:14px">每个单元 = 一个「交际任务」，从多部剧里聚合同场景的说法。先看剧里怎么说的，学句型骨架，再用练习检验。</div>
-    <div class="unit-card" onclick="openUnit(0)" style="background:#FFFDF7;border:1px solid #F0E6CC;border-radius:14px;padding:18px;cursor:pointer">
-      <div style="display:flex;align-items:center;gap:10px">
-        <span style="font-size:15px">💬</span>
-        <b style="font-size:15px">委婉反驳 · polite disagreement</b>
-        <span class="badge-dim" style="margin-left:auto">5 张语料卡</span>
-      </div>
-      <div style="font-size:12px;color:#8A6D2F;margin:8px 0 4px">📺 摩登家庭 ×2 · 查理成长日记 ×2 · 卡戴珊家族 ×1 ｜ 强度弱→强递增</div>
-      <div style="font-size:12.5px;color:#4A4A42;line-height:1.7">先看剧里怎么委婉说「不」——It's just that / I wouldn't say / Don't take this the wrong way… 学会在不同场合软着陆。</div>
-      <div style="font-size:12.5px;color:#854F0B;margin-top:12px;font-weight:500">打开本单元 →</div>
-    </div>`;
+  const done = courseUnitDone();
+  const units = [
+    {id:"D", ico:"💬", name:"委婉反驳", sub:"polite disagreement", cards:5, status: done.done ? "done" : "current", stars: done.stars||0, tip:"先肯定再补一刀"},
+    {id:"R", ico:"🙅", name:"委婉拒绝", sub:"polite refusal", cards:0, status:"locked", tip:"I'd love to, but…"},
+    {id:"S", ico:"😅", name:"尴尬圆场", sub:"saving the moment", cards:0, status:"locked", tip:"轻松化解冷场"},
+    {id:"F", ico:"🏠", name:"家庭拌嘴", sub:"family bickering", cards:0, status:"locked", tip:"亲密关系的火药味"},
+    {id:"A", ico:"🙏", name:"道歉安抚", sub:"apology & comfort", cards:0, status:"locked", tip:"说错话后的补救"},
+    {id:"H", ico:"🤝", name:"请求帮忙", sub:"asking a favor", cards:0, status:"locked", tip:"开口求助的艺术"}
+  ];
+  c.innerHTML=''+
+    '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">'+
+      '<button class="q-btn ghost" onclick="renderLearnHome()">← 返回主页</button>'+
+      '<span class="filter-label">🎯 生活口语课</span>'+
+    '</div>'+
+    '<div class="dlg-sub">每天闯一关，学会一个「交际任务」的所有说法</div>'+
+    '<div class="dlg-map">'+
+      units.map(function(u,i){
+        const cls = u.status==="locked" ? "dlg-node locked" : u.status==="done" ? "dlg-node done" : "dlg-node current";
+        const left = i%2===0 ? 0 : 130;
+        const body = u.status==="locked"
+          ? '<div class="dlg-lock">🔒</div><div class="dlg-name">'+u.name+'</div><div class="dlg-sub2">'+u.sub+'</div>'
+          : '<div class="dlg-ico">'+u.ico+'</div><div class="dlg-name">'+u.name+'</div><div class="dlg-sub2">'+u.sub+'</div>'+
+            (u.status==="done"
+              ? '<div class="dlg-stars">'+("⭐".repeat(u.stars))+'<span style="color:#D3D1C7">'+("⭐".repeat(3-u.stars))+'</span></div><div class="dlg-tip">已通关</div>'
+              : '<div class="dlg-stars" style="color:#7F77DD">●</div><div class="dlg-tip">'+u.tip+'</div>');
+        return '<div class="dlg-node-wrap" style="margin-left:'+left+'px">'+
+          (i>0?'<div class="dlg-link"></div>':"")+
+          '<div class="'+cls+'" onclick="'+(u.status!=="locked"?"openUnit(0)":"")+'">'+body+'</div>'+
+          '</div>';
+      }).join("")+
+    '</div>'+
+    '<div class="dlg-foot">🗺️ 前方还有 '+units.filter(function(u){return u.status==="locked";}).length+' 关等待解锁 · 每关一个交际任务，从多部剧聚合同场景说法</div>';
+}
+function courseUnitDone(){
+  try{ var d = JSON.parse(localStorage.getItem("wb_course_unit1")||"{}"); return {done:!!d.done, stars:d.stars||0}; }
+  catch(e){ return {done:false, stars:0}; }
+}
+function saveUnitDone(stars){
+  try{ localStorage.setItem("wb_course_unit1", JSON.stringify({done:true, stars:stars})); }catch(e){}
 }
 // ===================== 多邻国式关卡（单元=闯关：10题混合题型） =====================
 var qList=[], qIndex=0, qCorrect=0, qCombo=0, orderSel=[], orderWords=[], orderAnsStr="";
@@ -1529,8 +1573,8 @@ function renderUnitQ(){
   c.innerHTML=''+
     '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
       '<button class="q-btn ghost" onclick="renderCourseHome()">✕</button>'+
-      '<div class="dlq-progress"><div class="dlq-progress-fill" style="width:'+pct+'%"></div></div>'+
-      '<span class="dlq-count">'+(qIndex+1)+'/'+qList.length+'</span>'+
+      '<div class="dlq-ring"><svg viewBox="0 0 48 48" width="42" height="42"><circle cx="24" cy="24" r="20" fill="none" stroke="#F1EFE8" stroke-width="6"/><circle cx="24" cy="24" r="20" fill="none" stroke="#1D9E75" stroke-width="6" stroke-dasharray="125.6" stroke-dashoffset="'+Math.round(125.6*(1-qIndex/qList.length))+' " stroke-linecap="round" transform="rotate(-90 24 24)"/></svg></div>'+
+      '<div class="dlq-count" style="font-size:13px;font-weight:500">💬 委婉反驳 <span style="color:#8892A0;font-weight:400">'+(qIndex+1)+'/'+qList.length+'</span></div>'+
     '</div>'+
     '<div class="dlq-card">'+
       '<div class="dlq-type">'+typeLabel+'</div>'+
@@ -1553,7 +1597,8 @@ function answerUnitQuiz(el){
     if(b===el&&!ok){ el.style.background="#FCEBEB"; el.style.borderColor="#E24B4A"; }
   });
   const combo=qCombo>=2?' <b style="color:#854F0B">🔥 连击 x'+qCombo+'</b>':"";
-  fb.innerHTML='<div class="dlq-fb-box '+(ok?"ok":"bad")+'">'+(ok?"✅ 正确！"+combo:"❌ 正确答案：<b>"+q.ans+"</b>")+'</div>'+
+  const trap = ok ? "" : '<div class="dlq-trap">⚠️ 错因：<b>'+el.textContent+'</b> 是中式直译或语气不当的说法，母语者不这么用——记住这个坑，比记住答案更值钱。</div>';
+  fb.innerHTML='<div class="dlq-fb-box '+(ok?"ok":"bad")+'">'+(ok?"✅ 正确！"+combo:"❌ 正确答案：<b>"+q.ans+"</b>")+'</div>'+trap+
     explainCardHtml(q.card)+
     '<button class="q-btn reveal" style="width:100%;margin-top:12px" onclick="nextUnitQ()">'+(qIndex>=qList.length-1?"🏁 查看成绩":"下一题 →")+'</button>';
 }
@@ -1590,6 +1635,7 @@ function finishUnit(){
   const c=document.getElementById("learnCourse");
   const acc=qCorrect/qList.length;
   const stars=acc>=0.9?3:acc>=0.7?2:1;
+  saveUnitDone(stars);
   c.innerHTML=''+
     '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
       '<button class="q-btn ghost" onclick="renderCourseHome()">← 单元列表</button>'+
@@ -1601,6 +1647,7 @@ function finishUnit(){
       '<div class="dlq-stars">'+("⭐".repeat(stars))+'<span style="color:#D3D1C7">'+("⭐".repeat(3-stars))+'</span></div>'+
       '<div style="font-size:15px;margin:8px 0">答对 <b>'+qCorrect+'</b> / '+qList.length+' 题</div>'+
       '<div style="font-size:12px;color:#8892A0">答错的题都配了讲解卡，可以「再练一次」巩固</div>'+
+      '<div class="dlg-congrats">🎉</div>'+
       '<div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap">'+
         '<button class="q-btn reveal" onclick="openUnit(0)">🔄 再练一次</button>'+
         '<button class="q-btn ghost" onclick="renderSkelTable()">📋 句型总表</button>'+
