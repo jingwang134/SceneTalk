@@ -82,7 +82,11 @@ http.createServer((req, res) => {
   fs.readFile(file, (err, data) => {
     if (err) return send(res, 404, 'Not Found', 'text/plain');
     const ext = path.extname(file).toLowerCase();
-    res.writeHead(200, { 'Content-Type': MIME[ext] || 'application/octet-stream' });
+    const noCache = ext === '.html' || ext === '.js' || ext === '.css';
+    res.writeHead(200, {
+      'Content-Type': MIME[ext] || 'application/octet-stream',
+      'Cache-Control': noCache ? 'no-cache, no-store, must-revalidate' : 'public, max-age=86400'
+    });
     res.end(data);
   });
 }).listen(PORT, () => {
