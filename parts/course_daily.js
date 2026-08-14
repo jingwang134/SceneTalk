@@ -20,6 +20,8 @@ const COURSE_DAILY_UNIT1 = [
       { p: "The thing is…", zh: "重点是……（引出真正原因）" },
       { p: "It's not that…, it's just that…", zh: "不是……而是……（澄清误会）" }
     ],
+    order_sentence: "It's just that weird stuff happens.",
+    cloze_en: "She trusts you. ___ weird stuff happens at concerts.",
     apply: {
       core: "有保留地说出不同意见",
       example: "I don't mean to criticize, it's just that the budget needs more thought. 我不是想挑刺，只是预算这块还得再想想。",
@@ -48,6 +50,8 @@ const COURSE_DAILY_UNIT1 = [
       { p: "I'm not sure I'd agree with that", zh: "这个我倒不一定认同" },
       { p: "I see it a bit differently", zh: "我看得稍微有点不一样" }
     ],
+    order_sentence: "I wouldn't say too much time.",
+    cloze_en: "Well, ___ too much time.",
     apply: {
       core: "礼貌地不认同对方的定性",
       example: "同事说这方案太冒险——I wouldn't say risky, I'd say bold. 我不觉得冒险，我觉得是有魄力。",
@@ -75,6 +79,8 @@ const COURSE_DAILY_UNIT1 = [
       { p: "I mean this in the nicest way…", zh: "我是好意说的……" },
       { p: "No offense, but…", zh: "无意冒犯，但是……" }
     ],
+    order_sentence: "Don't take this the wrong way, but why?",
+    cloze_en: "Mom, ___, but why did you have another baby?",
     apply: {
       core: "给可能冒犯的话加保险",
       example: "Don't take this the wrong way, but I think your idea needs a backup plan. 别误会我的意思，不过我觉得你的方案得有个备选。",
@@ -103,6 +109,8 @@ const COURSE_DAILY_UNIT1 = [
       { p: "I'd really like to, but…", zh: "我真的很想去，但是……" },
       { p: "I wish I could, but…", zh: "我倒是希望我能去，但是……" }
     ],
+    order_sentence: "I would love to, but I can't this weekend.",
+    cloze_en: "___ come, but I can't this weekend.",
     apply: {
       core: "拒绝邀约而不伤感情",
       example: "I would love to come to your party, but I have to finish a report tonight. 我特别想去你的派对，但今晚得赶完报告。",
@@ -131,6 +139,8 @@ const COURSE_DAILY_UNIT1 = [
       { p: "How come you didn't…?", zh: "你怎么没……？（口语质问）" },
       { p: "You could've at least…", zh: "你至少也该……（不满）" }
     ],
+    order_sentence: "Why didn't you tell me earlier?",
+    cloze_en: "___ invite me to your birthday?",
     apply: {
       core: "熟人之间直接表达不满",
       example: "Why didn't you tell me earlier? I could've helped. 你为什么不早点告诉我？我本来能帮忙的。",

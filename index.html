@@ -454,6 +454,27 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
 .scene-src{font-size:11px;color:#A08A5C;font-weight:400}
 .scene-line{font-size:12.5px;line-height:1.7;color:#4A4A42;padding:3px 8px;border-radius:5px}
 .scene-line.hit{background:#FBE9C9;color:#633806;font-weight:500}
+.dlq-progress{flex:1;height:10px;background:#F1EFE8;border-radius:8px;overflow:hidden}
+.dlq-progress-fill{height:100%;background:#1D9E75;border-radius:8px;transition:width .3s}
+.dlq-count{font-size:12px;color:#5F5E5A;flex:0 0 auto}
+.dlq-card{background:#fff;border:1px solid #EDEAE0;border-radius:16px;padding:20px}
+.dlq-type{font-size:12px;color:#854F0B;background:#FAEEDA;border-radius:8px;padding:4px 10px;display:inline-block;margin-bottom:12px}
+.dlq-prompt{font-size:17px;font-weight:500;color:#2C2C2A;line-height:1.6;margin-bottom:6px}
+.dlq-tip{font-size:12.5px;color:#8892A0;margin-bottom:14px}
+.dlq-opts{display:flex;flex-direction:column;gap:10px}
+.dlq-opt{font-size:14px;padding:13px 16px;border-radius:12px;border:2px solid #EDEAE0;background:#fff;cursor:pointer;text-align:left;line-height:1.5;transition:border-color .15s}
+.dlq-opt:hover{border-color:#BA7517}
+.dlq-fb-box{padding:10px 14px;border-radius:10px;margin-top:12px;font-size:13.5px}
+.dlq-fb-box.ok{background:#EDF7F0;color:#1F7A44;border:1px solid #CBE7D4}
+.dlq-fb-box.bad{background:#FCEBEB;color:#A32D2D;border:1px solid #F7C1C1}
+.dlq-order{display:flex;flex-direction:column;gap:12px}
+.dlq-order-ans{min-height:54px;border:2px dashed #D3D1C7;border-radius:12px;padding:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.dlq-order-hint{color:#8892A0;font-size:12px;padding:12px}
+.dlq-order-pool{display:flex;flex-wrap:wrap;gap:8px}
+.dlq-word{font-size:14px;padding:10px 14px;border-radius:10px;border:1px solid #CECBF6;background:#EEEDFE;color:#3C3489;cursor:pointer}
+.dlq-word.sel{background:#E1F5EE;border-color:#1D9E75;color:#0F6E56}
+.dlq-done{background:#fff;border:1px solid #EDEAE0;border-radius:16px;padding:28px;text-align:center}
+.dlq-stars{font-size:24px;letter-spacing:4px}
 .cc2-card{background:#fff;border:1px solid #EDEAE0;border-radius:16px;padding:18px;box-shadow:0 1px 4px rgba(44,44,42,.05)}
 .cc2-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
 .cc2-src{font-size:12px;color:#854F0B;background:#FAEEDA;border-radius:8px;padding:4px 10px}
@@ -1096,6 +1117,8 @@ const COURSE_DAILY_UNIT1 = [
       { p: "The thing is…", zh: "重点是……（引出真正原因）" },
       { p: "It's not that…, it's just that…", zh: "不是……而是……（澄清误会）" }
     ],
+    order_sentence: "It's just that weird stuff happens.",
+    cloze_en: "She trusts you. ___ weird stuff happens at concerts.",
     apply: {
       core: "有保留地说出不同意见",
       example: "I don't mean to criticize, it's just that the budget needs more thought. 我不是想挑刺，只是预算这块还得再想想。",
@@ -1124,6 +1147,8 @@ const COURSE_DAILY_UNIT1 = [
       { p: "I'm not sure I'd agree with that", zh: "这个我倒不一定认同" },
       { p: "I see it a bit differently", zh: "我看得稍微有点不一样" }
     ],
+    order_sentence: "I wouldn't say too much time.",
+    cloze_en: "Well, ___ too much time.",
     apply: {
       core: "礼貌地不认同对方的定性",
       example: "同事说这方案太冒险——I wouldn't say risky, I'd say bold. 我不觉得冒险，我觉得是有魄力。",
@@ -1151,6 +1176,8 @@ const COURSE_DAILY_UNIT1 = [
       { p: "I mean this in the nicest way…", zh: "我是好意说的……" },
       { p: "No offense, but…", zh: "无意冒犯，但是……" }
     ],
+    order_sentence: "Don't take this the wrong way, but why?",
+    cloze_en: "Mom, ___, but why did you have another baby?",
     apply: {
       core: "给可能冒犯的话加保险",
       example: "Don't take this the wrong way, but I think your idea needs a backup plan. 别误会我的意思，不过我觉得你的方案得有个备选。",
@@ -1179,6 +1206,8 @@ const COURSE_DAILY_UNIT1 = [
       { p: "I'd really like to, but…", zh: "我真的很想去，但是……" },
       { p: "I wish I could, but…", zh: "我倒是希望我能去，但是……" }
     ],
+    order_sentence: "I would love to, but I can't this weekend.",
+    cloze_en: "___ come, but I can't this weekend.",
     apply: {
       core: "拒绝邀约而不伤感情",
       example: "I would love to come to your party, but I have to finish a report tonight. 我特别想去你的派对，但今晚得赶完报告。",
@@ -1207,6 +1236,8 @@ const COURSE_DAILY_UNIT1 = [
       { p: "How come you didn't…?", zh: "你怎么没……？（口语质问）" },
       { p: "You could've at least…", zh: "你至少也该……（不满）" }
     ],
+    order_sentence: "Why didn't you tell me earlier?",
+    cloze_en: "___ invite me to your birthday?",
     apply: {
       core: "熟人之间直接表达不满",
       example: "Why didn't you tell me earlier? I could've helped. 你为什么不早点告诉我？我本来能帮忙的。",
@@ -1457,89 +1488,144 @@ function renderCourseHome(){
       <div style="font-size:12.5px;color:#854F0B;margin-top:12px;font-weight:500">打开本单元 →</div>
     </div>`;
 }
-function openUnit(i){
-  unitIdx = 0;
-  renderUnit();
-}
-function renderUnit(){
-  const c = document.getElementById("learnCourse");
-  if(!c) return;
-  const cards = COURSE_DAILY_UNIT1;
-  const card = cards[unitIdx];
-  if(!card){ unitIdx = 0; renderUnit(); return; }
-  const t = card.tags;
-  const pr = card.practice;
-  const tp = card.meta.type==="tv_drama"?"美剧":"真人秀";
-  const dlg = card.dialogue.map(function(d){
-    const hl = d.en.indexOf(card.key.split("…")[0].split("?")[0].split(",")[0])!==-1;
-    return `<div class="cd-line"><span class="cd-sp">${d.sp}</span><div><div class="cd-en">${hl?`<span class="cd-hl">${d.en}</span>`:d.en}</div><div class="cd-zh">${d.zh}</div></div></div>`;
-  }).join("");
-  const clozeOpts = [pr.cloze.answer].concat(pr.cloze.distractors);
-  c.innerHTML = `
-    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap">
-      <button class="q-btn ghost" onclick="renderCourseHome()">← 单元列表</button>
-      <span class="filter-label">💬 委婉反驳</span>
-      <span class="badge-dim">${card.order} / ${cards.length}</span>
-    </div>
-    <div class="cc2-card">
-      <div class="cc2-head"><span class="cc2-src">📺 ${card.meta.show} ${card.meta.ep} · ${tp} · ${card.meta.chars.join(" / ")}</span><span class="cc2-em">😐 ${t.emotion}</span></div>
-      <div class="cc2-key">
-        <div class="cc2-key-label">✦ 关键说法</div>
-        <div class="cc2-key-phrase">${card.key}</div>
-      </div>
-      <div class="cc2-scene"><b style="font-size:11px;color:#8892A0">剧中原话</b><div class="cd-dialogue" style="margin-top:6px">${dlg}</div></div>
-      <div class="cc2-sec">
-        <div class="cc2-sec-label">💡 解释</div>
-        <div class="cc2-core">「${card.explain.core}」</div>
-        <div class="cc2-desc">${card.explain.desc}</div>
-      </div>
-      <div class="cc2-sec">
-        <div class="cc2-sec-label">🔗 同类说法 · 换着说</div>
-        ${card.extends.map(function(x){ return `<div class="cc2-ext"><span class="cc2-ext-p">${x.p}</span><span class="cc2-ext-zh">${x.zh}</span></div>`; }).join("")}
-      </div>
-      <div class="cc2-sec">
-        <div class="cc2-sec-label">🚀 用起来</div>
-        <div class="cc2-core">「${card.apply.core}」</div>
-        <div class="cc2-example">${card.apply.example}</div>
-        <div class="cc2-where">📍 ${card.apply.where}</div>
-      </div>
-      <div class="cc2-risk">⚠️ ${t.risk}</div>
-      <div class="cc2-practice">
-        <b style="font-size:12.5px">✏️ 检验一下 · 挖空</b>
-        <div class="cp-prompt" style="margin:8px 0">${pr.cloze.prompt}</div>
-        <div class="cp-opts" id="cpOpts">
-          ${clozeOpts.map(function(o,i){ return `<button class="cp-opt" onclick="ansCloze(this,'${pr.cloze.answer}')">${o}</button>`; }).join("")}
-        </div>
-        <div class="cp-fb" id="cpFb"></div>
-        <b style="font-size:12.5px;display:block;margin-top:12px">✏️ 换场景套用</b>
-        <div class="cp-prompt">${pr.rewrite}</div>
-      </div>
-    </div>
-    <div class="cd-nav" style="display:flex;gap:10px;margin:16px 0">
-      <button class="q-btn ghost" onclick="unitIdx=Math.max(0,unitIdx-1);renderUnit()" ${unitIdx===0?"disabled":""}>← 上一张</button>
-      <button class="q-btn reveal" style="margin-left:auto" onclick="unitIdx=Math.min(${cards.length-1},unitIdx+1);renderUnit()">${unitIdx>=cards.length-1?"✅ 完成本单元":"下一张 →"}</button>
-    </div>
-    <div class="cd-skel-table">
-      <b style="display:block;margin-bottom:8px">📋 句型总表（本单元 · 按情绪强度 弱→强）</b>
-      ${COURSE_DAILY_SKELETONS.map(function(s){
-        return `<div class="skel-row"><span class="skel-e">${s.emotion}</span><span class="skel-s">${s.key}</span><span class="skel-x">${s.example}</span><span class="skel-src">${s.source}</span></div>`;
-      }).join("")}
-    </div>`;
-}
-function ansCloze(btn, ans){
-  const fb = document.getElementById("cpFb");
-  if(!fb) return;
-  const ok = btn.textContent.trim() === ans;
-  document.querySelectorAll("#cpOpts .cp-opt").forEach(function(b){
-    if(b.textContent.trim() === ans){ b.style.background="#EDF7F0"; b.style.borderColor="#5DCAA5"; }
+// ===================== 多邻国式关卡（单元=闯关：10题混合题型） =====================
+var qList=[], qIndex=0, qCorrect=0, qCombo=0, orderSel=[], orderWords=[], orderAnsStr="";
+function openUnit(i){ buildUnitQuiz(); renderUnitQ(); }
+function buildUnitQuiz(){
+  const cards=COURSE_DAILY_UNIT1;
+  qList=[];
+  const pairs=[[0,3],[1,3],[2,0],[1,2],[0,1]];
+  cards.forEach(function(card,ci){
+    const pair=pairs[ci%pairs.length];
+    pair.forEach(function(t){ const q=makeUnitQ(card,t); if(q) qList.push(q); });
   });
-  fb.innerHTML = ok
-    ? '<div style="color:#1F7A44;margin-top:8px;font-size:12.5px">✅ 正确！It\'s just that 这类骨架是「先软化、再转折」——比直接说 No 高级得多。</div>'
-    : '<div style="color:#A32D2D;margin-top:8px;font-size:12.5px">❌ 不对。中式英语常见错误是直接否定或用错连接词，参考绿色答案。</div>';
+  qList=shuffleArr(qList);
+  qIndex=0; qCorrect=0; qCombo=0;
 }
-function showRewriteTip(btn){
-  const el = btn.nextElementSibling;
-  if(el) el.style.display = el.style.display === "none" ? "" : "none";
+function makeUnitQ(card,t){
+  if(t===0){
+    const all=COURSE_DAILY_UNIT1.map(function(x){return x.explain.core;});
+    const wrongs=shuffleArr(all.filter(function(x){return x!==card.explain.core;})).slice(0,3);
+    return {type:"en-zh", card:card, q:card.apply.example, opts:shuffleArr([card.explain.core].concat(wrongs)), ans:card.explain.core, tip:"这句英文，核心含义是？"};
+  }
+  if(t===1){
+    return {type:"zh-en", card:card, q:card.practice.cloze.prompt, opts:shuffleArr([card.key].concat(card.practice.cloze.distractors)), ans:card.key, tip:"这句中文，剧里会怎么说？"};
+  }
+  if(t===2){
+    return {type:"cloze", card:card, q:card.cloze_en, opts:shuffleArr([card.practice.cloze.answer].concat(card.practice.cloze.distractors)), ans:card.practice.cloze.answer, tip:card.practice.cloze.prompt};
+  }
+  if(t===3){
+    return {type:"order", card:card, q:card.order_sentence, ans:card.order_sentence, tip:"把单词排成一句完整的英文"};
+  }
+  return null;
+}
+function renderUnitQ(){
+  const c=document.getElementById("learnCourse");
+  if(!c) return;
+  const q=qList[qIndex];
+  if(!q) return;
+  const pct=Math.round(qIndex/qList.length*100);
+  const typeLabel=q.type==="en-zh"?"🔤 含义选择":q.type==="zh-en"?"💬 中译英":q.type==="cloze"?"✏️ 选词填空":"🧩 句子排序";
+  c.innerHTML=''+
+    '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
+      '<button class="q-btn ghost" onclick="renderCourseHome()">✕</button>'+
+      '<div class="dlq-progress"><div class="dlq-progress-fill" style="width:'+pct+'%"></div></div>'+
+      '<span class="dlq-count">'+(qIndex+1)+'/'+qList.length+'</span>'+
+    '</div>'+
+    '<div class="dlq-card">'+
+      '<div class="dlq-type">'+typeLabel+'</div>'+
+      '<div class="dlq-prompt">'+q.q+'</div>'+
+      '<div class="dlq-tip">'+q.tip+'</div>'+
+      (q.type==="order"
+        ? '<div class="dlq-order"><div class="dlq-order-ans" id="orderAns"></div><div class="dlq-order-pool" id="orderPool"></div></div>'
+        : '<div class="dlq-opts" id="dlqOpts">'+q.opts.map(function(o,i){return '<button class="dlq-opt" onclick="answerUnitQuiz(this)">'+o+'</button>';}).join("")+'</div>')+
+      '<div class="dlq-fb" id="dlqFb"></div>'+
+    '</div>';
+  if(q.type==="order") startOrder(q);
+}
+function answerUnitQuiz(el){
+  const q=qList[qIndex];
+  const fb=document.getElementById("dlqFb");
+  const ok=el.textContent.trim()===q.ans.trim();
+  if(ok){ qCorrect++; qCombo++; } else { qCombo=0; }
+  document.querySelectorAll("#dlqOpts .dlq-opt").forEach(function(b){
+    if(b.textContent.trim()===q.ans.trim()){ b.style.background="#EDF7F0"; b.style.borderColor="#1D9E75"; }
+    if(b===el&&!ok){ el.style.background="#FCEBEB"; el.style.borderColor="#E24B4A"; }
+  });
+  const combo=qCombo>=2?' <b style="color:#854F0B">🔥 连击 x'+qCombo+'</b>':"";
+  fb.innerHTML='<div class="dlq-fb-box '+(ok?"ok":"bad")+'">'+(ok?"✅ 正确！"+combo:"❌ 正确答案：<b>"+q.ans+"</b>")+'</div>'+
+    explainCardHtml(q.card)+
+    '<button class="q-btn reveal" style="width:100%;margin-top:12px" onclick="nextUnitQ()">'+(qIndex>=qList.length-1?"🏁 查看成绩":"下一题 →")+'</button>';
+}
+function startOrder(q){
+  orderAnsStr=q.ans; orderSel=[]; orderWords=shuffleArr(q.ans.split(/\s+/));
+  paintOrder();
+}
+function paintOrder(){
+  const a=document.getElementById("orderAns"), p=document.getElementById("orderPool");
+  if(!a||!p) return;
+  a.innerHTML=orderSel.length
+    ? orderSel.map(function(w,i){return '<button class="dlq-word sel" onclick="unpickOrder('+i+')">'+w+'</button>';}).join("")
+    : '<span class="dlq-order-hint">点下方单词组句</span>';
+  p.innerHTML=orderWords.map(function(w,i){return '<button class="dlq-word" onclick="pickOrder('+i+')">'+w+'</button>';}).join("");
+  if(orderWords.length===0&&orderSel.length>0){
+    const q=qList[qIndex];
+    const ok=orderSel.join(" ")===orderAnsStr;
+    if(ok){ qCorrect++; qCombo++; } else { qCombo=0; }
+    const combo=qCombo>=2?' <b style="color:#854F0B">🔥 连击 x'+qCombo+'</b>':"";
+    const fb=document.getElementById("dlqFb");
+    if(fb) fb.innerHTML='<div class="dlq-fb-box '+(ok?"ok":"bad")+'">'+(ok?"✅ 语序正确！"+combo:"❌ 正确答案：<b>"+orderAnsStr+"</b>")+'</div>'+
+      explainCardHtml(q.card)+
+      '<button class="q-btn reveal" style="width:100%;margin-top:12px" onclick="nextUnitQ()">'+(qIndex>=qList.length-1?"🏁 查看成绩":"下一题 →")+'</button>';
+  }
+}
+function pickOrder(i){ orderSel.push(orderWords[i]); orderWords.splice(i,1); paintOrder(); }
+function unpickOrder(i){ orderWords.push(orderSel[i]); orderSel.splice(i,1); paintOrder(); }
+function nextUnitQ(){
+  qIndex++;
+  if(qIndex>=qList.length){ finishUnit(); return; }
+  renderUnitQ();
+}
+function finishUnit(){
+  const c=document.getElementById("learnCourse");
+  const acc=qCorrect/qList.length;
+  const stars=acc>=0.9?3:acc>=0.7?2:1;
+  c.innerHTML=''+
+    '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
+      '<button class="q-btn ghost" onclick="renderCourseHome()">← 单元列表</button>'+
+      '<span class="filter-label">💬 委婉反驳 · 完成</span>'+
+    '</div>'+
+    '<div class="dlq-done">'+
+      '<div style="font-size:26px">🏁</div>'+
+      '<div style="font-size:20px;font-weight:500;margin:8px 0">关卡完成！</div>'+
+      '<div class="dlq-stars">'+("⭐".repeat(stars))+'<span style="color:#D3D1C7">'+("⭐".repeat(3-stars))+'</span></div>'+
+      '<div style="font-size:15px;margin:8px 0">答对 <b>'+qCorrect+'</b> / '+qList.length+' 题</div>'+
+      '<div style="font-size:12px;color:#8892A0">答错的题都配了讲解卡，可以「再练一次」巩固</div>'+
+      '<div style="display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap">'+
+        '<button class="q-btn reveal" onclick="openUnit(0)">🔄 再练一次</button>'+
+        '<button class="q-btn ghost" onclick="renderSkelTable()">📋 句型总表</button>'+
+      '</div>'+
+    '</div>';
+}
+function renderSkelTable(){
+  const c=document.getElementById("learnCourse");
+  c.innerHTML=''+
+    '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">'+
+      '<button class="q-btn ghost" onclick="renderCourseHome()">← 单元列表</button>'+
+      '<span class="filter-label">📋 句型总表（情绪弱→强）</span>'+
+    '</div>'+
+    COURSE_DAILY_SKELETONS.map(function(s){
+      return '<div class="skel-row"><span class="skel-e">'+s.emotion+'</span><span class="skel-s">'+s.key+'</span><span class="skel-x">'+s.example+'</span><span class="skel-src">'+s.source+'</span></div>';
+    }).join("");
+}
+function explainCardHtml(card){
+  return '<div class="cc2-card" style="margin-top:12px">'+
+    '<div class="cc2-key" style="border-radius:12px;padding:14px;margin-bottom:10px"><div style="font-size:11px;color:#AFA9EC">✦ 关键说法</div><div style="font-size:18px;font-weight:500;color:#fff;margin-top:4px">'+card.key+'</div></div>'+
+    '<div class="cc2-sec"><div class="cc2-sec-label">💡 解释</div><div class="cc2-core">「'+card.explain.core+'」</div><div class="cc2-desc">'+card.explain.desc+'</div></div>'+
+    '<div class="cc2-sec"><div class="cc2-sec-label">🔗 同类说法 · 换着说</div>'+card.extends.map(function(x){return '<div class="cc2-ext"><span class="cc2-ext-p">'+x.p+'</span><span class="cc2-ext-zh">'+x.zh+'</span></div>';}).join("")+'</div>'+
+    '<div class="cc2-sec"><div class="cc2-sec-label">🚀 用起来</div><div class="cc2-example">'+card.apply.example+'</div><div class="cc2-where">📍 '+card.apply.where+'</div></div>'+
+    '<div class="cc2-risk">⚠️ '+card.tags.risk+'</div>'+
+  '</div>';
 }
 function showLearnView(view){
   const map={home:"learnHome",browse:"libraryView",path:"trainPath",wordbook:"trainWordbook",course:"learnCourse"};
