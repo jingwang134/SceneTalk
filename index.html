@@ -582,87 +582,60 @@ main{max-width:1100px;margin:0 auto;padding:24px 24px 60px}
     </div>
   </div>
   <nav class="tabs">
-    <button class="tab active" data-tab="library">📚 表达库</button>
-    <button class="tab" data-tab="train">🎯 训练场</button>
+    <button class="tab active" data-tab="learn">🎯 学习</button>
     <button class="tab" data-tab="compare">🎤 雅思答案定制</button>
   </nav>
 </header>
 
 <main>
   <!-- ===== TAB 1: Expression Library ===== -->
-  <section id="library" class="tab-content active">
-    <h2 class="section-title">表达库</h2>
-    <p class="section-desc">雅思6.5+ 表达，按话题与类型分类。点击话题卡定位，点击表达卡查看用法并进入训练。</p>
+  <section id="learn" class="tab-content active">
+    <h2 class="section-title">🎯 学习</h2>
+    <p class="section-desc">选一个话题，沿「范例 → 学词 → 闯关 → 实战」学透；全库表达随时可搜索。记不住的自动进词库，3 天未复习自动提醒。</p>
 
-    <!-- 学习仪表盘 -->
     <div class="dash-bar" id="dashBar"></div>
 
-    <div class="topic-section-title">🗂️ 浏览与筛选 <span style="font-size:12px;color:#8892A0;font-weight:400">· 话题卡片选话题，按钮细筛类型</span></div>
-    <div class="topic-grid" id="topicGrid"></div>
-    <div class="filters" style="margin-top:14px">
-      <span class="filter-label">类型</span>
-      <div class="filter-group" id="typeFilters">
-        <button class="filter-btn active" data-filter="all">全部</button>
-        <button class="filter-btn" data-filter="phrase">短语</button>
-        <button class="filter-btn" data-filter="sentence">句子</button>
-        <button class="filter-btn" data-filter="paragraph">段落</button>
+    <div id="learnHome"></div>
+
+    <!-- 浏览全部（原表达库）-->
+    <div id="libraryView" style="display:none">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+        <button class="q-btn ghost" onclick="renderLearnHome()">← 返回主页</button>
+        <span class="filter-label" id="browseTitle">浏览与筛选 · 全部表达</span>
       </div>
-    </div>
-    <div class="filters" id="topicFilterRow" style="display:none">
-      <span class="filter-label">当前话题</span>
-      <button class="filter-btn state-filter active" id="topicFilterBtn"></button>
-      <button class="filter-clear" onclick="clearTopic()">✕ 清除话题筛选</button>
-    </div>
-    <div class="filters" id="dimFilterRow" style="display:none">
-      <span class="filter-label">话题维度</span>
-      <div class="filter-group" id="dimFilters"></div>
-      <button class="filter-clear" onclick="clearDim()">✕ 清除维度</button>
-    </div>
-    <div class="filters" id="stateFilterRow" style="display:none">
-      <span class="filter-label">学习状态</span>
-      <button class="filter-btn state-filter active" id="stateFilterBtn"></button>
-      <button class="filter-clear" id="stateFilterClear" onclick="clearStateFilter()">✕ 清除状态筛选</button>
-    </div>
-
-    <div class="expr-grid" id="exprGrid"></div>
-  </section>
-
-      <!-- ===== TAB 2: Train ===== -->
-  <section id="train" class="tab-content">
-    <h2 class="section-title">训练场</h2>
-    <p class="section-desc">按话题走完整路径：🗺️ 学词 → ⚡ 闯关 → 🎤 实战，记不住的自动进 📚 词库</p>
-
-    <div class="train-mode-switch">
-      <button class="mode-btn active" onclick="setTrainTab('path')">
-        <div class="m-title">🗺️ 话题学习</div>
-        <div class="m-desc">选话题 → 闪卡学词 → 闯关 → 雅思实战，一条路径学透</div>
-      </button>
-      <button class="mode-btn" onclick="setTrainTab('wordbook')">
-        <div class="m-title">📚 我的词库</div>
-        <div class="m-desc">记不住的表达在这里，陌生 / 模糊 / 认识 三档自评复习</div>
-      </button>
-      <button class="mode-btn" onclick="setTrainTab('daily')">
-        <div class="m-title">🎯 今日任务</div>
-        <div class="m-desc">系统按记忆状态自动排课，待复习优先</div>
-      </button>
+      <div class="topic-grid" id="topicGrid"></div>
+      <div class="filters" style="margin-top:14px">
+        <span class="filter-label">类型</span>
+        <div class="filter-group" id="typeFilters">
+          <button class="filter-btn active" data-filter="all">全部</button>
+          <button class="filter-btn" data-filter="phrase">短语</button>
+          <button class="filter-btn" data-filter="sentence">句子</button>
+          <button class="filter-btn" data-filter="paragraph">段落</button>
+        </div>
+      </div>
+      <div class="filters" id="topicFilterRow" style="display:none">
+        <span class="filter-label">当前话题</span>
+        <button class="filter-btn state-filter active" id="topicFilterBtn"></button>
+        <button class="filter-clear" onclick="clearTopic()">✕ 清除话题筛选</button>
+      </div>
+      <div class="filters" id="dimFilterRow" style="display:none">
+        <span class="filter-label">话题维度</span>
+        <div class="filter-group" id="dimFilters"></div>
+        <button class="filter-clear" onclick="clearDim()">✕ 清除维度</button>
+      </div>
+      <div class="filters" id="stateFilterRow" style="display:none">
+        <span class="filter-label">学习状态</span>
+        <button class="filter-btn state-filter active" id="stateFilterBtn"></button>
+        <button class="filter-clear" id="stateFilterClear" onclick="clearStateFilter()">✕ 清除状态筛选</button>
+      </div>
+      <div class="expr-grid" id="exprGrid"></div>
     </div>
 
-    <!-- 话题学习 -->
-    <div id="trainPath"></div>
+    <!-- 话题路径（学习流）-->
+    <div id="trainPath" style="display:none"></div>
 
     <!-- 我的词库 -->
     <div id="trainWordbook" style="display:none"></div>
-
-    <!-- 今日任务 -->
-    <div id="trainDaily" style="display:none">
-      <div class="daily-goal">
-        <span class="gl">🎯 今日目标</span>
-        <div class="daily-progress"><div class="fill" id="dailyProgressFill"></div></div>
-        <span class="gt" id="dailyProgressText">0 / 4</span>
-        <span class="gx" id="dailyXpText">+30 XP</span>
-      </div>
-      <div id="dailyContent"></div>
-    </div>
   </section>
 
 <!-- ===== TAB 3: 雅思答案定制 ===== -->
@@ -1118,8 +1091,8 @@ function goTrain(id){
   if(!getTodayDoneIds().includes(e.id)){
     dailyQueue=[e,...dailyQueue.filter(x=>x.id!==e.id)].slice(0,DAILY_GOAL);
   }
-  switchTab("train");
-  setTrainTab("path");
+  switchTab("learn");
+  showLearnView("path");
   startPath(e.topic);
   pathPhase="learn";
   flashList=topicExpressions(e.topic);
@@ -1240,17 +1213,50 @@ function wbRemove(id){
 function wbCount(){ return Object.keys(wbGet()).length; }
 
 // ===================== 模式切换 =====================
-function setTrainTab(tab){
-  trainTab=tab;
-  const btns=document.querySelectorAll(".mode-btn");
-  btns.forEach(b=>b.classList.remove("active"));
-  btns[["path","wordbook","daily"].indexOf(tab)].classList.add("active");
-  document.getElementById("trainPath").style.display= tab==="path"?"":"none";
-  document.getElementById("trainWordbook").style.display= tab==="wordbook"?"":"none";
-  document.getElementById("trainDaily").style.display= tab==="daily"?"":"none";
-  if(tab==="path") renderPathHome();
-  else if(tab==="wordbook") renderWordbook("unknown");
-  else renderDaily();
+function showLearnView(view){
+  const map={home:"learnHome",browse:"libraryView",path:"trainPath",wordbook:"trainWordbook"};
+  Object.keys(map).forEach(function(k){
+    const el=document.getElementById(map[k]);
+    if(el) el.style.display= k===view?"":"none";
+  });
+}
+function goLearnTopic(t){
+  showLearnView("path");
+  startPath(t);
+}
+function goLearnBrowse(){
+  currentTopic="all"; currentDim="all"; currentFilter="all"; currentState="all";
+  document.getElementById("browseTitle").textContent="浏览与筛选 · 全部表达";
+  showLearnView("browse");
+  renderTopicGrid(); renderLibrary();
+}
+function goLearnWordbook(){ showLearnView("wordbook"); renderWordbook("unknown"); }
+function goLearnReview(){
+  currentTopic="all"; currentDim="all"; currentFilter="all"; currentState="review";
+  document.getElementById("browseTitle").textContent="🔁 待复习的表达";
+  showLearnView("browse");
+  renderTopicGrid(); renderLibrary();
+}
+function doLearnSearch(){
+  const kw=document.getElementById("learnSearch").value.trim().toLowerCase();
+  showLearnView("browse");
+  const grid=document.getElementById("exprGrid");
+  document.getElementById("browseTitle").textContent=kw?("搜索「"+kw+"」"):"浏览与筛选 · 全部表达";
+  if(!kw){ renderTopicGrid(); renderLibrary(); return; }
+  renderTopicGrid();
+  const hits=expressions.filter(function(e){
+    const okTopic=currentTopic==="all"||e.topic===currentTopic;
+    return okTopic && (e.english.toLowerCase().includes(kw)||e.chinese.includes(kw)||(e.keywords||[]).some(function(k){return k.word.toLowerCase().includes(kw);}));
+  });
+  grid.innerHTML=hits.length?hits.map(function(e){
+    const tp=topicOf(e.topic);
+    return '<div class="expr-card" onclick="showDetail('+e.id+')">'+
+      '<div class="card-top"><span class="badge-type '+e.type+'">'+(e.type==="phrase"?"短语":e.type==="sentence"?"句子":"段落")+'</span>'+
+      '<span class="badge-topic">'+tp.icon+' '+tp.name+'</span>'+
+      '<span class="badge-level">'+e.level+'</span></div>'+
+      '<div class="expr-en">'+e.english+'</div>'+
+      '<div class="expr-zh">'+e.chinese+'</div></div>';
+  }).join(""):'<div class="empty-state"><div class="icon">🔍</div><p>没有找到「'+kw+'」，换个词试试</p></div>';
 }
 
 // ===================== 🗺️ 话题学习路径 =====================
@@ -1261,18 +1267,20 @@ function topicMastery(key){
   const learned=list.filter(e=>exprState(e.id)==="learned").length;
   return Math.round(learned/list.length*100);
 }
-function renderPathHome(){
+function renderLearnHome(){
+  showLearnView("home");
   pathPhase="pick"; pathTopic=null;
-  const c=document.getElementById("trainPath");
+  const c=document.getElementById("learnHome");
+  if(!c) return;
   const used=[...new Set(expressions.map(e=>e.topic))];
   const cards=used.map(t=>{
     const tp=topicOf(t);
     const list=topicExpressions(t);
-    const mastered=exprState; // noop
     const m=topicMastery(t);
     const wbN=list.filter(e=>wbLevel(e.id)).length;
+    const rv=list.filter(e=>exprState(e.id)==="review").length;
     return `
-    <div class="path-topic-card" onclick="startPath('${t}')">
+    <div class="path-topic-card" onclick="goLearnTopic('${t}')">
       <div class="pt-head">
         <div class="pt-icon">${tp.icon}</div>
         <div>
@@ -1281,14 +1289,23 @@ function renderPathHome(){
         </div>
       </div>
       <div class="pt-bar"><div class="fill" style="width:${m}%"></div></div>
-      <div class="pt-meta"><span>掌握度 ${m}%</span><span>${list.filter(e=>exprState(e.id)==="review").length>0?"🔁 "+list.filter(e=>exprState(e.id)==="review").length+" 待复习":""}</span></div>
+      <div class="pt-meta"><span>掌握度 ${m}%</span><span>${rv>0?"🔁 "+rv+" 待复习":""}</span></div>
       <div class="pt-start">${m===100?"✅ 已学透 · 再巩固":"🚀 开始学习"}</div>
     </div>`;
   }).join("");
+  const reviewN=Object.keys(wbGet()).filter(id=>wbGet()[id]==="review").length;
   c.innerHTML=`
-    <div class="topic-section-title">🗺️ 选择话题，开始学习路径</div>
-    <p style="font-size:12.5px;color:#8892A0;margin-bottom:14px">路径：📖 闪卡学词 → ⚡ 闯关 → 🎤 雅思实战，记不住的自动进词库</p>
-    <div class="path-grid">${cards}</div>`;
+    <div class="learn-search-row" style="display:flex;gap:10px;margin:14px 0">
+      <input id="learnSearch" class="gen-input" placeholder="🔍 搜索全库表达，如 pull strings / clean slate" style="flex:1">
+      <button class="q-btn reveal" onclick="doLearnSearch()">搜索</button>
+    </div>
+    <div class="topic-section-title">🗺️ 选一个话题开始学习 <span style="font-size:12px;color:#8892A0;font-weight:400">· 路径：范例 → 学词 → 闯关 → 实战</span></div>
+    <div class="path-grid">${cards}</div>
+    <div class="learn-actions" style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+      <button class="q-btn reveal" onclick="goLearnBrowse()">📖 浏览全部表达</button>
+      <button class="q-btn ghost" onclick="goLearnWordbook()">📚 我的词库（${wbCount()}）</button>
+      ${reviewN>0?`<button class="q-btn ghost" onclick="goLearnReview()">🔁 待复习 ${reviewN}</button>`:""}
+    </div>`;
 }
 function startPath(topicKey){
   pathTopic=topicKey;
@@ -1355,7 +1372,7 @@ function pathBanner(){
       <span class="s-topic" style="background:#F0F4F8;color:#2C5AA0;font-size:12px;font-weight:700;padding:4px 12px;border-radius:12px">${tp.icon} ${tp.name} · 话题学习${pathDim!=="all"&&pathDim?` · <span style="color:#534AB7">${dimNameOf(pathTopic,pathDim)}</span>`:""}</span>
       <span>
         ${pathPhase!=="dim"&&pathDim!=="all"&&pathDim?`<button class="q-btn ghost" style="margin-right:6px" onclick="restorePathPhase('dim')">📂 换维度</button>`:""}
-        <button class="q-btn clear" onclick="renderPathHome()">✕ 换话题</button>
+        <button class="q-btn clear" onclick="renderLearnHome()">✕ 换话题</button>
       </span>
     </div>
     ${renderPathSteps()}`;
@@ -1474,8 +1491,8 @@ function renderPathDone(c){
       </div>
       ${wbIn>0?`<p style="font-size:13px;color:#8B6914;background:#FFF8E6;border-radius:8px;padding:10px;margin:10px 0">📚 ${wbIn} 条记不住的表达已加入「我的词库」，记得去复习</p>`:""}
       <div style="margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-        <button class="q-btn reveal" onclick="setTrainTab('wordbook')">📚 去词库复习</button>
-        <button class="q-btn clear" onclick="renderPathHome()">🗺️ 学下一个话题</button>
+        <button class="q-btn reveal" onclick="goLearnWordbook()">📚 去词库复习</button>
+        <button class="q-btn clear" onclick="renderLearnHome()">🗺️ 学下一个话题</button>
         <button class="q-btn clear" onclick="restartPathTopic()">🔄 重新学一遍</button>
       </div>
     </div>`;
@@ -1631,9 +1648,9 @@ function renderQuizResult(host){
       <div style="margin-top:18px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
         ${inPath?`
           <button class="q-btn reveal" onclick="goPathSpeak()">🎤 进入雅思实战 →</button>
-          <button class="q-btn clear" onclick="renderPathHome()">🗺️ 换话题</button>`:`
+          <button class="q-btn clear" onclick="renderLearnHome()">🗺️ 换话题</button>`:`
           <button class="q-btn reveal" onclick="restartQuiz()">🔄 再来一关</button>
-          <button class="q-btn clear" onclick="setTrainTab('path')">🗺️ 去话题学习</button>`}
+          <button class="q-btn clear" onclick="renderLearnHome()">🗺️ 去话题学习</button>`}
       </div>
     </div>`;
 }
@@ -1877,8 +1894,8 @@ function renderDaily(){
         <h3>今日任务全部完成！</h3>
         <p>今天已学习 ${done} 条表达 · 明天记得回来打卡</p>
         <div style="margin-top:16px">
-          <button class="q-btn reveal" onclick="setTrainTab('path')">🗺️ 去话题学习</button>
-          <button class="q-btn clear" style="margin-left:8px" onclick="setTrainTab('wordbook')">📚 词库复习</button>
+          <button class="q-btn reveal" onclick="renderLearnHome()">🗺️ 去话题学习</button>
+          <button class="q-btn clear" style="margin-left:8px" onclick="goLearnWordbook()">📚 词库复习</button>
         </div>
       </div>`;
     return;
@@ -2866,10 +2883,7 @@ document.querySelectorAll("#typeFilters .filter-btn").forEach(btn=>{
 // ===================== INIT =====================
 renderHeaderChips();
 renderDash();
-renderTopicGrid();
-renderLibrary();
-renderPathHome();
-renderDaily();
+renderLearnHome();
 
 </script>
 </body>
